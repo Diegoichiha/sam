@@ -11,6 +11,7 @@
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
   const fine = matchMedia('(hover: hover) and (pointer: fine)').matches;
   const clamp = (v, a, b) => Math.min(b, Math.max(a, v));
+  const isHome = document.body.dataset.page === 'home';
 
   const yearEl = $('[data-year]');
   if (yearEl) yearEl.textContent = new Date().getFullYear();
@@ -108,7 +109,8 @@
   }
 
   const scrollToTarget = (target) => {
-    if (lenis) lenis.scrollTo(target, { duration: 1.6, easing: (t) => 1 - Math.pow(1 - t, 4) });
+    const offset = parseFloat(target.dataset.scrollOffset) || 0;
+    if (lenis) lenis.scrollTo(target, { offset, duration: 1.6, easing: (t) => 1 - Math.pow(1 - t, 4) });
     else target.scrollIntoView({ behavior: 'smooth' });
   };
 
@@ -203,10 +205,11 @@
      ScrollTrigger calcula mal la posición de lo que se crea antes que un pin que queda más arriba en la página,
      así que estas funciones se llaman al final, cuando ya existen el pin del proceso y el scroll horizontal. */
 
-  // Enlace activo del mega menú
+  // Enlace activo del mega menú: en el Home según la sección visible; en páginas internas según <body data-nav>
   const initNav = () => {
     const navLinks = $$('.mm__links a');
-    // Qué enlace resalta cada bloque de la página
+    const mark = (id) => navLinks.forEach((l) => l.classList.toggle('is-current', !!id && l.dataset.nav === id));
+    if (!isHome) { mark(document.body.dataset.nav); return; }
     const map = [
       ['inicio', '#inicio'], ['nosotros', '#nosotros'], ['soluciones', '#soluciones'], ['como', '.story'],
       ['nosotros', '.stats'], ['portafolio', '#portafolio'], ['contacto', '#contacto'], ['blog', '#blog'],
@@ -221,7 +224,7 @@
         const r = el.getBoundingClientRect();
         if (r.top <= line && r.bottom > line) id = nid;
       });
-      navLinks.forEach((l) => l.classList.toggle('is-current', !!id && l.getAttribute('href') === '#' + id));
+      mark(id);
     };
     ScrollTrigger.create({ start: 0, end: 'max', onUpdate: update });
     ScrollTrigger.addEventListener('refresh', update);
@@ -373,63 +376,81 @@
     fabVisibility();
   }
 
-  if (reduce) { initRolls(); finishReduced(); return; }
+  // Contexto que se entrega a la lógica propia de cada página interna (assets/js/pages.js define window.SAM_PAGE)
+  const ctx = { $, $$, clamp, split, gsap, ScrollTrigger, reduce, fine, lenis, header, scrollToTarget };
+  const pageHook = () => { if (typeof window.SAM_PAGE === 'function') window.SAM_PAGE(ctx); };
 
-  /* ───────── Hero ───────── */
+  if (reduce) { initRolls(); initNav(); if (isHome) finishReduced(); pageHook(); return; }
+
+  /* ───────── Hero (genérico: Home y páginas internas) ───────── */
+  const heroEl0 = $('.hero');
   const heroTitle = $('.hero__title');
-  const heroWords = split(heroTitle);
+  const heroWords = heroTitle ? split(heroTitle) : [];
+  const wallEl = $('.wall');
+  const visuals = $$('[data-hero-visual]');
   gsap.set(heroWords, { yPercent: 118 });
   gsap.set('[data-hero-in]', { autoAlpha: 0, y: 34 });
-  gsap.set('.wall', { autoAlpha: 0, x: 90, scale: 0.94 });
-  gsap.set('.hero__scroll', { autoAlpha: 0 });
+  if (wallEl) gsap.set(wallEl, { autoAlpha: 0, x: 90, scale: 0.94 });
+  gsap.set(visuals, { autoAlpha: 0, y: 50, scale: 0.92 });
+  gsap.set($$('.hero__scroll'), { autoAlpha: 0 });
   gsap.set(header, { yPercent: -140 });
 
   const intro = () => {
-    gsap.timeline({ defaults: { ease: 'expo.out' }, delay: 0.15 })
-      .to('.wall', { autoAlpha: 1, x: 0, scale: 1, duration: 2, ease: 'power4.out' }, 0.1)
-      .to(header, { yPercent: 0, duration: 1.3 }, 0.35)
+    const tl = gsap.timeline({ defaults: { ease: 'expo.out' }, delay: 0.15 });
+    if (wallEl) tl.to(wallEl, { autoAlpha: 1, x: 0, scale: 1, duration: 2, ease: 'power4.out' }, 0.1);
+    tl.to(header, { yPercent: 0, duration: 1.3 }, 0.35)
       .to(heroWords, { yPercent: 0, duration: 1.5, stagger: 0.07 }, 0.3)
       .to('[data-hero-in]', { autoAlpha: 1, y: 0, duration: 1.2, stagger: 0.13 }, 0.5)
-      .to('.hero__scroll', { autoAlpha: 1, duration: 1 }, 1.4);
+      .to(visuals, { autoAlpha: 1, y: 0, scale: 1, duration: 1.6, stagger: 0.18, ease: 'power4.out' }, 0.5)
+      .to($$('.hero__scroll'), { autoAlpha: 1, duration: 1 }, 1.4);
   };
   (document.fonts && document.fonts.ready ? document.fonts.ready : Promise.resolve()).then(intro);
 
-  // El hero queda fijo y "Sobre nosotros" sube por encima: mientras lo cubre, el hero se aleja y se oscurece
-  const heroEl0 = $('.hero');
-  const heroSticky = () => getComputedStyle(heroEl0).position === 'sticky';
-  gsap.timeline({ scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: true } })
-    .to('.hero__bg', { yPercent: 8, ease: 'none' }, 0)
-    .to('.wall__rot', { yPercent: -12, ease: 'none' }, 0)
-    .to('[data-hero-copy]', { yPercent: -8, opacity: 0.25, ease: 'none' }, 0)
-    .to('.hero__inner', { scale: 0.94, transformOrigin: '50% 100%', ease: 'none' }, 0)
-    .to('.hero__dim', { opacity: 0.8, ease: 'none' }, 0);
+  // El hero queda fijo y la sección siguiente sube por encima: mientras lo cubre, el hero se aleja y se oscurece
+  const heroSticky = () => !!heroEl0 && getComputedStyle(heroEl0).position === 'sticky';
+  if (heroEl0) {
+    gsap.timeline({ scrollTrigger: { trigger: heroEl0, start: 'top top', end: 'bottom top', scrub: true } })
+      .to('.hero__bg', { yPercent: 8, ease: 'none' }, 0)
+      .to($$('.wall__rot'), { yPercent: -12, ease: 'none' }, 0)
+      .to($$('[data-hero-visual]'), { yPercent: -10, ease: 'none' }, 0)
+      .to('[data-hero-copy]', { yPercent: -8, opacity: 0.25, ease: 'none' }, 0)
+      .to('.hero__inner', { scale: 0.94, transformOrigin: '50% 100%', ease: 'none' }, 0)
+      .to('.hero__dim', { opacity: 0.8, ease: 'none' }, 0);
+  }
 
-  // Parallax con el mouse
-  if (fine) {
-    const heroEl = $('.hero');
-    const wallEl = $('.wall');
-    const bgx = gsap.quickTo(wallEl, 'x', { duration: 1.4, ease: 'power3' });
-    const bgy = gsap.quickTo(wallEl, 'y', { duration: 1.4, ease: 'power3' });
-    // Luz de color que sigue al cursor sobre el hero (como en Asoclicper)
+  // Parallax con el mouse + luz de color que sigue al cursor (como en Asoclicper)
+  if (fine && heroEl0) {
+    const bgx = wallEl ? gsap.quickTo(wallEl, 'x', { duration: 1.4, ease: 'power3' }) : null;
+    const bgy = wallEl ? gsap.quickTo(wallEl, 'y', { duration: 1.4, ease: 'power3' }) : null;
+    const depthEls = $$('[data-depth]', heroEl0).map((el) => ({
+      d: parseFloat(el.dataset.depth) || 20,
+      x: gsap.quickTo(el, 'x', { duration: 1.2, ease: 'power3' }),
+      y: gsap.quickTo(el, 'y', { duration: 1.2, ease: 'power3' }),
+    }));
     const glow = $('.hero__glow');
-    gsap.set(glow, { xPercent: -50, yPercent: -50 });
-    const glowX = gsap.quickTo(glow, 'x', { duration: 0.75, ease: 'power3.out' });
-    const glowY = gsap.quickTo(glow, 'y', { duration: 0.75, ease: 'power3.out' });
+    let glowX, glowY;
+    if (glow) {
+      gsap.set(glow, { xPercent: -50, yPercent: -50 });
+      glowX = gsap.quickTo(glow, 'x', { duration: 0.75, ease: 'power3.out' });
+      glowY = gsap.quickTo(glow, 'y', { duration: 0.75, ease: 'power3.out' });
+    }
     let glowOn = false;
-    heroEl.addEventListener('mousemove', (e) => {
+    heroEl0.addEventListener('mousemove', (e) => {
       const nx = e.clientX / innerWidth - 0.5;
       const ny = e.clientY / innerHeight - 0.5;
-      bgx(nx * -34); bgy(ny * -22);
-      const r = heroEl.getBoundingClientRect();
-      glowX(e.clientX - r.left); glowY(e.clientY - r.top);
-      if (!glowOn) { glowOn = true; gsap.to(glow, { opacity: 1, duration: 0.45, overwrite: 'auto' }); }
+      if (bgx) { bgx(nx * -34); bgy(ny * -22); }
+      depthEls.forEach((f) => { f.x(nx * f.d); f.y(ny * f.d); });
+      if (glow) {
+        const r = heroEl0.getBoundingClientRect();
+        glowX(e.clientX - r.left); glowY(e.clientY - r.top);
+        if (!glowOn) { glowOn = true; gsap.to(glow, { opacity: 1, duration: 0.45, overwrite: 'auto' }); }
+      }
     });
-    heroEl.addEventListener('mouseleave', () => { glowOn = false; gsap.to(glow, { opacity: 0, duration: 0.7, overwrite: 'auto' }); });
+    heroEl0.addEventListener('mouseleave', () => { glowOn = false; if (glow) gsap.to(glow, { opacity: 0, duration: 0.7, overwrite: 'auto' }); });
   }
 
   /* ───────── Muro de trabajos del hero (reactivo a la velocidad del scroll) ───────── */
   const bandTweens = [];
-  // Muro de trabajos del hero: columnas en sentidos opuestos, también reactivas a la velocidad del scroll
   $$('.wall__col').forEach((col, i) => {
     const track = $('.wall__track', col);
     const base = track.innerHTML;
@@ -442,19 +463,27 @@
     const up = i % 2 === 0;
     bandTweens.push(gsap.fromTo(track, { yPercent: up ? 0 : -50 }, { yPercent: up ? -50 : 0, duration: 60 + i * 14, ease: 'none', repeat: -1 }));
   });
-  ScrollTrigger.create({
-    trigger: '.about', start: 'top top',
-    onEnter: () => { if (heroSticky()) { bandTweens.forEach((t) => t.pause()); heroEl0.style.visibility = 'hidden'; } },
-    onLeaveBack: () => { bandTweens.forEach((t) => t.resume()); heroEl0.style.visibility = ''; },
-  });
-  let lastY = scrollY, boost = 0;
-  gsap.ticker.add(() => {
-    const dy = Math.abs(scrollY - lastY);
-    lastY = scrollY;
-    boost += (Math.min(dy, 70) / 7 - boost) * 0.08;
-    bandTweens.forEach((t) => t.timeScale(1 + boost));
-  });
+  // Cuando la sección siguiente tapa el hero por completo se pausa su animación (ahorra GPU)
+  const coverEl = heroEl0 && heroEl0.nextElementSibling;
+  if (coverEl) {
+    ScrollTrigger.create({
+      trigger: coverEl, start: 'top top',
+      onEnter: () => { if (heroSticky()) { bandTweens.forEach((t) => t.pause()); heroEl0.style.visibility = 'hidden'; } },
+      onLeaveBack: () => { bandTweens.forEach((t) => t.resume()); heroEl0.style.visibility = ''; },
+    });
+  }
+  if (bandTweens.length) {
+    let lastY = scrollY, boost = 0;
+    gsap.ticker.add(() => {
+      const dy = Math.abs(scrollY - lastY);
+      lastY = scrollY;
+      boost += (Math.min(dy, 70) / 7 - boost) * 0.08;
+      bandTweens.forEach((t) => t.timeScale(1 + boost));
+    });
+  }
 
+  /* ───────── Secciones propias del Home ───────── */
+  if (isHome) {
   /* ───────── Sobre nosotros ───────── */
   const bigWords = split($('.about__big'), false);
   gsap.fromTo(bigWords, { opacity: 0.14 }, {
@@ -641,7 +670,10 @@
     });
   }
 
+  }
+
   /* ───────── Lo que queda debajo de los pines ───────── */
+  pageHook();
   initNav();
   initRolls();
   initReveals(heroTitle);
@@ -655,7 +687,7 @@
     });
   }
 
-  gsap.from('.cta__bubble', {
+  if ($('.cta__bubble')) gsap.from('.cta__bubble', {
     scale: 0.3, autoAlpha: 0, rotate: -40, duration: 1.4, ease: 'back.out(1.6)',
     scrollTrigger: { trigger: '.cta__title', start: 'top 70%', once: true },
   });

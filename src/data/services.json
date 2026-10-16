@@ -1,0 +1,845 @@
+{
+ "cards": [
+  {
+   "icon": "leads",
+   "title": "Generación de Leads",
+   "desc": "Conectamos tu negocio con clientes ideales para que generes más ventas y crecimiento.",
+   "slug": "generacion-de-leads"
+  },
+  {
+   "icon": "consultoria",
+   "title": "Marketing Estrátegico",
+   "desc": "Impulsamos tu negocio con estrategias digitales efectivas para que alcances tus objetivos con éxito.",
+   "slug": "marketing-estrategico"
+  },
+  {
+   "icon": "redessociales",
+   "title": "Social Media Marketing",
+   "desc": "Potenciamos tu marca en redes sociales para que conectes, impactes y conviertas más.",
+   "slug": "social-media-manager"
+  },
+  {
+   "icon": "paginasweb",
+   "title": "Diseño de Páginas web",
+   "desc": "Diseñamos sitios web, tiendas virtuales y landing pages que atraen, convierten y hacen crecer tu negocio.",
+   "slug": "diseno-de-paginas-web"
+  },
+  {
+   "icon": "seoicon",
+   "title": "Optimización SEO",
+   "desc": "Mejoramos tu posicionamiento en Google para que tu negocio gane más visibilidad y tráfico orgánico.",
+   "slug": "optimizacion-seo"
+  },
+  {
+   "icon": "pautagoogle",
+   "title": "Publicidad Paga",
+   "desc": "Gestionamos campañas en Google, Meta, TikTok y LinkedIn Ads para maximizar tu alcance y conversiones.",
+   "slug": "publicidad-paga"
+  },
+  {
+   "icon": "emailmarketing",
+   "title": "Email Marketing / SMS",
+   "desc": "Diseñamos campañas de Email y SMS que convierten, fidelizan clientes y aumentan tus ventas.",
+   "slug": "email-marketing"
+  },
+  {
+   "icon": "diseno",
+   "title": "Diseño gráfico",
+   "desc": "Creamos diseños atractivos que comunican, inspiran y refuerzan la identidad de tu marca.",
+   "slug": "diseno-grafico"
+  },
+  {
+   "icon": "marca2",
+   "title": "Branding",
+   "desc": "Construimos una identidad visual poderosa para que tu marca destaque y conecte con su audiencia.",
+   "slug": "branding"
+  }
+ ],
+ "pages": {
+  "generacion-de-leads": {
+   "slug": "generacion-de-leads",
+   "h1": "Generación de Leads",
+   "sub_h2": "con Estrategias que Convierten",
+   "sub_p": "Atraemos clientes ideales para tu negocio con campañas inteligentes y métricas reales.",
+   "cta": "Quiero mas clientes ahora",
+   "card_title": "Generación de Leads",
+   "card_desc": "Conectamos tu negocio con clientes ideales para que generes más ventas y crecimiento.",
+   "icon": "leads",
+   "intro": {
+    "h2": "Estrategia de leads diseñada para tu negocio",
+    "blocks": [
+     {
+      "p": "En SAM Digital diseñamos campañas publicitarias en redes sociales y Google Ads 100% enfocadas en conseguir personas interesadas en lo que ofreces."
+     },
+     {
+      "p": "No hacemos likes ni seguidores: hacemos que personas reales te dejen sus datos para que tú puedas convertirlos en ventas."
+     },
+     {
+      "p": "Este servicio está pensado tanto para negocios físicos (como clínicas dentales, estéticas, estudios de tatuajes) como para negocios digitales que necesitan un flujo constante de leads."
+     }
+    ]
+   },
+   "why": {
+    "h2": "¿Por qué contratar este servicio?",
+    "blocks": [
+     {
+      "p": "Porque tu negocio no necesita más visibilidad, necesita más clientes potenciales listos para comprarte."
+     },
+     {
+      "ul": [
+       "Si te has cansado de invertir en publicidad sin ver resultados...",
+       "Si sientes que el problema no es la calidad de tu producto, sino que no llegas a la audiencia correcta...",
+       "O si simplemente quieres escalar tu facturación con una estrategia bien pensada..."
+      ]
+     },
+     {
+      "p": "Entonces este servicio es para ti."
+     }
+    ]
+   },
+   "steps": {
+    "h2": "Nuestro Proceso Estratégico",
+    "items": [
+     {
+      "t": "Conocemos tu negocio",
+      "d": "Agendamos una reunión para entender a quién quieres llegar."
+     },
+     {
+      "t": "Creamos una estrategia de captación",
+      "d": "Diseñamos tu embudo y anuncios personalizados."
+     },
+     {
+      "t": "Lanzamos campañas con Inteligencia Artificial",
+      "d": "Empezamos a atraer leads desde Facebook, Instagram o Google."
+     },
+     {
+      "t": "Te entregamos los contactos",
+      "d": "Recibes en tiempo real los datos de los interesados para gestionarlos."
+     },
+     {
+      "t": "Medimos y optimizamos",
+      "d": "Analizamos resultados y mejoramos lo necesario para obtener más por menos."
+     }
+    ]
+   },
+   "benefits": {
+    "h2": "Beneficios de la generación de leads",
+    "items": [
+     {
+      "t": "Clientes calificados",
+      "d": "Solo te contactarán personas que ya mostraron interés real."
+     },
+     {
+      "t": "Ahorro de tiempo",
+      "d": "Nosotros atraemos, calificamos y te entregamos los datos listos para que hagas seguimiento."
+     },
+     {
+      "t": "Estrategia personalizada",
+      "d": "Adaptamos la campaña a tu tipo de negocio y cliente ideal."
+     },
+     {
+      "t": "Resultados medibles",
+      "d": "Sabes cuántos leads se generan, cuánto te cuesta cada uno y cómo avanza tu inversión."
+     }
+    ]
+   }
+  },
+  "marketing-estrategico": {
+   "slug": "marketing-estrategico",
+   "h1": "Marketing Estratégico",
+   "sub_h2": "",
+   "sub_p": "Diseñamos la Estrategia de Marketing que tu Negocio Necesita para Crecer",
+   "cta": "Solicita tu diagnóstico gratuito",
+   "card_title": "Marketing Estrátegico",
+   "card_desc": "Impulsamos tu negocio con estrategias digitales efectivas para que alcances tus objetivos con éxito.",
+   "icon": "consultoria",
+   "intro": {
+    "h2": "¿Qué es el marketing estratégico para tu negocio?",
+    "blocks": [
+     {
+      "p": "Nuestro servicio de Marketing Estratégico está diseñado para negocios que quieren crecer, pero no saben por dónde empezar o sienten que están estancados."
+     },
+     {
+      "p": "Te ayudamos a definir el rumbo, optimizar lo que ya haces y aprovechar mejor tus recursos. Desde la estrategia hasta la acción, trabajamos contigo como aliados, no como proveedores."
+     },
+     {
+      "ul": [
+       "¿No sabes si estás invirtiendo bien?",
+       "¿Publicas en redes pero no ves resultados?",
+       "¿Tienes campañas corriendo, pero no sabes si están bien hechas?"
+      ]
+     },
+     {
+      "p": "Entonces este servicio es para ti."
+     }
+    ]
+   },
+   "why": {
+    "h2": "¿Por qué contratar este servicio?",
+    "blocks": [
+     {
+      "p": "Porque tener presencia en internet no es suficiente si no hay una estrategia clara detrás. La mayoría de negocios se quedan en la acción sin dirección. Nosotros cambiamos eso."
+     },
+     {
+      "ul": [
+       "Te ayudamos a entender qué está funcionando (y qué no).",
+       "Te damos una hoja de ruta clara, con pasos concretos.",
+       "Te acompañamos en la ejecución para asegurar resultados."
+      ]
+     }
+    ]
+   },
+   "steps": {
+    "h2": "Nuestro Proceso Estratégico",
+    "items": [
+     {
+      "t": "Diagnóstico inicial",
+      "d": "Conocemos tu negocio, mercado, competencia y estado actual."
+     },
+     {
+      "t": "Diseño de la estrategia",
+      "d": "Creamos un plan claro con objetivos, canales y acciones recomendadas."
+     },
+     {
+      "t": "Implementación con acompañamiento",
+      "d": "Te guiamos o trabajamos junto a tu equipo en la ejecución."
+     },
+     {
+      "t": "Análisis y ajustes",
+      "d": "Medimos el impacto de lo que haces y proponemos mejoras constantes."
+     },
+     {
+      "t": "Crecimiento sostenible",
+      "d": "La estrategia evoluciona contigo y tu negocio."
+     }
+    ]
+   },
+   "benefits": {
+    "h2": "Beneficios del Marketing Estratégico",
+    "items": [
+     {
+      "t": "Visión clara del negocio",
+      "d": "Detectamos oportunidades, errores y fortalezas."
+     },
+     {
+      "t": "Plan personalizado",
+      "d": "Cada empresa es única, y tu estrategia también debe serlo."
+     },
+     {
+      "t": "Acompañamiento constante",
+      "d": "No estás solo/a, te guiamos y ajustamos en el camino."
+     },
+     {
+      "t": "Decisiones basadas en datos",
+      "d": "Analizamos resultados para mejorar continuamente."
+     }
+    ]
+   }
+  },
+  "social-media-manager": {
+   "slug": "social-media-manager",
+   "h1": "Social Media Manager",
+   "sub_h2": "",
+   "sub_p": "Conecta con tu Audiencia y Haz que tu Marca Brille en Redes Sociales",
+   "cta": "Quiero mejorar mis redes ya",
+   "card_title": "Social Media Marketing",
+   "card_desc": "Potenciamos tu marca en redes sociales para que conectes, impactes y conviertas más.",
+   "icon": "redessociales",
+   "intro": {
+    "h2": "Social Media para Negocios",
+    "blocks": [
+     {
+      "p": "Tu presencia en redes sociales puede ser mucho más que likes y publicaciones bonitas. En SAM Digital te ayudamos a construir una comunidad, posicionar tu marca y generar conversaciones que impulsen tu negocio."
+     },
+     {
+      "p": "Nuestro servicio de Social Media Manager no es solo subir contenido:"
+     },
+     {
+      "ul": [
+       "Es diseñar una estrategia de comunicación.",
+       "Es crear contenido que hable tu idioma y el de tus clientes.",
+       "Es analizar qué funciona y ajustar para crecer."
+      ]
+     },
+     {
+      "p": "Ideal para negocios que quieren verse profesionales, conectar con su audiencia y vender más a través de Instagram, Facebook, TikTok o LinkedIn."
+     }
+    ]
+   },
+   "why": {
+    "h2": "¿Por qué contratar este servicio?",
+    "blocks": [
+     {
+      "p": "Porque publicar por publicar no sirve. Si no tienes tiempo, ideas o resultados, necesitas un equipo experto."
+     },
+     {
+      "ul": [
+       "¿Tus redes están desactualizadas o no reflejan tu negocio?",
+       "¿Sientes que subes contenido pero nadie interactúa?",
+       "¿No sabes cómo vender sin sonar insistente?"
+      ]
+     },
+     {
+      "p": "Entonces este servicio es para ti."
+     }
+    ]
+   },
+   "steps": {
+    "h2": "Nuestro Proceso Estratégico",
+    "items": [
+     {
+      "t": "Brief inicial",
+      "d": "Conocemos tu negocio, objetivos y público ideal."
+     },
+     {
+      "t": "Estrategia de redes",
+      "d": "Definimos pilares de contenido, tono y estilo de comunicación."
+     },
+     {
+      "t": "Calendario de publicaciones",
+      "d": "Planificamos y diseñamos cada pieza de contenido."
+     },
+     {
+      "t": "Gestión completa",
+      "d": "Publicamos, respondemos mensajes (si lo deseas) y monitoreamos el comportamiento."
+     },
+     {
+      "t": "Reportes y ajustes",
+      "d": "Te enviamos informes periódicos con propuestas de mejora."
+     }
+    ]
+   },
+   "benefits": {
+    "h2": "Beneficios de la generación de leads",
+    "items": [
+     {
+      "t": "Presencia profesional y coherente",
+      "d": "Tu marca con identidad clara y mensajes bien pensados"
+     },
+     {
+      "t": "Ahorro de tiempo",
+      "d": "Nos encargamos de todo: planificación, diseño, redacción y publicación."
+     },
+     {
+      "t": "Contenido estratégico",
+      "d": "Cada publicación tiene un objetivo: educar, conectar o vender."
+     },
+     {
+      "t": "Mayor interacción",
+      "d": "Mejoramos el engagement con tu comunidad."
+     }
+    ]
+   }
+  },
+  "diseno-de-paginas-web": {
+   "slug": "diseno-de-paginas-web",
+   "h1": "Diseño de sitios web",
+   "sub_h2": "Lo que tu Negocio Necesita para Crecer",
+   "sub_p": "Creamos sitios web atractivos, funcionales y adaptados a tu público, ya sea un portal informativo, tienda online o landing page de alta conversión.",
+   "cta": "Quiero mi sitio web profesional ahora",
+   "card_title": "Diseño de Páginas web",
+   "card_desc": "Diseñamos sitios web, tiendas virtuales y landing pages que atraen, convierten y hacen crecer tu negocio.",
+   "icon": "paginasweb",
+   "intro": {
+    "h2": "¿Qué es el diseño web?",
+    "blocks": [
+     {
+      "p": "En SAM Digital desarrollamos sitios web que no solo se ven bien, sino que funcionan. Nos encargamos de todo el proceso para que tu negocio tenga presencia online de forma profesional, con páginas rápidas, seguras y adaptadas a todos los dispositivos."
+     }
+    ]
+   },
+   "why": {
+    "h2": "¿Por qué contratar este servicio?",
+    "blocks": [
+     {
+      "p": "Porque un sitio web no es solo un escaparate, es la primera impresión que se lleva tu cliente de ti."
+     },
+     {
+      "ul": [
+       "Un diseño poco profesional puede hacerte perder ventas",
+       "Un sitio lento o mal estructurado confunde al usuario",
+       "Una web sin estrategia no convierte visitas en clientes"
+      ]
+     },
+     {
+      "p": "Con SAM Digital tendrás un sitio web que comunique, impacte y venda."
+     }
+    ]
+   },
+   "steps": {
+    "h2": "Sitios web profesionales",
+    "items": [
+     {
+      "t": "Sitios Web Corporativos o Informativos",
+      "d": "Perfectos para presentar tu marca, tus servicios, tu equipo y generar confianza. Una página web informativa bien estructurada posiciona tu negocio como una opción seria y profesional."
+     },
+     {
+      "t": "Tiendas Virtuales o Ecommerce",
+      "d": "Creamos tiendas online con carrito de compras, pasarelas de pago seguras y panel de gestión de productos. Vende tus productos o servicios 24/7 con un ecommerce optimizado para convertir visitantes en compradores."
+     },
+     {
+      "t": "Landing Pages de Alta Conversión",
+      "d": "Diseñamos páginas de aterrizaje enfocadas 100% en captar clientes potenciales, perfectas para campañas publicitarias o promociones especiales."
+     },
+     {
+      "t": "Webs para Profesionales Independientes",
+      "d": "Desarrollamos páginas personales para psicólogos, abogados, consultores, coaches, etc., que necesitan una presencia digital que refleje autoridad y profesionalismo."
+     },
+     {
+      "t": "Portafolios Digitales",
+      "d": "Mostramos de forma visual e impactante los proyectos y trabajos de fotógrafos, diseñadores, artistas o creativos que necesitan destacar su talento en línea."
+     }
+    ]
+   },
+   "benefits": {
+    "h2": "Beneficios de tener un sitio web",
+    "items": [
+     {
+      "t": "Diseño a medida",
+      "d": "Reflejamos la esencia de tu marca"
+     },
+     {
+      "t": "Experiencia de usuario optimizada",
+      "d": "Navegación fácil e intuitiva"
+     },
+     {
+      "t": "Responsive",
+      "d": "Perfecto en celular, tablet o computador"
+     },
+     {
+      "t": "Soporte y asesoría",
+      "d": "Te acompañamos durante y después del lanzamiento"
+     }
+    ]
+   }
+  },
+  "optimizacion-seo": {
+   "slug": "optimizacion-seo",
+   "h1": "Optimización SEO",
+   "sub_h2": "Haz que tu negocio aparezca en Google y gane visibilidad todos los días",
+   "sub_p": "",
+   "cta": "Quiero posicionar mi web en Google",
+   "card_title": "Optimización SEO",
+   "card_desc": "Mejoramos tu posicionamiento en Google para que tu negocio gane más visibilidad y tráfico orgánico.",
+   "icon": "seoicon",
+   "intro": {
+    "h2": "¿Qué es la optimización SEO?",
+    "blocks": [
+     {
+      "p": "En SAM Digital optimizamos tu sitio con estrategias de SEO On Page y Off Page, lo que significa que trabajamos tanto dentro como fuera de tu web para mejorar su posicionamiento en buscadores como Google."
+     },
+     {
+      "p": "Este servicio está pensado para negocios que quieren ganar visibilidad de forma natural, atraer más visitas sin pagar por clics y fortalecer su presencia digital a largo plazo."
+     }
+    ]
+   },
+   "why": {
+    "h2": "¿Por qué realizar la optimización SEO?",
+    "blocks": [
+     {
+      "p": "Porque si tu negocio no aparece en Google, estás perdiendo oportunidades todos los días."
+     },
+     {
+      "ul": [
+       "Te ayuda a atraer tráfico orgánico constante",
+       "Reduce tu dependencia de la publicidad paga",
+       "Aumenta la autoridad de tu marca en internet",
+       "Mejora la experiencia de usuario en tu sitio"
+      ]
+     },
+     {
+      "p": "Además, una buena estrategia SEO genera resultados duraderos en el tiempo."
+     }
+    ]
+   },
+   "steps": {
+    "h2": "¿Cómo funciona el SEO en SAM digital?",
+    "items": [
+     {
+      "t": "Auditoría SEO inicial",
+      "d": "Revisamos el estado actual de tu sitio web"
+     },
+     {
+      "t": "Optimización On Page",
+      "d": "Mejoramos textos, títulos, velocidad, enlaces internos, estructura y más"
+     },
+     {
+      "t": "Estrategia Off Page:",
+      "d": "Conseguimos enlaces externos, menciones y presencia en otros sitios de autoridad"
+     },
+     {
+      "t": "Análisis de palabras clave",
+      "d": "Detectamos las búsquedas que hacen tus clientes y adaptamos tu contenido"
+     },
+     {
+      "t": "Seguimiento mensual",
+      "d": "Te mostramos el progreso con reportes claros y acciones continuas"
+     }
+    ]
+   },
+   "benefits": {
+    "h2": "Beneficios de una web con SEO optimizado",
+    "items": [
+     {
+      "t": "Mejor visibilidad en buscadores",
+      "d": "Tus clientes te encuentran cuando buscan lo que ofreces"
+     },
+     {
+      "t": "Más visitas orgánicas",
+      "d": "Atraes tráfico sin pagar por clics constantemente"
+     },
+     {
+      "t": "Mejor experiencia web",
+      "d": "Optimizamos velocidad, estructura y usabilidad"
+     },
+     {
+      "t": "Resultados sostenibles",
+      "d": "Tu posicionamiento no desaparece cuando se acaba la pauta"
+     }
+    ]
+   }
+  },
+  "publicidad-paga": {
+   "slug": "publicidad-paga",
+   "h1": "Publicidad Paga",
+   "sub_h2": "",
+   "sub_p": "Lleva tu negocio al siguiente nivel con campañas de publicidad paga que sí funcionan",
+   "cta": "Quiero empezar a pautar ahora",
+   "card_title": "Publicidad Paga",
+   "card_desc": "Gestionamos campañas en Google, Meta, TikTok y LinkedIn Ads para maximizar tu alcance y conversiones.",
+   "icon": "pautagoogle",
+   "intro": {
+    "h2": "¿Qué son los anuncios pagos?",
+    "blocks": [
+     {
+      "p": "En SAM Digital diseñamos y ejecutamos estrategias de campañas y anuncios de publicidad paga personalizados para que llegues a las personas correctas en el momento justo, usando las plataformas más efectivas:"
+     },
+     {
+      "ul": [
+       "Meta Ads (Facebook e Instagram)",
+       "TikTok Ads",
+       "Google Ads (Búsqueda, Display, YouTube)"
+      ]
+     },
+     {
+      "p": "Nos encargamos de todo: desde la estrategia y los anuncios, hasta la optimización diaria. Tú solo enfócate en atender a los nuevos clientes."
+     }
+    ]
+   },
+   "why": {
+    "h2": "¿Por qué tener anuncios publicitarios?",
+    "blocks": [
+     {
+      "p": "Porque pautar sin estrategia es tirar dinero. Nosotros nos aseguramos de que cada peso invertido te acerque a tus objetivos."
+     },
+     {
+      "ul": [
+       "Campañas enfocadas en resultados, no en likes",
+       "Segmentación precisa para llegar a tu cliente ideal",
+       "Optimización constante para mejorar el rendimiento",
+       "Informes claros para que sepas en qué estás invirtiendo"
+      ]
+     }
+    ]
+   },
+   "steps": {
+    "h2": "Nuestro Proceso Estratégico",
+    "items": [
+     {
+      "t": "Reunión inicial",
+      "d": "Conocemos tu negocio, público objetivo y metas"
+     },
+     {
+      "t": "Definimos la estrategia",
+      "d": "Elegimos las plataformas adecuadas y el tipo de campaña (leads, tráfico, ventas, etc.)"
+     },
+     {
+      "t": "Diseñamos los anuncios",
+      "d": "Creamos el mensaje, diseño y segmentación"
+     },
+     {
+      "t": "Lanzamos y gestionamos",
+      "d": "Activamos la campaña y optimizamos día a día"
+     },
+     {
+      "t": "Te entregamos reportes",
+      "d": "Recibes informes periódicos con resultados y sugerencias"
+     }
+    ]
+   },
+   "benefits": {
+    "h2": "Beneficios de la generación de leads",
+    "items": [
+     {
+      "t": "Más visibilidad",
+      "d": "Apareces frente a miles de personas interesadas en lo que ofreces"
+     },
+     {
+      "t": "Resultados medibles",
+      "d": "Sabes exactamente cuánto te cuesta un lead, clic o compra"
+     },
+     {
+      "t": "Tráfico inmediato",
+      "d": "Atrae visitas desde el primer día"
+     },
+     {
+      "t": "Campañas personalizadas",
+      "d": "Adaptadas a tu tipo de negocio, presupuesto y objetivo"
+     }
+    ]
+   }
+  },
+  "branding": {
+   "slug": "branding",
+   "h1": "Diseño de Branding",
+   "sub_h2": "",
+   "sub_p": "Construimos marcas memorables que inspiran confianza y generan impacto.",
+   "cta": "Quiero crear mi marca ahora",
+   "card_title": "Branding",
+   "card_desc": "Construimos una identidad visual poderosa para que tu marca destaque y conecte con su audiencia.",
+   "icon": "marca2",
+   "intro": {
+    "h2": "¿Qué es el servicio de Diseño de Branding?",
+    "blocks": [
+     {
+      "p": "El branding es mucho más que un logo: es la forma en que tu negocio se presenta al mundo y cómo tus clientes lo recuerdan."
+     },
+     {
+      "p": "En SAM Digital creamos marcas sólidas, coherentes y profesionales, que transmiten confianza y hacen que tu negocio se diferencie de la competencia."
+     },
+     {
+      "p": "Nuestro servicio incluye:"
+     },
+     {
+      "ul": [
+       "Creación de logo único y memorable",
+       "Definición de paleta de colores y tipografías",
+       "Manual de identidad visual",
+       "Diseño de material POP y piezas gráficas de apoyo",
+       "Aplicaciones digitales y físicas"
+      ]
+     }
+    ]
+   },
+   "why": {
+    "h2": "¿Por qué invertir en Branding?",
+    "blocks": [
+     {
+      "p": "Porque una marca bien construida:"
+     },
+     {
+      "ul": [
+       "Te hace diferente y reconocible",
+       "Genera confianza y credibilidad en tus clientes",
+       "Da consistencia visual a todos tus canales",
+       "Te ayuda a crecer con bases sólidas"
+      ]
+     }
+    ]
+   },
+   "steps": {
+    "h2": "Nuestro Proceso Estratégico",
+    "items": [
+     {
+      "t": "Exploración de tu negocio",
+      "d": "Conversamos contigo para conocer tu historia, visión, valores y lo que quieres transmitir con tu marca."
+     },
+     {
+      "t": "Análisis y conceptualización",
+      "d": "Definimos los conceptos, estilos y referencias visuales que representarán la esencia de tu marca."
+     },
+     {
+      "t": "Diseño del logo",
+      "d": "Creamos un logo único, versátil y memorable, que funcionará en cualquier formato digital o físico."
+     },
+     {
+      "t": "Construcción de identidad visual",
+      "d": "Desarrollamos paleta de colores, tipografías y lineamientos gráficos que aseguren coherencia en toda tu comunicación."
+     },
+     {
+      "t": "Aplicaciones y material POP",
+      "d": "Diseñamos piezas iniciales como tarjetas, flyers, presentaciones o empaques, además del manual de marca con las guías de uso."
+     }
+    ]
+   },
+   "benefits": {
+    "h2": "Beneficios de nuestro servicio de Branding",
+    "items": [
+     {
+      "t": "Identidad profesional",
+      "d": "Diseñamos marcas que transmiten confianza y seriedad."
+     },
+     {
+      "t": "Coherencia visual",
+      "d": "Tu marca se verá igual de bien en redes, web o material impreso."
+     },
+     {
+      "t": "Impacto en el mercado",
+      "d": "Destaca frente a la competencia con un diseño estratégico."
+     },
+     {
+      "t": "Material POP incluido",
+      "d": "Recibes elementos listos para conectar con tu público."
+     }
+    ]
+   }
+  },
+  "diseno-grafico": {
+   "slug": "diseno-grafico",
+   "h1": "Diseño Gráfico",
+   "sub_h2": "",
+   "sub_p": "Potencia tu marca con diseños que comunican, impactan y generan resultados.",
+   "cta": "Solicitar diseño ahora",
+   "card_title": "Diseño gráfico",
+   "card_desc": "Creamos diseños atractivos que comunican, inspiran y refuerzan la identidad de tu marca.",
+   "icon": "diseno",
+   "intro": {
+    "h2": "Diseño Gráfico que conecta y vende",
+    "blocks": [
+     {
+      "p": "Creamos piezas gráficas pensadas para captar la atención y fortalecer la identidad visual de tu negocio, tanto en digital como en físico."
+     }
+    ]
+   },
+   "why": {
+    "h2": "¿Por qué contratar nuestro servicio de diseño gráfico?",
+    "blocks": [
+     {
+      "ul": [
+       "Te ayudamos a comunicar tu mensaje con claridad y estilo.",
+       "Aseguramos consistencia visual en todos tus canales de comunicación.",
+       "Diseñamos con una mirada estratégica, no solo estética.",
+       "Entregamos piezas listas para publicar o imprimir, con medidas y formatos adecuados."
+      ]
+     }
+    ]
+   },
+   "steps": {
+    "h2": "Nuestro Proceso Estratégico",
+    "items": [
+     {
+      "t": "Diseño de piezas para redes sociales",
+      "d": "Post, carruseles, historias, reels covers, anuncios y todo lo necesario para que tu marca se vea profesional y coherente en Instagram, Facebook, TikTok o LinkedIn."
+     },
+     {
+      "t": "Diseño de piezas para páginas web",
+      "d": "Diseños visuales que mejoran la experiencia del usuario y refuerzan tu identidad de marca: banners, botones, encabezados, ilustraciones y más."
+     },
+     {
+      "t": "Diseño de flyers y portafolios",
+      "d": "Desde piezas promocionales hasta catálogos, dossiers y presentaciones con una estética alineada a tu marca y objetivos de venta."
+     },
+     {
+      "t": "Diseño para impresos en gran formato",
+      "d": "Vallas, pendones, pasacalles, stands, adhesivos o cualquier soporte visual físico que necesite tu marca para ser visible en espacios reales."
+     }
+    ]
+   },
+   "benefits": {
+    "h2": "Beneficios de la generación de leads",
+    "items": [
+     {
+      "t": "Diseño personalizado",
+      "d": "Creamos piezas alineadas 100% con tu marca."
+     },
+     {
+      "t": "Entrega rápida y profesional",
+      "d": "Cumplimos tiempos de entrega sin comprometer la calidad."
+     },
+     {
+      "t": "Diseños para digital e impreso",
+      "d": "Nos adaptamos a todos los formatos que tu marca necesite."
+     },
+     {
+      "t": "Acompañamiento creativo",
+      "d": "Te asesoramos en cada etapa del diseño."
+     }
+    ]
+   }
+  },
+  "email-marketing": {
+   "slug": "email-marketing",
+   "h1": "Campañas de Email Marketing",
+   "sub_h2": "Tu mensaje, directo al corazón del cliente.",
+   "sub_p": "",
+   "cta": "Solicita tu estrategia hoy mismo.",
+   "card_title": "Email Marketing / SMS",
+   "card_desc": "Diseñamos campañas de Email y SMS que convierten, fidelizan clientes y aumentan tus ventas.",
+   "icon": "emailmarketing",
+   "intro": {
+    "h2": "¿Qué es el servicio de campañas de Email Marketing?",
+    "blocks": [
+     {
+      "p": "El email marketing es una herramienta poderosa para comunicarte con tus clientes actuales y potenciales de forma directa, segmentada y automatizada."
+     },
+     {
+      "p": "En SAM Digital diseñamos, redactamos y gestionamos campañas de correo electrónico personalizadas, ya sea para promocionar productos, informar novedades, recuperar carritos abandonados o fidelizar a tu audiencia."
+     },
+     {
+      "p": "Nos encargamos de todo: desde la estrategia, diseño visual, redacción de los correos y análisis de resultados, para que tú solo te preocupes por atender los nuevos clientes que llegan a ti."
+     }
+    ]
+   },
+   "why": {
+    "h2": "¿Por qué deberías considerar una campaña de Email Marketing?",
+    "blocks": [
+     {
+      "p": "Porque el correo sigue siendo uno de los canales con mayor retorno de inversión (ROI) en marketing digital."
+     },
+     {
+      "p": "Además, te permite mantener una relación constante con tu comunidad, enviar promociones especiales y automatizar procesos de venta y recordatorios."
+     },
+     {
+      "p": "Es económico, medible, automatizable y sigue funcionando… si se hace bien. Y eso es justo lo que hacemos en SAM Digital."
+     }
+    ]
+   },
+   "steps": {
+    "h2": "Nuestro proceso de trabajo",
+    "items": [
+     {
+      "t": "Diagnóstico inicial",
+      "d": "Conocemos tu marca, tus objetivos y tu base de datos de contactos."
+     },
+     {
+      "t": "Diseño de estrategia",
+      "d": "Definimos qué tipo de correos enviaremos, a quién y en qué momentos."
+     },
+     {
+      "t": "Diseño y redacción",
+      "d": "Creamos piezas visuales llamativas y textos persuasivos con llamados a la acción efectivos."
+     },
+     {
+      "t": "Automatización y programación",
+      "d": "Configuramos herramientas de envío (como Mailchimp, Brevo o Klaviyo) y automatizamos según la estrategia."
+     },
+     {
+      "t": "Envío y seguimiento",
+      "d": "Lanzamos las campañas y medimos su impacto para optimizar constantemente."
+     }
+    ]
+   },
+   "benefits": {
+    "h2": "Beneficios de la generación de leads",
+    "items": [
+     {
+      "t": "Alto retorno de inversión",
+      "d": "Convierte más gastando menos, con una de las estrategias más rentables del marketing digital."
+     },
+     {
+      "t": "Automatización inteligente",
+      "d": "Envía el mensaje justo, en el momento adecuado, sin mover un dedo."
+     },
+     {
+      "t": "Segmentación precisa",
+      "d": "Habla directo al interés de cada cliente según su comportamiento o perfil."
+     },
+     {
+      "t": "Diseño que convierte",
+      "d": "Correos visuales, atractivos y optimizados para generar clics y ventas."
+     }
+    ]
+   }
+  }
+ }
+}

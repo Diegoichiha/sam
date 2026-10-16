@@ -1,21 +1,46 @@
-# SÁM digital · Rediseño del sitio (Home v1)
+# SÁM digital · Rediseño del sitio
 
-Propuesta de rediseño del Home de [samdigital.com.co](https://samdigital.com.co/): más impacto visual y de movimiento, manteniendo el branding de la marca.
-Sitio estático (HTML + CSS + JS vanilla), sin build.
+Propuesta de rediseño de [samdigital.com.co](https://samdigital.com.co/): más impacto visual y de movimiento, manteniendo el branding de la marca y **exactamente los mismos textos** del sitio actual.
+Sitio estático (HTML + CSS + JS vanilla) con las 22 páginas generadas desde datos por un script de Python.
 
 ```
-index.html              ← Home
-assets/css/styles.css   ← sistema de diseño + estilos de todas las secciones
-assets/js/main.js       ← animaciones, cursor, scrollytelling
-assets/vendor/          ← GSAP 3.12.5, ScrollTrigger 3.12.5, Lenis 1.1.20 (copias locales)
-assets/img/             ← logos, iconos de servicios, portafolio (work/) y blog (tomados del sitio actual)
+index.html                       ← Home (generado)
+<slug>/index.html                ← 21 páginas internas, con las mismas URL del sitio actual (generadas)
+build.py                         ← generador de todas las páginas
+src/data/*.json                  ← contenido extraído del sitio actual (servicios, nosotros, legales, artículos)
+src/pages/home.html              ← contenido del Home
+src/partials/                    ← chrome (cursor, progreso) y botón flotante compartidos
+assets/css/styles.css            ← sistema de diseño + estilos del Home
+assets/css/pages.css             ← estilos de las páginas internas
+assets/js/main.js                ← lo común: cabecera, mega menú, cursor, hero, revelados (+ secciones del Home)
+assets/js/pages.js               ← lógica de las internas (pasos apilados, filtro, índice, formulario)
+assets/vendor/                   ← GSAP 3.12.5, ScrollTrigger 3.12.5, Lenis 1.1.20 (copias locales)
+assets/img/                      ← logos, iconos, portafolio (work/), blog, servicios y fotos de stock
 ```
+
+### Páginas
+
+| Ruta | Contenido |
+|---|---|
+| `/` | Home |
+| `/services/` | Nuestras soluciones: órbita con los 9 servicios + tarjetas |
+| `/generacion-de-leads/` `/marketing-estrategico/` `/social-media-manager/` `/diseno-de-paginas-web/` `/optimizacion-seo/` `/publicidad-paga/` `/email-marketing/` `/diseno-grafico/` `/branding/` | Páginas de servicio: hero con ilustración, intro, "por qué", proceso (tarjetas apiladas), beneficios, otras soluciones y CTA |
+| `/sobre-nosotros/` | Hero de fotos, mosaico, misión y visión, cifras, aliado estratégico |
+| `/portafolio/` | Pestañas con filtro animado (Diseño web, Branding, Diseño gráfico, Edición de video) |
+| `/contacto/` | Datos de contacto + formulario |
+| `/blog/` y 3 artículos | Listado y lectura con índice lateral que resalta la sección visible |
+| `/aviso-legal/` `/politica-de-privacidad/` `/politica-de-cookies/` `/declaracion-de-accesibilidad/` | Documentos legales con índice |
+
+Elementos nuevos propuestos (no existen en el sitio actual): órbita de servicios, tarjetas de proceso apiladas con contador, filtro animado del portafolio, índice lateral de lectura, migas de pan y bloque "Otras soluciones".
 
 ## Probar en local
 
 ```bash
-npx http-server . -p 5190 -c-1
+python build.py                      # regenera index.html y las carpetas de cada página
+npx http-server . -p 5190 -c-1       # servidor local
 ```
+
+Para cambiar un texto: editar el JSON de `src/data/` (o `src/pages/home.html` para el Home) y volver a ejecutar `python build.py`. Requiere Python 3 con `lxml`. **No editar a mano los `index.html` generados.**
 
 ## Marca (extraída del sitio actual)
 
@@ -73,8 +98,11 @@ Accesibilidad: respeta `prefers-reduced-motion` (sin Lenis, sin pines ni animaci
 
 - **WhatsApp**: se usa el número que ya está configurado en el sitio actual (`573167335485`); confirmar que es el oficial.
 - **Logos de clientes**: la sección "Ellos confiaron en nosotros" del sitio actual no se pudo extraer; hay que pedir los logos.
-- **Casos de éxito**: se usan los 12 trabajos del portafolio actual (`assets/img/work/`, mockups de 1200×800). Faltan resultados/métricas aprobadas por cliente. VOLCALI está solo en el muro del hero (su enlace en el sitio actual apunta por error a ASOCLICPER). "Ver portafolio" enlaza al portafolio del sitio actual hasta que se diseñe esa página.
+- **Casos de éxito**: se usan los 12 trabajos del portafolio actual (`assets/img/work/`, mockups de 1200×800). Faltan resultados/métricas aprobadas por cliente. VOLCALI está solo en el muro del hero (su enlace en el sitio actual apunta por error a ASOCLICPER). "Ver portafolio" enlaza a `/portafolio/`.
 - **Cifras**: se usan datos reales del sitio actual (15+ años, 9 soluciones, 4 plataformas de pauta, 30 min de consultoría). Si hay métricas aprobadas (clientes, proyectos, ROI), se pueden sumar.
 - **Textos de "¿Cómo lo hacemos?"**: el sitio actual tiene lorem ipsum en esta sección; los textos de los 3 pasos son propuesta nuestra.
-- **Enlaces internos**: las páginas de cada solución, portafolio, blog y legales apuntan a anclas/`#` hasta que se diseñen.
-- **Formulario de contacto**: falta diseñar la sección con formulario (hoy el CTA lleva al ancla `#contacto`).
+- **Formulario de contacto**: no tiene backend. Al enviarlo valida los campos y abre WhatsApp con el mensaje ya redactado; al migrar se reemplaza por el envío real (correo / CRM).
+- **Textos repetidos en el sitio actual** (se mantuvieron tal cual): el título "Beneficios de la generación de leads" aparece también en Social media manager, Publicidad paga, Diseño gráfico y Email marketing. Conviene corregirlos con el cliente.
+- **Enlace de VOLCALI** en el portafolio: en el sitio actual apunta a asoclicper.com (se mantuvo); la tarjeta "Marketing Estrátegico" se corrigió a "Estratégico".
+- **Portafolio**: las pestañas "Diseño gráfico" y "Edición de video" están vacías en el sitio actual; muestran "Pronto publicaremos nuevos proyectos en esta categoría.".
+- **Fotos de los artículos y de Nosotros**: las de stock son provisionales.

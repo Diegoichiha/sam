@@ -1,0 +1,18 @@
+<!-- WhatsApp: círculo en reposo que se expande al pasar el mouse y abre una tarjeta de contacto -->
+<button type="button" class="fab" id="fab" aria-haspopup="dialog" aria-expanded="false" aria-controls="fabPopup">
+  <span class="fab-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><use href="#i-support"/></svg></span>
+  <span class="fab-label">Hablar con un especialista</span>
+</button>
+<div class="fab-popup" id="fabPopup" role="dialog" aria-modal="false" aria-label="Contacto">
+  <button type="button" class="fab-popup-close" id="fabPopupClose" aria-label="Cerrar">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>
+  </button>
+  <span class="fab-popup-avatar" data-fab-part><img src="assets/img/brand/favicon.png" alt=""></span>
+  <p class="fab-popup-title" data-fab-part>Equipo SÁM digital</p>
+  <p class="fab-popup-message" data-fab-part>¿Quieres convertir tu presencia digital en un sistema de clientes? Escríbenos y te respondemos directo por WhatsApp.</p>
+  <a href="https://wa.me/573167335485" target="_blank" rel="noopener" class="fab-popup-cta" data-fab-part data-magnetic>
+    <svg viewBox="0 0 24 24" width="18" height="18"><use href="#i-wa"/></svg>
+    Escribir por WhatsApp
+  </a>
+</div>
+
