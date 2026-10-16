@@ -543,42 +543,85 @@
 </main>
 
 <!-- ───────── Footer ───────── -->
-<footer class="footer">
-  <span class="footer__ghost" aria-hidden="true">SÁM</span>
-  <div class="container">
-    <div class="footer__top">
-      <a class="footer__big" href="#contacto" data-magnetic>
-        <span>¿Hablamos?</span>
-        <i><svg width="48" height="48"><use href="#i-arrow-ur"/></svg></i>
-      </a>
-    </div>
+<footer class="footer" id="footer">
+  <div class="footer__photo" aria-hidden="true"><img src="assets/img/footer/equipo.webp" alt="" width="2200" height="1467" loading="lazy"></div>
+  <div class="footer__shade" aria-hidden="true"></div>
 
-    <div class="footer__grid">
-      <div class="footer__brand">
-        <img src="assets/img/brand/logo-sam-blanco.png" alt="SÁM digital" width="300" height="116" loading="lazy">
-        <p>Somos un aliado estratégico integral en soluciones digitales. Contamos con más de 15 años de experiencia, gracias a un equipo profesional y especialista en cada una de las áreas.</p>
-      </div>
-      <nav class="footer__col" aria-label="Navegación">
-        <h4>Navegación</h4>
-        <a href="#inicio">Inicio</a><a href="#nosotros">Nosotros</a><a href="#soluciones">Soluciones</a><a href="#portafolio">Portafolio</a><a href="#contacto">Contacto</a>
-      </nav>
-      <nav class="footer__col" aria-label="Soluciones">
-        <h4>Soluciones</h4>
-        <a href="#soluciones">Generación de leads</a><a href="#soluciones">Marketing estratégico</a><a href="#soluciones">Social media marketing</a><a href="#soluciones">Diseño de páginas web</a><a href="#soluciones">Optimización SEO</a><a href="#soluciones">Publicidad paga</a><a href="#soluciones">Email marketing / SMS</a><a href="#soluciones">Diseño gráfico</a><a href="#soluciones">Branding</a>
-      </nav>
-      <div class="footer__col">
-        <h4>Síguenos</h4>
-        <div class="social">
-          <a href="https://www.facebook.com/profile.php?id=61582248838081" aria-label="Facebook" target="_blank" rel="noopener"><svg width="20" height="20"><use href="#i-fb"/></svg></a>
-          <a href="https://www.instagram.com/samdigital_mkt/" aria-label="Instagram" target="_blank" rel="noopener"><svg width="20" height="20"><use href="#i-ig"/></svg></a>
-          <a href="https://www.linkedin.com/company/s%C3%A1m-digital/" aria-label="LinkedIn" target="_blank" rel="noopener"><svg width="20" height="20"><use href="#i-in"/></svg></a>
-        </div>
-      </div>
-    </div>
+  <div class="container footer__hero">
+    <h2 class="footer__title" data-split>Más que marketing, creamos <em>sistemas</em> que generan ventas.</h2>
+    <a class="btn btn--primary btn--xl" href="#contacto" data-magnetic>
+      <span class="btn__txt"><span>Hablemos de tu proyecto</span><span aria-hidden="true">Hablemos de tu proyecto</span></span>
+      <span class="btn__ico"><svg width="20" height="20"><use href="#i-arrow"/></svg></span>
+    </a>
+  </div>
 
-    <div class="footer__bottom">
+  <div class="container footer__links">
+    <section class="footer__block footer__block--sol" aria-label="Soluciones" data-reveal>
+      <h3 class="footer__h">Soluciones</h3>
+      <div class="footer__cols footer__cols--3">
+          <div class="footer__col">
+            <a class="footer__cat" href="#soluciones">Atraer clientes <svg width="14" height="14" aria-hidden="true"><use href="#i-arrow-ur"/></svg></a>
+            <ul>
+            <li><a href="#soluciones">Generación de leads</a></li>
+            <li><a href="#soluciones">Publicidad paga</a></li>
+            <li><a href="#soluciones">Optimización SEO</a></li>
+            </ul>
+          </div>
+          <div class="footer__col">
+            <a class="footer__cat" href="#soluciones">Convertir y fidelizar <svg width="14" height="14" aria-hidden="true"><use href="#i-arrow-ur"/></svg></a>
+            <ul>
+            <li><a href="#soluciones">Diseño de páginas web</a></li>
+            <li><a href="#soluciones">Email marketing / SMS</a></li>
+            <li><a href="#soluciones">Marketing estratégico</a></li>
+            </ul>
+          </div>
+          <div class="footer__col">
+            <a class="footer__cat" href="#soluciones">Marca y contenido <svg width="14" height="14" aria-hidden="true"><use href="#i-arrow-ur"/></svg></a>
+            <ul>
+            <li><a href="#soluciones">Branding</a></li>
+            <li><a href="#soluciones">Diseño gráfico</a></li>
+            <li><a href="#soluciones">Social media marketing</a></li>
+            </ul>
+          </div>
+      </div>
+    </section>
+    <nav class="footer__block footer__block--nav" aria-label="Navegación" data-reveal>
+      <h3 class="footer__h">Navegación</h3>
+      <div class="footer__cols footer__cols--2">
+          <div class="footer__col">
+            <p class="footer__cat">Principal</p>
+            <ul>
+            <li><a href="#inicio">Inicio</a></li>
+            <li><a href="#nosotros">Nosotros</a></li>
+            <li><a href="#soluciones">Soluciones</a></li>
+            <li><a href="#como">Cómo lo hacemos</a></li>
+            <li><a href="#portafolio">Portafolio</a></li>
+            <li><a href="#contacto">Contacto</a></li>
+            </ul>
+          </div>
+          <div class="footer__col">
+            <p class="footer__cat">Recursos</p>
+            <ul>
+            <li><a href="#blog">Blog</a></li>
+            <li><a href="#portafolio">Casos de éxito</a></li>
+            <li><a href="#contacto">Consultoría gratis</a></li>
+            <li><a href="#contacto">Agenda tu cita</a></li>
+            </ul>
+          </div>
+      </div>
+    </nav>
+  </div>
+
+  <div class="container footer__bar">
+    <div class="footer__brand">
+      <img src="assets/img/brand/logo-sam-blanco.png" alt="SÁM digital" width="300" height="116" loading="lazy">
       <p>© <span data-year>2026</span> SÁM digital. Todos los derechos reservados.</p>
-      <p class="footer__legal"><a href="#">Política de privacidad</a><a href="#">Declaración de accesibilidad</a><a href="#">Aviso legal</a><a href="#">Política de cookies</a></p>
+    </div>
+    <p class="footer__legal"><a href="#">Política de privacidad</a><a href="#">Declaración de accesibilidad</a><a href="#">Aviso legal</a><a href="#">Política de cookies</a></p>
+    <div class="social">
+      <a href="https://www.facebook.com/profile.php?id=61582248838081" aria-label="Facebook" target="_blank" rel="noopener"><svg width="20" height="20"><use href="#i-fb"/></svg></a>
+      <a href="https://www.instagram.com/samdigital_mkt/" aria-label="Instagram" target="_blank" rel="noopener"><svg width="20" height="20"><use href="#i-ig"/></svg></a>
+      <a href="https://www.linkedin.com/company/s%C3%A1m-digital/" aria-label="LinkedIn" target="_blank" rel="noopener"><svg width="20" height="20"><use href="#i-in"/></svg></a>
     </div>
   </div>
 </footer>

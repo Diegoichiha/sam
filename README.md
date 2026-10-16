@@ -51,6 +51,7 @@ Medido en superside.com a 1920 px: contenido de **1608 px** máximo, centrado, c
 | Párrafo que se ilumina palabra a palabra con el scroll | Superside | "Sobre nosotros" |
 | **Hero fijo (sticky)** a pantalla completa: "Sobre nosotros" sube y lo cubre; el hero se aleja y se oscurece mientras tanto | — | hero → sección 2 |
 | **Mosaico** de cuadrados y rectángulos (5 fotos de stock + tile de experiencia con cifra que rueda) | Superside | "Sobre nosotros" |
+| **Footer estilo Superside**: foto de stock a pantalla completa con degradado oscuro, titular + CTA centrados y columnas "Soluciones" / "Navegación" con líneas finas; la foto se desplaza con el scroll | Superside | footer |
 | **Secciones a alto completo**: cada bloque mide al menos el alto de la pantalla (`min-height: 100svh`) y centra su contenido, así nunca asoma un pedazo de la siguiente | Superside | global |
 | Dígitos que ruedan | Superside | "15+" del mosaico y cifras |
 | Lista de soluciones con vista previa que sigue al cursor | Superside | "Soluciones" |
@@ -65,7 +66,7 @@ Accesibilidad: respeta `prefers-reduced-motion` (sin Lenis, sin pines ni animaci
 ## Imágenes
 
 - **Portafolio** (hero y casos de éxito): trabajos reales de samdigital.com.co.
-- **Mosaico de "Sobre nosotros"**: 5 fotos de stock de [Unsplash](https://unsplash.com) (licencia libre), **provisionales**; reemplazar por fotografía propia del equipo de SÁM cuando exista.
+- **Mosaico de "Sobre nosotros"** y **foto del footer**: fotos de stock de [Unsplash](https://unsplash.com) (licencia libre), **provisionales**; reemplazar por fotografía propia del equipo de SÁM cuando exista.
 - Blog e íconos de servicios: del sitio actual.
 
 ## Pendientes por validar con el cliente

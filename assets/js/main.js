@@ -646,6 +646,15 @@
   initRolls();
   initReveals(heroTitle);
 
+  // Footer: la foto se desplaza y se acerca despacio mientras se llega al final
+  const footerPhoto = $('.footer__photo img');
+  if (footerPhoto) {
+    gsap.fromTo(footerPhoto, { yPercent: -7, scale: 1.12 }, {
+      yPercent: 5, scale: 1.02, ease: 'none',
+      scrollTrigger: { trigger: '.footer', start: 'top bottom', end: 'bottom bottom', scrub: true },
+    });
+  }
+
   gsap.from('.cta__bubble', {
     scale: 0.3, autoAlpha: 0, rotate: -40, duration: 1.4, ease: 'back.out(1.6)',
     scrollTrigger: { trigger: '.cta__title', start: 'top 70%', once: true },
