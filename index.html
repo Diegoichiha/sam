@@ -1,0 +1,543 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>SÁM digital · Agencia de marketing digital</title>
+  <meta name="description" content="Más que marketing, creamos sistemas que generan ventas. Agencia creativa de marketing digital: leads, SEO, pauta, diseño web, branding y más.">
+  <meta name="theme-color" content="#06304C">
+  <link rel="icon" href="assets/img/brand/favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Red+Hat+Display:ital,wght@0,400;0,500;0,700;0,800;0,900;1,700;1,800;1,900&family=Quicksand:wght@400;500;600;700&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body>
+
+<!-- ───────── Sprite de íconos ───────── -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-arrow-ur" viewBox="0 0 24 24"><path d="M7 17 17 7M8 7h9v9" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-down" viewBox="0 0 24 24"><path d="M12 5v14M6 13l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-fb" viewBox="0 0 24 24"><path fill="currentColor" d="M14 8h2V5h-2.5C11 5 10 6.6 10 8.7V11H8v3h2v6h3v-6h2.2l.4-3H13V9c0-.6.3-1 1-1z"/></symbol>
+  <symbol id="i-ig" viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="4.5" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="3.7" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="16.7" cy="7.3" r="1.2" fill="currentColor"/></symbol>
+  <symbol id="i-in" viewBox="0 0 24 24"><path fill="currentColor" d="M6.5 9H4v11h2.5V9zM5.2 4.5a1.5 1.5 0 100 3 1.5 1.5 0 000-3zM20 13.2c0-2.6-1.4-4.3-3.6-4.3-1.2 0-2 .6-2.4 1.2V9h-2.5v11H14v-6c0-1.4.7-2.2 1.8-2.2s1.7.8 1.7 2.2V20H20v-6.8z"/></symbol>
+  <symbol id="i-wa" viewBox="0 0 24 24"><path fill="currentColor" d="M12 3a9 9 0 00-7.7 13.6L3 21l4.5-1.2A9 9 0 1012 3zm4.6 12.4c-.2.6-1.2 1.1-1.7 1.2-.4.1-1 .1-1.6-.1-.4-.1-.9-.3-1.5-.6-2.6-1.1-4.3-3.8-4.4-4-.1-.2-1-1.3-1-2.5s.6-1.8.9-2c.2-.2.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 1.9c.1.2.1.3 0 .5l-.3.4-.4.5c-.1.1-.3.3-.1.6.2.3.7 1.2 1.5 1.9 1 .9 1.9 1.2 2.2 1.3.3.1.5.1.6-.1l.8-1c.2-.2.4-.2.6-.1l1.8.9c.3.1.4.2.5.3.1.2.1.7-.1 1.3z"/></symbol>
+  <symbol id="i-spark" viewBox="0 0 24 24"><path fill="currentColor" d="M12 1.5l2.3 7.2 7.2 2.3-7.2 2.3L12 20.5l-2.3-7.2L2.5 11l7.2-2.3z"/></symbol>
+  <symbol id="i-target" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="5" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="1.6" fill="currentColor"/></symbol>
+</svg>
+
+<div class="progress" aria-hidden="true"></div>
+
+<!-- Cursor personalizado (solo punteros finos) -->
+<div class="cursor" aria-hidden="true">
+  <div class="cursor__ring"><span class="cursor__label"></span></div>
+  <div class="cursor__dot"></div>
+</div>
+
+<a class="skip" href="#main">Saltar al contenido</a>
+
+<!-- ───────── Header ───────── -->
+<header class="header" id="header">
+  <div class="container">
+    <div class="header__bar">
+      <a class="header__logo" href="#inicio" aria-label="SÁM digital, inicio">
+        <img src="assets/img/brand/logo-sam-blanco.png" alt="SÁM digital" width="300" height="116">
+      </a>
+
+      <nav class="nav" aria-label="Principal">
+        <ul>
+          <li><a class="nav__link is-current" href="#inicio">Inicio</a></li>
+          <li><a class="nav__link" href="#nosotros">Nosotros</a></li>
+          <li class="has-mega">
+            <a class="nav__link" href="#soluciones" aria-haspopup="true">Soluciones
+              <svg class="nav__caret" width="12" height="12" viewBox="0 0 12 12" aria-hidden="true"><path d="M2 4l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+            <div class="mega">
+              <ul class="mega__grid">
+                <li><a href="#soluciones"><img src="assets/img/services/leads.png" alt="" width="44" height="40"><span><b>Generación de leads</b><small>Clientes ideales, más ventas</small></span></a></li>
+                <li><a href="#soluciones"><img src="assets/img/services/consultoria.png" alt="" width="44" height="40"><span><b>Marketing estratégico</b><small>Estrategias que cumplen metas</small></span></a></li>
+                <li><a href="#soluciones"><img src="assets/img/services/redessociales.png" alt="" width="44" height="40"><span><b>Social media marketing</b><small>Conecta, impacta y convierte</small></span></a></li>
+                <li><a href="#soluciones"><img src="assets/img/services/paginasweb.png" alt="" width="44" height="40"><span><b>Diseño de páginas web</b><small>Sitios, tiendas y landing pages</small></span></a></li>
+                <li><a href="#soluciones"><img src="assets/img/services/seoicon.png" alt="" width="44" height="40"><span><b>Optimización SEO</b><small>Más visibilidad en Google</small></span></a></li>
+                <li><a href="#soluciones"><img src="assets/img/services/pautagoogle.png" alt="" width="44" height="40"><span><b>Publicidad paga</b><small>Google, Meta, TikTok y LinkedIn</small></span></a></li>
+                <li><a href="#soluciones"><img src="assets/img/services/emailmarketing.png" alt="" width="44" height="40"><span><b>Email marketing / SMS</b><small>Campañas que fidelizan</small></span></a></li>
+                <li><a href="#soluciones"><img src="assets/img/services/diseno.png" alt="" width="44" height="40"><span><b>Diseño gráfico</b><small>Piezas que comunican</small></span></a></li>
+                <li><a href="#soluciones"><img src="assets/img/services/marca2.png" alt="" width="44" height="40"><span><b>Branding</b><small>Una identidad poderosa</small></span></a></li>
+              </ul>
+            </div>
+          </li>
+          <li><a class="nav__link" href="#portafolio">Portafolio</a></li>
+          <li><a class="nav__link" href="#contacto">Contacto</a></li>
+        </ul>
+      </nav>
+
+      <a class="btn btn--brand header__cta" href="#contacto" data-magnetic>
+        <span class="btn__txt"><span>Hablemos de tu proyecto</span><span aria-hidden="true">Hablemos de tu proyecto</span></span>
+        <span class="btn__ico"><svg width="18" height="18"><use href="#i-arrow"/></svg></span>
+      </a>
+
+      <button class="burger" aria-label="Abrir menú" aria-expanded="false" aria-controls="mobile-menu"><i></i><i></i></button>
+    </div>
+  </div>
+</header>
+
+<!-- Menú móvil -->
+<div class="mmenu" id="mobile-menu" aria-hidden="true">
+  <nav aria-label="Móvil">
+    <a href="#inicio">Inicio</a>
+    <a href="#nosotros">Nosotros</a>
+    <a href="#soluciones">Soluciones</a>
+    <a href="#portafolio">Portafolio</a>
+    <a href="#contacto">Contacto</a>
+  </nav>
+  <div class="mmenu__foot">
+    <a class="btn btn--primary" href="#contacto">
+      <span class="btn__txt"><span>Hablemos de tu proyecto</span><span aria-hidden="true">Hablemos de tu proyecto</span></span>
+      <span class="btn__ico"><svg width="18" height="18"><use href="#i-arrow"/></svg></span>
+    </a>
+    <div class="social">
+      <a href="https://www.facebook.com/profile.php?id=61582248838081" aria-label="Facebook" target="_blank" rel="noopener"><svg width="20" height="20"><use href="#i-fb"/></svg></a>
+      <a href="https://www.instagram.com/samdigital_mkt/" aria-label="Instagram" target="_blank" rel="noopener"><svg width="20" height="20"><use href="#i-ig"/></svg></a>
+      <a href="https://www.linkedin.com/company/s%C3%A1m-digital/" aria-label="LinkedIn" target="_blank" rel="noopener"><svg width="20" height="20"><use href="#i-in"/></svg></a>
+    </div>
+  </div>
+</div>
+
+<main id="main">
+
+<!-- ───────── Hero ───────── -->
+<section class="hero" id="inicio">
+  <div class="hero__bg" data-hero-bg>
+    <img src="assets/img/brand/fondo-banner.webp" alt="" width="1920" height="990" fetchpriority="high">
+  </div>
+  <div class="hero__shade" aria-hidden="true"></div>
+  <div class="hero__grid" aria-hidden="true"></div>
+  <span class="aurora aurora--a" aria-hidden="true"></span>
+  <span class="aurora aurora--b" aria-hidden="true"></span>
+
+  <div class="container hero__inner">
+    <div class="hero__copy" data-hero-copy>
+      <span class="chip" data-hero-in><i></i>Agencia creativa</span>
+      <h1 class="hero__title" data-split>Más que marketing creamos <em>sistemas</em> que generan ventas.</h1>
+      <p class="hero__lead" data-hero-in>Conoce nuestro portafolio de soluciones: diseñamos y desarrollamos tu página web para que conectes con tus clientes potenciales.</p>
+      <div class="hero__cta" data-hero-in>
+        <a class="btn btn--primary btn--lg" href="#contacto" data-magnetic>
+          <span class="btn__txt"><span>Hablemos de tu proyecto</span><span aria-hidden="true">Hablemos de tu proyecto</span></span>
+          <span class="btn__ico"><svg width="20" height="20"><use href="#i-arrow"/></svg></span>
+        </a>
+        <a class="btn btn--ghost btn--lg" href="#soluciones" data-magnetic>
+          <span class="btn__txt"><span>Ver soluciones</span><span aria-hidden="true">Ver soluciones</span></span>
+          <span class="btn__ico btn__ico--ghost"><svg width="18" height="18"><use href="#i-down"/></svg></span>
+        </a>
+      </div>
+    </div>
+
+    <!-- Tarjetas flotantes (decorativas) -->
+    <div class="hero__floats" aria-hidden="true">
+      <div class="float float--a" data-depth="34"><span class="float__ico float__ico--g"><svg width="16" height="16"><use href="#i-check"/></svg></span><span><b>Nuevo lead calificado</b><small>Cotización de página web</small></span></div>
+      <div class="float float--b" data-depth="-22"><span class="float__ico float__ico--o"><svg width="16" height="16"><use href="#i-target"/></svg></span><span><b>Campaña optimizada</b><small>Google Ads · Meta Ads</small></span></div>
+      <div class="float float--c" data-depth="48"><span class="float__ico float__ico--b"><svg width="16" height="16"><use href="#i-spark"/></svg></span><span><b>Email enviado</b><small>Secuencia de bienvenida</small></span></div>
+    </div>
+  </div>
+
+  <a class="hero__scroll" href="#nosotros" aria-label="Desliza para ver más">
+    <span class="hero__mouse"><i></i></span>
+    <span>Desliza</span>
+  </a>
+
+  <a class="badge-spin" href="#contacto" aria-label="Hablemos de tu proyecto" data-magnetic>
+    <svg viewBox="0 0 200 200" aria-hidden="true">
+      <defs><path id="circ" d="M100,100 m-78,0 a78,78 0 1,1 156,0 a78,78 0 1,1 -156,0"/></defs>
+      <text><textPath href="#circ" startOffset="0">Hablemos de tu proyecto · Hablemos de tu proyecto ·</textPath></text>
+    </svg>
+    <span class="badge-spin__arrow"><svg width="30" height="30"><use href="#i-arrow-ur"/></svg></span>
+  </a>
+</section>
+
+<!-- ───────── Bandas de servicios (marquee) ───────── -->
+<div class="bands" aria-hidden="true">
+  <div class="band band--back" data-marquee="1">
+    <div class="band__track">
+      <span>Generación de leads</span><i><svg width="26" height="26"><use href="#i-spark"/></svg></i><span>Marketing estratégico</span><i><svg width="26" height="26"><use href="#i-spark"/></svg></i><span>Social media</span><i><svg width="26" height="26"><use href="#i-spark"/></svg></i><span>Diseño web</span><i><svg width="26" height="26"><use href="#i-spark"/></svg></i><span>SEO</span><i><svg width="26" height="26"><use href="#i-spark"/></svg></i><span>Publicidad paga</span><i><svg width="26" height="26"><use href="#i-spark"/></svg></i><span>Email marketing</span><i><svg width="26" height="26"><use href="#i-spark"/></svg></i><span>Diseño gráfico</span><i><svg width="26" height="26"><use href="#i-spark"/></svg></i><span>Branding</span><i><svg width="26" height="26"><use href="#i-spark"/></svg></i>
+    </div>
+  </div>
+  <div class="band band--front" data-marquee="-1">
+    <div class="band__track">
+      <span>Más que marketing</span><i><svg width="26" height="26"><use href="#i-spark"/></svg></i><span>Sistemas que generan ventas</span><i><svg width="26" height="26"><use href="#i-spark"/></svg></i><span>Éxito digital</span><i><svg width="26" height="26"><use href="#i-spark"/></svg></i><span>Más que marketing</span><i><svg width="26" height="26"><use href="#i-spark"/></svg></i><span>Sistemas que generan ventas</span><i><svg width="26" height="26"><use href="#i-spark"/></svg></i><span>Éxito digital</span><i><svg width="26" height="26"><use href="#i-spark"/></svg></i>
+    </div>
+  </div>
+</div>
+
+<!-- ───────── Sobre nosotros ───────── -->
+<section class="about section section--light" id="nosotros">
+  <div class="container">
+    <p class="eyebrow"><span></span>Sobre nosotros</p>
+    <p class="about__big" data-scrub>Convertimos tu presencia digital en un <em>sistema constante</em> de clientes.</p>
+
+    <div class="about__grid">
+      <div class="about__copy">
+        <p data-reveal>Diseñamos y desarrollamos tu página web para que conectes con tus clientes potenciales. Nuestro equipo creativo te acompaña en cada etapa con un sitio que carga rápido, se adapta a todos los dispositivos y está optimizado para convertir.</p>
+        <ul class="ticks" data-reveal>
+          <li><svg width="18" height="18"><use href="#i-check"/></svg>Carga rápida</li>
+          <li><svg width="18" height="18"><use href="#i-check"/></svg>Móviles, tablets y computadores</li>
+          <li><svg width="18" height="18"><use href="#i-check"/></svg>Optimizada para buscadores</li>
+        </ul>
+        <a class="btn btn--dark" href="#soluciones" data-reveal data-magnetic>
+          <span class="btn__txt"><span>Conoce más</span><span aria-hidden="true">Conoce más</span></span>
+          <span class="btn__ico btn__ico--orange"><svg width="18" height="18"><use href="#i-arrow"/></svg></span>
+        </a>
+      </div>
+
+      <div class="about__media" data-about-media>
+        <img src="assets/img/brand/nosotros.webp" alt="Equipo creativo de SÁM trabajando en estrategia y diseño" width="600" height="596" loading="lazy">
+        <div class="years" role="img" aria-label="Más de 15 años de experiencia">
+          <b class="years__num" data-roll="15" data-suffix="+"></b>
+          <span>Años de<br>experiencia</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ───────── Soluciones ───────── -->
+<section class="services sheet section section--dark" id="soluciones">
+  <span class="aurora aurora--c" aria-hidden="true"></span>
+  <div class="container services__grid">
+    <div class="services__side">
+      <p class="eyebrow eyebrow--dark"><span></span>Nuestras soluciones</p>
+      <h2 class="h2" data-split>Todo lo que tu marca necesita para <em>vender más</em></h2>
+      <p class="services__lead" data-reveal>Nueve soluciones que trabajan juntas: de atraer al cliente ideal a convertirlo y fidelizarlo.</p>
+      <a class="btn btn--primary" href="#contacto" data-reveal data-magnetic>
+        <span class="btn__txt"><span>Hablemos de tu proyecto</span><span aria-hidden="true">Hablemos de tu proyecto</span></span>
+        <span class="btn__ico"><svg width="18" height="18"><use href="#i-arrow"/></svg></span>
+      </a>
+    </div>
+
+    <ol class="svc-list">
+      <li class="svc" data-img="assets/img/services/leads.png">
+        <a href="#contacto"><span class="svc__n">01</span><span class="svc__body"><span class="svc__name">Generación de leads</span><span class="svc__desc">Conectamos tu negocio con clientes ideales para que generes más ventas y crecimiento.</span></span><span class="svc__go"><svg width="22" height="22"><use href="#i-arrow-ur"/></svg></span></a>
+      </li>
+      <li class="svc" data-img="assets/img/services/consultoria.png">
+        <a href="#contacto"><span class="svc__n">02</span><span class="svc__body"><span class="svc__name">Marketing estratégico</span><span class="svc__desc">Impulsamos tu negocio con estrategias digitales efectivas para que alcances tus objetivos con éxito.</span></span><span class="svc__go"><svg width="22" height="22"><use href="#i-arrow-ur"/></svg></span></a>
+      </li>
+      <li class="svc" data-img="assets/img/services/redessociales.png">
+        <a href="#contacto"><span class="svc__n">03</span><span class="svc__body"><span class="svc__name">Social media marketing</span><span class="svc__desc">Potenciamos tu marca en redes sociales para que conectes, impactes y conviertas más.</span></span><span class="svc__go"><svg width="22" height="22"><use href="#i-arrow-ur"/></svg></span></a>
+      </li>
+      <li class="svc" data-img="assets/img/services/paginasweb.png">
+        <a href="#contacto"><span class="svc__n">04</span><span class="svc__body"><span class="svc__name">Diseño de páginas web</span><span class="svc__desc">Sitios web, tiendas virtuales y landing pages que atraen, convierten y hacen crecer tu negocio.</span></span><span class="svc__go"><svg width="22" height="22"><use href="#i-arrow-ur"/></svg></span></a>
+      </li>
+      <li class="svc" data-img="assets/img/services/seoicon.png">
+        <a href="#contacto"><span class="svc__n">05</span><span class="svc__body"><span class="svc__name">Optimización SEO</span><span class="svc__desc">Mejoramos tu posicionamiento en Google para que ganes más visibilidad y tráfico orgánico.</span></span><span class="svc__go"><svg width="22" height="22"><use href="#i-arrow-ur"/></svg></span></a>
+      </li>
+      <li class="svc" data-img="assets/img/services/pautagoogle.png">
+        <a href="#contacto"><span class="svc__n">06</span><span class="svc__body"><span class="svc__name">Publicidad paga</span><span class="svc__desc">Campañas en Google, Meta, TikTok y LinkedIn Ads para maximizar tu alcance y tus conversiones.</span></span><span class="svc__go"><svg width="22" height="22"><use href="#i-arrow-ur"/></svg></span></a>
+      </li>
+      <li class="svc" data-img="assets/img/services/emailmarketing.png">
+        <a href="#contacto"><span class="svc__n">07</span><span class="svc__body"><span class="svc__name">Email marketing / SMS</span><span class="svc__desc">Campañas de Email y SMS que convierten, fidelizan clientes y aumentan tus ventas.</span></span><span class="svc__go"><svg width="22" height="22"><use href="#i-arrow-ur"/></svg></span></a>
+      </li>
+      <li class="svc" data-img="assets/img/services/diseno.png">
+        <a href="#contacto"><span class="svc__n">08</span><span class="svc__body"><span class="svc__name">Diseño gráfico</span><span class="svc__desc">Diseños atractivos que comunican, inspiran y refuerzan la identidad de tu marca.</span></span><span class="svc__go"><svg width="22" height="22"><use href="#i-arrow-ur"/></svg></span></a>
+      </li>
+      <li class="svc" data-img="assets/img/services/marca2.png">
+        <a href="#contacto"><span class="svc__n">09</span><span class="svc__body"><span class="svc__name">Branding</span><span class="svc__desc">Construimos una identidad visual poderosa para que tu marca destaque y conecte con su audiencia.</span></span><span class="svc__go"><svg width="22" height="22"><use href="#i-arrow-ur"/></svg></span></a>
+      </li>
+    </ol>
+  </div>
+
+  <!-- Vista previa que sigue al cursor -->
+  <div class="svc-preview" aria-hidden="true"><img alt="" width="194" height="174"></div>
+</section>
+
+<!-- ───────── ¿Cómo lo hacemos? · Scrollytelling ───────── -->
+<section class="story-intro sheet section section--light" id="como">
+  <div class="container story-intro__inner">
+    <p class="eyebrow"><span></span>¿Cómo lo hacemos?</p>
+    <h2 class="h2 h2--xl" data-split>Impulsamos el <em>éxito digital</em> de tu empresa</h2>
+  </div>
+</section>
+
+<section class="story" aria-label="Nuestro proceso en tres pasos">
+  <div class="story__pin">
+    <div class="container story__grid">
+
+      <div class="story__copy">
+        <p class="story__count" aria-hidden="true"><b>01</b> / 03</p>
+
+        <article class="panel is-active" data-step="0">
+          <h3 class="panel__title">Recolección <em>de datos</em></h3>
+          <p class="panel__text">Conectamos tu web, tus redes, tu pauta y tu email para entender de dónde llegan tus clientes hoy: qué canales funcionan, cuáles no y dónde se pierde el interés.</p>
+          <ul class="panel__list">
+            <li><svg width="16" height="16"><use href="#i-check"/></svg>Auditoría digital completa</li>
+            <li><svg width="16" height="16"><use href="#i-check"/></svg>Conexión de todas tus fuentes</li>
+            <li><svg width="16" height="16"><use href="#i-check"/></svg>Línea base de resultados</li>
+          </ul>
+        </article>
+
+        <article class="panel" data-step="1">
+          <h3 class="panel__title">Análisis <em>de datos</em></h3>
+          <p class="panel__text">Convertimos los números en decisiones: identificamos a tu cliente ideal, el canal con mejor retorno y las oportunidades que tu competencia todavía no está aprovechando.</p>
+          <ul class="panel__list">
+            <li><svg width="16" height="16"><use href="#i-check"/></svg>Segmentación de audiencia</li>
+            <li><svg width="16" height="16"><use href="#i-check"/></svg>Retorno por canal</li>
+            <li><svg width="16" height="16"><use href="#i-check"/></svg>Oportunidades de mercado</li>
+          </ul>
+        </article>
+
+        <article class="panel" data-step="2">
+          <h3 class="panel__title">Definición <em>de estrategias</em></h3>
+          <p class="panel__text">Diseñamos un sistema de captación completo, de la atracción al cierre, con metas claras y medición continua para que cada acción empuje una venta.</p>
+          <ul class="panel__list">
+            <li><svg width="16" height="16"><use href="#i-check"/></svg>Embudo de ventas a tu medida</li>
+            <li><svg width="16" height="16"><use href="#i-check"/></svg>Plan de contenido y pauta</li>
+            <li><svg width="16" height="16"><use href="#i-check"/></svg>Optimización continua</li>
+          </ul>
+        </article>
+
+        <div class="story__progress" aria-hidden="true"><span><i></i></span><span><i></i></span><span><i></i></span></div>
+      </div>
+
+      <div class="story__stage">
+        <div class="dash" data-dash aria-hidden="true">
+          <div class="dash__bar">
+            <span class="dash__dots"><i></i><i></i><i></i></span>
+            <span class="dash__tabs">
+              <b class="dash__tab is-on">Datos</b><b class="dash__tab">Análisis</b><b class="dash__tab">Estrategia</b>
+            </span>
+          </div>
+
+          <div class="viz">
+            <!-- 1 · Datos -->
+            <div class="viz__layer" data-layer="0">
+              <div class="hub"><span class="hub__ring"></span><span class="hub__core">S</span></div>
+              <span class="node" style="--x:15%;--y:22%">Sitio web</span>
+              <span class="node" style="--x:50%;--y:9%">Google Ads</span>
+              <span class="node" style="--x:85%;--y:22%">Meta Ads</span>
+              <span class="node" style="--x:14%;--y:78%">Email</span>
+              <span class="node" style="--x:50%;--y:91%">SEO</span>
+              <span class="node" style="--x:86%;--y:78%">Redes sociales</span>
+            </div>
+
+            <!-- 2 · Análisis -->
+            <div class="viz__layer" data-layer="1">
+              <div class="chart">
+                <div class="bars">
+                  <i class="bar" style="--h:34%"></i><i class="bar" style="--h:52%"></i><i class="bar" style="--h:44%"></i><i class="bar" style="--h:68%"></i>
+                  <i class="bar" style="--h:58%"></i><i class="bar" style="--h:82%"></i><i class="bar bar--hot" style="--h:96%"></i><i class="bar" style="--h:74%"></i>
+                </div>
+                <svg class="chart__line" viewBox="0 0 100 50" preserveAspectRatio="none">
+                  <path pathLength="1" d="M0 42 C 12 40, 20 34, 30 30 S 48 30, 56 20 S 76 14, 84 8 S 96 4, 100 2"/>
+                </svg>
+              </div>
+              <span class="insight" style="--x:6%;--y:6%"><svg width="14" height="14"><use href="#i-target"/></svg>Audiencia ideal detectada</span>
+              <span class="insight" style="--x:46%;--y:20%"><svg width="14" height="14"><use href="#i-spark"/></svg>Canal con mejor retorno</span>
+              <span class="insight" style="--x:6%;--y:82%"><svg width="14" height="14"><use href="#i-check"/></svg>Oportunidad: SEO local</span>
+            </div>
+
+            <!-- 3 · Estrategia -->
+            <div class="viz__layer" data-layer="2">
+              <div class="funnel">
+                <div class="band-f" style="--w:100%"><span>Atraer</span></div>
+                <div class="band-f" style="--w:80%"><span>Convertir</span></div>
+                <div class="band-f" style="--w:60%"><span>Cerrar</span></div>
+                <div class="band-f" style="--w:42%"><span>Fidelizar</span></div>
+              </div>
+              <span class="sale"><svg width="16" height="16"><use href="#i-check"/></svg>Venta cerrada</span>
+              <span class="plan" style="--x:3%;--y:8%">Plan de acción</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ───────── Números ───────── -->
+<section class="stats sheet section section--dark" aria-label="SÁM en cifras">
+  <span class="aurora aurora--d" aria-hidden="true"></span>
+  <div class="container">
+    <p class="eyebrow eyebrow--dark"><span></span>SÁM en cifras</p>
+    <h2 class="h2" data-split>Experiencia que se traduce en <em>resultados</em></h2>
+
+    <div class="stats__grid">
+      <div class="stat" data-reveal>
+        <b class="stat__num" data-roll="15" data-suffix="+" role="img" aria-label="Más de 15"></b>
+        <p>Años de experiencia ayudando a empresas a crecer en digital.</p>
+      </div>
+      <div class="stat" data-reveal>
+        <b class="stat__num" data-roll="9" role="img" aria-label="9"></b>
+        <p>Soluciones integradas, de la estrategia a la ejecución.</p>
+      </div>
+      <div class="stat" data-reveal>
+        <b class="stat__num" data-roll="4" role="img" aria-label="4"></b>
+        <p>Plataformas de pauta: Google, Meta, TikTok y LinkedIn.</p>
+      </div>
+      <div class="stat" data-reveal>
+        <b class="stat__num" data-roll="30" data-suffix=" min" role="img" aria-label="30 minutos"></b>
+        <p>Para resolver todas tus dudas con un especialista.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ───────── Portafolio · Scroll horizontal ───────── -->
+<section class="work" id="portafolio" aria-label="Portafolio">
+  <div class="work__pin">
+    <div class="work__track">
+
+      <div class="work__intro">
+        <p class="eyebrow"><span></span>Casos de éxito</p>
+        <h2 class="h2" data-split>Clientes que le apostaron al <em>éxito digital</em></h2>
+        <p class="work__lead">Conoce algunos de nuestros trabajos que llevaron a nuestros clientes al crecimiento digital y al cumplimiento de sus objetivos.</p>
+        <a class="btn btn--dark" href="#portafolio" data-magnetic>
+          <span class="btn__txt"><span>Ver portafolio</span><span aria-hidden="true">Ver portafolio</span></span>
+          <span class="btn__ico btn__ico--orange"><svg width="18" height="18"><use href="#i-arrow"/></svg></span>
+        </a>
+      </div>
+
+      <a class="wcard" href="#portafolio" data-cursor="view" data-cursor-label="Ver">
+        <span class="wcard__media"><img src="assets/img/work/proyecto-1.webp" alt="Sitio web institucional mostrado en escritorio, tablet y móvil" width="500" height="500" loading="lazy"></span>
+        <span class="wcard__meta"><small>01 · Página web</small><b>Sitio institucional</b><svg width="22" height="22"><use href="#i-arrow-ur"/></svg></span>
+      </a>
+
+      <a class="wcard" href="#portafolio" data-cursor="view" data-cursor-label="Ver">
+        <span class="wcard__media"><img src="assets/img/work/proyecto-2.webp" alt="Brochure de marca corporativa en cuatro vistas" width="500" height="500" loading="lazy"></span>
+        <span class="wcard__meta"><small>02 · Marca corporativa</small><b>Brochure e identidad</b><svg width="22" height="22"><use href="#i-arrow-ur"/></svg></span>
+      </a>
+
+      <div class="work__end">
+        <p class="work__endtitle">Tu proyecto puede ser <em>el siguiente</em></p>
+        <a class="btn btn--primary" href="#contacto" data-magnetic>
+          <span class="btn__txt"><span>Empezar ahora</span><span aria-hidden="true">Empezar ahora</span></span>
+          <span class="btn__ico"><svg width="18" height="18"><use href="#i-arrow"/></svg></span>
+        </a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ───────── CTA ───────── -->
+<section class="cta sheet section" id="contacto">
+  <div class="cta__bg" aria-hidden="true"></div>
+  <span class="aurora aurora--e" aria-hidden="true"></span>
+  <div class="container">
+    <p class="eyebrow eyebrow--dark"><span></span>Hablemos de tu proyecto</p>
+    <h2 class="cta__title" data-split>Tu idea, nuestro conocimiento. Logremos juntos el <em>éxito digital</em></h2>
+
+    <a class="cta__bubble" href="#contacto" data-magnetic aria-label="Empezar">
+      <span>Empezar</span>
+      <svg width="34" height="34"><use href="#i-arrow-ur"/></svg>
+    </a>
+
+    <div class="cta__cards">
+      <article class="ccard" data-reveal>
+        <img src="assets/img/brand/ideas.png" alt="" width="96" height="86" loading="lazy">
+        <h3>Consultoría gratis</h3>
+        <p>Aprovecha la oportunidad de iniciar el éxito digital totalmente gratis. Estamos listos para escucharte.</p>
+      </article>
+      <article class="ccard" data-reveal>
+        <img src="assets/img/brand/especialistas.png" alt="" width="96" height="86" loading="lazy">
+        <h3>Especialista de marketing</h3>
+        <p>Puedes hablar con un especialista para ayudarte a lograr los objetivos de tu compañía.</p>
+      </article>
+      <article class="ccard" data-reveal>
+        <img src="assets/img/brand/reloj.png" alt="" width="96" height="86" loading="lazy">
+        <h3>Agenda tu cita</h3>
+        <p>Resuelve todas tus dudas en 30 minutos.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ───────── Blog ───────── -->
+<section class="blog section section--light" id="blog">
+  <div class="container">
+    <div class="blog__head">
+      <div>
+        <p class="eyebrow"><span></span>Blog</p>
+        <h2 class="h2" data-split>Últimas <em>noticias</em></h2>
+      </div>
+      <a class="btn btn--dark" href="#blog" data-magnetic>
+        <span class="btn__txt"><span>Más publicaciones</span><span aria-hidden="true">Más publicaciones</span></span>
+        <span class="btn__ico btn__ico--orange"><svg width="18" height="18"><use href="#i-arrow"/></svg></span>
+      </a>
+    </div>
+
+    <div class="blog__grid">
+      <a class="post" href="#blog" data-reveal data-cursor="view" data-cursor-label="Leer">
+        <span class="post__img"><img src="assets/img/blog/tendencias-2026.jpg" alt="" width="370" height="300" loading="lazy"></span>
+        <small class="post__tag">Tendencias</small>
+        <b class="post__title">Las 5 tendencias de marketing digital que dominarán el 2026</b>
+        <time class="post__date" datetime="2026-02-21">Febrero 21, 2026</time>
+      </a>
+      <a class="post" href="#blog" data-reveal data-cursor="view" data-cursor-label="Leer">
+        <span class="post__img"><img src="assets/img/blog/estrategia-digital.jpg" alt="" width="370" height="300" loading="lazy"></span>
+        <small class="post__tag">Estrategia marketing</small>
+        <b class="post__title">¿Qué es una estrategia de marketing digital y cómo implementarla paso a paso?</b>
+        <time class="post__date" datetime="2026-03-21">Marzo 21, 2026</time>
+      </a>
+      <a class="post" href="#blog" data-reveal data-cursor="view" data-cursor-label="Leer">
+        <span class="post__img"><img src="assets/img/blog/costo-sin-estrategia.jpg" alt="" width="370" height="300" loading="lazy"></span>
+        <small class="post__tag">Marketing digital</small>
+        <b class="post__title">¿Sabes cuánto le cuesta a tu empresa no tener una estrategia digital?</b>
+        <time class="post__date" datetime="2026-04-09">Abril 9, 2026</time>
+      </a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ───────── Footer ───────── -->
+<footer class="footer">
+  <span class="footer__ghost" aria-hidden="true">SÁM</span>
+  <div class="container">
+    <div class="footer__top">
+      <a class="footer__big" href="#contacto" data-magnetic>
+        <span>¿Hablamos?</span>
+        <i><svg width="48" height="48"><use href="#i-arrow-ur"/></svg></i>
+      </a>
+    </div>
+
+    <div class="footer__grid">
+      <div class="footer__brand">
+        <img src="assets/img/brand/logo-sam-blanco.png" alt="SÁM digital" width="300" height="116" loading="lazy">
+        <p>Somos un aliado estratégico integral en soluciones digitales. Contamos con más de 15 años de experiencia, gracias a un equipo profesional y especialista en cada una de las áreas.</p>
+      </div>
+      <nav class="footer__col" aria-label="Navegación">
+        <h4>Navegación</h4>
+        <a href="#inicio">Inicio</a><a href="#nosotros">Nosotros</a><a href="#soluciones">Soluciones</a><a href="#portafolio">Portafolio</a><a href="#contacto">Contacto</a>
+      </nav>
+      <nav class="footer__col" aria-label="Soluciones">
+        <h4>Soluciones</h4>
+        <a href="#soluciones">Generación de leads</a><a href="#soluciones">Marketing estratégico</a><a href="#soluciones">Social media marketing</a><a href="#soluciones">Diseño de páginas web</a><a href="#soluciones">Optimización SEO</a><a href="#soluciones">Publicidad paga</a><a href="#soluciones">Email marketing / SMS</a><a href="#soluciones">Diseño gráfico</a><a href="#soluciones">Branding</a>
+      </nav>
+      <div class="footer__col">
+        <h4>Síguenos</h4>
+        <div class="social">
+          <a href="https://www.facebook.com/profile.php?id=61582248838081" aria-label="Facebook" target="_blank" rel="noopener"><svg width="20" height="20"><use href="#i-fb"/></svg></a>
+          <a href="https://www.instagram.com/samdigital_mkt/" aria-label="Instagram" target="_blank" rel="noopener"><svg width="20" height="20"><use href="#i-ig"/></svg></a>
+          <a href="https://www.linkedin.com/company/s%C3%A1m-digital/" aria-label="LinkedIn" target="_blank" rel="noopener"><svg width="20" height="20"><use href="#i-in"/></svg></a>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer__bottom">
+      <p>© <span data-year>2026</span> SÁM digital. Todos los derechos reservados.</p>
+      <p class="footer__legal"><a href="#">Política de privacidad</a><a href="#">Declaración de accesibilidad</a><a href="#">Aviso legal</a><a href="#">Política de cookies</a></p>
+    </div>
+  </div>
+</footer>
+
+<!-- WhatsApp (pendiente: número oficial) -->
+<a class="wa" href="#contacto" aria-label="Escríbenos por WhatsApp" data-magnetic><svg width="30" height="30"><use href="#i-wa"/></svg></a>
+
+<script src="assets/vendor/gsap.min.js"></script>
+<script src="assets/vendor/ScrollTrigger.min.js"></script>
+<script src="assets/vendor/lenis.min.js"></script>
+<script src="assets/js/main.js"></script>
+</body>
+</html>
