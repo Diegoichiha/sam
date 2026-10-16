@@ -50,7 +50,8 @@ Medido en superside.com a 1920 px: contenido de **1608 px** máximo, centrado, c
 | Hero sin foto: **muro de trabajos** (portafolio real de SÁM) en dos columnas inclinadas que suben y bajan, reactivas al scroll y al mouse; aurora y grilla | Superside / Markethink | hero |
 | Párrafo que se ilumina palabra a palabra con el scroll | Superside | "Sobre nosotros" |
 | **Hero fijo (sticky)** a pantalla completa: "Sobre nosotros" sube y lo cubre; el hero se aleja y se oscurece mientras tanto | — | hero → sección 2 |
-| **Mosaico** de cuadrados y rectángulos (fotos del equipo + trabajos + tile de experiencia con cifra que rueda) | Superside | "Sobre nosotros" |
+| **Mosaico** de cuadrados y rectángulos (5 fotos de stock + tile de experiencia con cifra que rueda) | Superside | "Sobre nosotros" |
+| **Secciones a alto completo**: cada bloque mide al menos el alto de la pantalla (`min-height: 100svh`) y centra su contenido, así nunca asoma un pedazo de la siguiente | Superside | global |
 | Dígitos que ruedan | Superside | "15+" del mosaico y cifras |
 | Lista de soluciones con vista previa que sigue al cursor | Superside | "Soluciones" |
 | **Scrollytelling** con pin: dashboard 3D que se endereza y 3 pasos (datos → análisis → estrategia) | Markethink | "¿Cómo lo hacemos?" |
@@ -58,9 +59,14 @@ Medido en superside.com a 1920 px: contenido de **1608 px** máximo, centrado, c
 | Cursor personalizado (punto sólido + aro con halo blanco, estados de enlace y "Ver") y luz de color que sigue al cursor en el hero | Asoclicper | global (solo punteros finos) |
 | Botones magnéticos con retorno elástico y foco de luz que sigue al cursor; tarjetas y filas con luz al pasar el mouse | Asoclicper | botones, tarjetas, soluciones |
 | WhatsApp flotante: círculo que se expande al pasar el mouse y abre una tarjeta de contacto (número oficial de SÁM tomado de su sitio actual) | Asoclicper | esquina inferior derecha |
-| Secciones apiladas con borde redondeado | Superside | transición entre secciones |
 
 Accesibilidad: respeta `prefers-reduced-motion` (sin Lenis, sin pines ni animaciones; el contenido queda visible y apilado). El cursor personalizado solo se activa con mouse.
+
+## Imágenes
+
+- **Portafolio** (hero y casos de éxito): trabajos reales de samdigital.com.co.
+- **Mosaico de "Sobre nosotros"**: 5 fotos de stock de [Unsplash](https://unsplash.com) (licencia libre), **provisionales**; reemplazar por fotografía propia del equipo de SÁM cuando exista.
+- Blog e íconos de servicios: del sitio actual.
 
 ## Pendientes por validar con el cliente
 
