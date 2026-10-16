@@ -99,7 +99,8 @@ em,em .wi{
 .section{position:relative;padding-block:var(--sec);isolation:isolate;overflow:hidden}
 /* Cada sección ocupa al menos el alto de la pantalla (nunca asoma un pedazo de la siguiente) y centra su contenido */
 .about,.story-intro,.stats,.cta,.blog{min-height:100svh;display:flex;flex-direction:column;justify-content:center;padding-block:clamp(44px,7svh,110px)}
-.services{min-height:100svh}
+/* overflow:clip recorta igual que hidden pero NO crea un contenedor de scroll, así que el lado izquierdo puede ser sticky respecto a la ventana */
+.services{min-height:100svh;overflow:clip}
 .section--light{background:var(--grad-warm);color:var(--ink)}
 .section--dark{background:var(--grad-dark-1);color:#fff}
 .stats.section--dark{background:var(--grad-dark-2)}
@@ -368,7 +369,7 @@ html.has-cursor,html.has-cursor *{cursor:none!important}
 .services{padding-bottom:calc(var(--sec) + 40px)}
 .aurora--c{width:50vw;height:50vw;right:-18vw;top:6vw;background:var(--blue);opacity:.45}
 .services__grid{display:grid;grid-template-columns:minmax(0,.85fr) minmax(0,2fr);gap:clamp(32px,6vw,120px);align-items:start}
-.services__side{position:sticky;top:120px;display:flex;flex-direction:column;align-items:flex-start;gap:clamp(20px,2vw,30px)}
+.services__side{position:sticky;top:clamp(90px,17svh,170px);display:flex;flex-direction:column;align-items:flex-start;gap:clamp(20px,2vw,30px)}
 .services__side .eyebrow{margin-bottom:0}
 .services__side .h2{font-size:clamp(1.9rem,3vw,3.2rem)}
 .services__lead{color:rgba(255,255,255,.72);max-width:26em}
