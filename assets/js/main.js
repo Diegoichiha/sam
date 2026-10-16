@@ -112,12 +112,13 @@
     else target.scrollIntoView({ behavior: 'smooth' });
   };
 
-  /* ───────── Cabecera + menú móvil ───────── */
+  /* ───────── Cabecera + mega menú ───────── */
   const header = $('#header');
   const burger = $('.burger');
-  const mmenu = $('#mobile-menu');
+  const mega = $('#mega-menu');
   let menuOpen = false;
   let headerHidden = false;
+  let megaTl = null;
 
   const showHeader = (show) => {
     const hide = !show;
@@ -126,14 +127,47 @@
     gsap.to(header, { yPercent: hide ? -140 : 0, duration: 0.8, ease: 'expo.out', overwrite: 'auto' });
   };
 
+  // Línea de tiempo de apertura: el menú se expande en círculo desde el botón y cada bloque entra en cascada
+  const buildMega = () => {
+    const r = burger.getBoundingClientRect();
+    const ox = r.left + r.width / 2, oy = r.top + r.height / 2;
+    const R = Math.hypot(Math.max(ox, innerWidth - ox), Math.max(oy, innerHeight - oy)) + 40;
+    const tl = gsap.timeline({ paused: true, defaults: { ease: 'expo.out' } });
+    tl.set(mega, { visibility: 'visible' })
+      .fromTo(mega, { clipPath: `circle(0px at ${ox}px ${oy}px)` }, { clipPath: `circle(${R}px at ${ox}px ${oy}px)`, duration: 1, ease: 'power3.inOut' }, 0)
+      .fromTo($$('.mm__t span', mega), { yPercent: 115 }, { yPercent: 0, duration: 1.1, stagger: 0.06 }, 0.35)
+      .fromTo($$('.mm__label', mega), { autoAlpha: 0, y: 14 }, { autoAlpha: 1, y: 0, duration: 0.7, stagger: 0.1 }, 0.4)
+      .fromTo($$('.mm__card', mega), { autoAlpha: 0, y: 46, scale: 0.95 }, { autoAlpha: 1, y: 0, scale: 1, duration: 1, stagger: 0.05, clearProps: 'transform' }, 0.45)
+      .fromTo($('.mm__ctabox', mega), { autoAlpha: 0, y: 60, scale: 0.92, rotate: 1.5 }, { autoAlpha: 1, y: 0, scale: 1, rotate: 0, duration: 1.2, ease: 'back.out(1.3)', clearProps: 'transform' }, 0.55)
+      .fromTo($$('.mm__proof li', mega), { autoAlpha: 0, y: 14 }, { autoAlpha: 1, y: 0, duration: 0.7, stagger: 0.08 }, 1)
+      .fromTo($('.mm__foot', mega), { autoAlpha: 0 }, { autoAlpha: 1, duration: 0.8 }, 0.85);
+    return tl;
+  };
+
   const setMenu = (open) => {
+    if (open === menuOpen) return;
     menuOpen = open;
     burger.setAttribute('aria-expanded', String(open));
     burger.setAttribute('aria-label', open ? 'Cerrar menú' : 'Abrir menú');
-    mmenu.classList.toggle('is-open', open);
-    mmenu.setAttribute('aria-hidden', String(!open));
+    mega.setAttribute('aria-hidden', String(!open));
+    header.classList.toggle('is-menu', open);
     if (lenis) open ? lenis.stop() : lenis.start();
-    if (open) showHeader(true);
+    else root.style.overflow = open ? 'hidden' : '';
+    if (open) {
+      showHeader(true);
+      if (reduce) { mega.style.visibility = 'visible'; mega.style.clipPath = 'none'; }
+      else {
+        if (megaTl) megaTl.kill();
+        megaTl = buildMega();
+        megaTl.timeScale(1).play(0);
+      }
+      mega.scrollTop = 0;
+      mega.focus({ preventScroll: true });
+    } else {
+      if (reduce) mega.style.visibility = 'hidden';
+      else if (megaTl) megaTl.timeScale(1.6).reverse();
+      burger.focus({ preventScroll: true });
+    }
   };
   burger.addEventListener('click', () => setMenu(!menuOpen));
   addEventListener('keydown', (e) => { if (e.key === 'Escape' && menuOpen) setMenu(false); });
@@ -291,7 +325,7 @@
       el.addEventListener('mouseleave', () => gsap.to(el, { x: 0, y: 0, duration: 0.8, ease: 'elastic.out(1,.4)', overwrite: 'auto' }));
     });
     // Tarjetas y filas de soluciones: la luz sigue al cursor
-    $$('.ccard, .svc a').forEach((el) => {
+    $$('.ccard, .svc a, .mm__card').forEach((el) => {
       el.addEventListener('mousemove', (e) => {
         const r = el.getBoundingClientRect();
         el.style.setProperty('--mx', e.clientX - r.left + 'px');

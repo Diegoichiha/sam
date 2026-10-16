@@ -44,7 +44,7 @@ Medido en superside.com a 1920 px: contenido de **1608 px** máximo, centrado, c
 | Técnica | Referente | Dónde |
 |---|---|---|
 | Scroll suave (Lenis) + progreso en la parte superior | Markethink | global |
-| Cabecera flotante tipo píldora, oculta al bajar y visible al subir, con mega-menú de soluciones | Markethink | header |
+| Cabecera flotante tipo píldora, oculta al bajar y visible al subir; botón de menú (hamburguesa) que abre un **mega menú** de pantalla completa: se expande en círculo desde el botón, navegación grande, las 9 soluciones y un CTA naranja con botón con brillo y pulso | Markethink | header |
 | Titulares revelados palabra por palabra con máscara | Superside | todos los `h1/h2` |
 | Acento en cursiva con degradé | Superside / Markethink | `em` en titulares |
 | Hero sin foto: **muro de trabajos** (portafolio real de SÁM) en dos columnas inclinadas que suben y bajan, reactivas al scroll y al mouse; aurora y grilla | Superside / Markethink | hero |
@@ -58,7 +58,7 @@ Medido en superside.com a 1920 px: contenido de **1608 px** máximo, centrado, c
 | **Scroll horizontal** con pin y tarjetas altas (imagen + barra de título teñida con el color de cada proyecto) | Superside | "Casos de éxito" |
 | Cursor personalizado (punto sólido + aro con halo blanco, estados de enlace y "Ver") y luz de color que sigue al cursor en el hero | Asoclicper | global (solo punteros finos) |
 | Botones magnéticos con retorno elástico y foco de luz que sigue al cursor; tarjetas y filas con luz al pasar el mouse | Asoclicper | botones, tarjetas, soluciones |
-| WhatsApp flotante: círculo que se expande al pasar el mouse y abre una tarjeta de contacto (número oficial de SÁM tomado de su sitio actual) | Asoclicper | esquina inferior derecha |
+| Botón flotante de servicio al cliente (ícono de audífonos): círculo que se expande al pasar el mouse y abre una tarjeta de contacto que lleva a WhatsApp (número de SÁM tomado de su sitio actual) | Asoclicper | esquina inferior derecha |
 
 Accesibilidad: respeta `prefers-reduced-motion` (sin Lenis, sin pines ni animaciones; el contenido queda visible y apilado). El cursor personalizado solo se activa con mouse.
 
