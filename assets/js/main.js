@@ -94,7 +94,7 @@
     m.style.cssText = 'position:absolute;visibility:hidden;white-space:pre';
     m.textContent = d.dataset.to;
     d.parentElement.appendChild(m);
-    d.style.width = m.offsetWidth + 1 + 'px'; // offsetWidth no se ve afectado por escalas (.years entra con scale 0)
+    d.style.width = m.offsetWidth + 1 + 'px'; // offsetWidth no se ve afectado por escalas (las piezas del mosaico entran con scale)
     m.remove();
   });
 
@@ -360,11 +360,15 @@
   };
   (document.fonts && document.fonts.ready ? document.fonts.ready : Promise.resolve()).then(intro);
 
-  // Parallax al hacer scroll
+  // El hero queda fijo y "Sobre nosotros" sube por encima: mientras lo cubre, el hero se aleja y se oscurece
+  const heroEl0 = $('.hero');
+  const heroSticky = () => getComputedStyle(heroEl0).position === 'sticky';
   gsap.timeline({ scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: true } })
-    .to('.hero__bg', { yPercent: 10, ease: 'none' }, 0)
-    .to('.wall__rot', { yPercent: -10, ease: 'none' }, 0)
-    .to('[data-hero-copy]', { yPercent: -14, opacity: 0.15, ease: 'none' }, 0);
+    .to('.hero__bg', { yPercent: 8, ease: 'none' }, 0)
+    .to('.wall__rot', { yPercent: -12, ease: 'none' }, 0)
+    .to('[data-hero-copy]', { yPercent: -8, opacity: 0.25, ease: 'none' }, 0)
+    .to('.hero__inner', { scale: 0.94, transformOrigin: '50% 100%', ease: 'none' }, 0)
+    .to('.hero__dim', { opacity: 0.8, ease: 'none' }, 0);
 
   // Parallax con el mouse
   if (fine) {
@@ -404,6 +408,11 @@
     const up = i % 2 === 0;
     bandTweens.push(gsap.fromTo(track, { yPercent: up ? 0 : -50 }, { yPercent: up ? -50 : 0, duration: 60 + i * 14, ease: 'none', repeat: -1 }));
   });
+  ScrollTrigger.create({
+    trigger: '.about', start: 'top top',
+    onEnter: () => { if (heroSticky()) { bandTweens.forEach((t) => t.pause()); heroEl0.style.visibility = 'hidden'; } },
+    onLeaveBack: () => { bandTweens.forEach((t) => t.resume()); heroEl0.style.visibility = ''; },
+  });
   let lastY = scrollY, boost = 0;
   gsap.ticker.add(() => {
     const dy = Math.abs(scrollY - lastY);
@@ -418,15 +427,16 @@
     opacity: 1, ease: 'none', stagger: 0.1,
     scrollTrigger: { trigger: '.about__big', start: 'top 82%', end: 'bottom 46%', scrub: 0.4 },
   });
-  const aboutImg = $('.about__media > img');
-  gsap.fromTo(aboutImg, { scale: 0.88, rotate: -3, yPercent: 6 }, {
-    scale: 1, rotate: 0, yPercent: -4, ease: 'none',
-    scrollTrigger: { trigger: '.about__media', start: 'top bottom', end: 'bottom 30%', scrub: 0.6 },
+  // Mosaico: cada pieza entra desde una dirección distinta
+  const tiles = $$('.mosaic .tile');
+  const dirs = [[-70, 0], [0, 70], [70, 0], [-70, 0], [0, 70], [70, 0]];
+  tiles.forEach((t, i) => gsap.set(t, { autoAlpha: 0, x: dirs[i % dirs.length][0], y: dirs[i % dirs.length][1], scale: 0.92 }));
+  ScrollTrigger.create({
+    trigger: '.mosaic', start: 'top 82%', once: true,
+    onEnter: () => gsap.to(tiles, { autoAlpha: 1, x: 0, y: 0, scale: 1, duration: 1.3, stagger: 0.12, ease: 'expo.out' }),
   });
-  gsap.from('.years', {
-    scale: 0, autoAlpha: 0, duration: 1.2, ease: 'back.out(1.7)',
-    scrollTrigger: { trigger: '.about__media', start: 'top 65%', once: true },
-  });
+  // Parallax suave: las columnas se desplazan a distinta velocidad
+  gsap.to('.mosaic .tile:nth-child(2n)', { yPercent: -4, ease: 'none', scrollTrigger: { trigger: '.mosaic', start: 'top bottom', end: 'bottom top', scrub: 0.6 } });
 
   /* ───────── Soluciones: vista previa que sigue al cursor ───────── */
   const list = $('.svc-list');

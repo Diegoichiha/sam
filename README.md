@@ -49,7 +49,9 @@ Medido en superside.com a 1920 px: contenido de **1608 px** máximo, centrado, c
 | Acento en cursiva con degradé | Superside / Markethink | `em` en titulares |
 | Hero sin foto: **muro de trabajos** (portafolio real de SÁM) en dos columnas inclinadas que suben y bajan, reactivas al scroll y al mouse; aurora y grilla | Superside / Markethink | hero |
 | Párrafo que se ilumina palabra a palabra con el scroll | Superside | "Sobre nosotros" |
-| Dígitos que ruedan | Superside | "15+" y cifras |
+| **Hero fijo (sticky)** a pantalla completa: "Sobre nosotros" sube y lo cubre; el hero se aleja y se oscurece mientras tanto | — | hero → sección 2 |
+| **Mosaico** de cuadrados y rectángulos (fotos del equipo + trabajos + tile de experiencia con cifra que rueda) | Superside | "Sobre nosotros" |
+| Dígitos que ruedan | Superside | "15+" del mosaico y cifras |
 | Lista de soluciones con vista previa que sigue al cursor | Superside | "Soluciones" |
 | **Scrollytelling** con pin: dashboard 3D que se endereza y 3 pasos (datos → análisis → estrategia) | Markethink | "¿Cómo lo hacemos?" |
 | **Scroll horizontal** con pin y tarjetas altas (imagen + barra de título teñida con el color de cada proyecto) | Superside | "Casos de éxito" |
