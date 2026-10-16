@@ -109,13 +109,33 @@
 
 <!-- ───────── Hero ───────── -->
 <section class="hero" id="inicio">
-  <div class="hero__bg" data-hero-bg>
-    <img src="assets/img/brand/fondo-banner.webp" alt="" width="1920" height="990" fetchpriority="high">
-  </div>
-  <div class="hero__shade" aria-hidden="true"></div>
+  <div class="hero__bg" data-hero-bg aria-hidden="true"></div>
   <div class="hero__grid" aria-hidden="true"></div>
   <span class="aurora aurora--a" aria-hidden="true"></span>
   <span class="aurora aurora--b" aria-hidden="true"></span>
+
+  <!-- Muro de trabajos: dos columnas que suben y bajan (portafolio real de SÁM) -->
+  <div class="wall" data-wall aria-hidden="true">
+    <div class="wall__rot">
+      <div class="wall__col">
+        <div class="wall__track">
+          <figure class="hcard"><img src="assets/img/work/octopus.webp" alt="" width="1200" height="800"><figcaption><b>Octopus Contenedor</b><small>Diseño web</small></figcaption></figure>
+          <figure class="hcard"><img src="assets/img/work/volcali.webp" alt="" width="1200" height="800"><figcaption><b>Volcali</b><small>Diseño web</small></figcaption></figure>
+          <figure class="hcard"><img src="assets/img/work/mananitas.webp" alt="" width="1200" height="800"><figcaption><b>Mañanitas Naturalmente</b><small>Diseño web</small></figcaption></figure>
+          <figure class="hcard"><img src="assets/img/work/brand-cala.webp" alt="" width="1200" height="800"><figcaption><b>Cala Impact</b><small>Branding</small></figcaption></figure>
+        </div>
+      </div>
+      <div class="wall__col">
+        <div class="wall__track">
+          <figure class="hcard"><img src="assets/img/work/picasso.webp" alt="" width="1200" height="800"><figcaption><b>Clínica Picasso</b><small>Diseño web</small></figcaption></figure>
+          <figure class="hcard"><img src="assets/img/work/tapetes.webp" alt="" width="1200" height="800"><figcaption><b>Tapetes y Pisos del Pacífico</b><small>Diseño web</small></figcaption></figure>
+          <figure class="hcard"><img src="assets/img/work/brand-tronox.webp" alt="" width="1200" height="800"><figcaption><b>Tronox</b><small>Branding</small></figcaption></figure>
+          <figure class="hcard"><img src="assets/img/work/ecyr.webp" alt="" width="1200" height="800"><figcaption><b>EC&amp;R</b><small>Diseño web</small></figcaption></figure>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="hero__shade" aria-hidden="true"></div>
 
   <div class="container hero__inner">
     <div class="hero__copy" data-hero-copy>
@@ -138,7 +158,6 @@
     <div class="hero__floats" aria-hidden="true">
       <div class="float float--a" data-depth="34"><span class="float__ico float__ico--g"><svg width="16" height="16"><use href="#i-check"/></svg></span><span><b>Nuevo lead calificado</b><small>Cotización de página web</small></span></div>
       <div class="float float--b" data-depth="-22"><span class="float__ico float__ico--o"><svg width="16" height="16"><use href="#i-target"/></svg></span><span><b>Campaña optimizada</b><small>Google Ads · Meta Ads</small></span></div>
-      <div class="float float--c" data-depth="48"><span class="float__ico float__ico--b"><svg width="16" height="16"><use href="#i-spark"/></svg></span><span><b>Email enviado</b><small>Secuencia de bienvenida</small></span></div>
     </div>
   </div>
 
@@ -391,20 +410,36 @@
         <p class="eyebrow"><span></span>Casos de éxito</p>
         <h2 class="h2" data-split>Clientes que le apostaron al <em>éxito digital</em></h2>
         <p class="work__lead">Conoce algunos de nuestros trabajos que llevaron a nuestros clientes al crecimiento digital y al cumplimiento de sus objetivos.</p>
-        <a class="btn btn--dark" href="#portafolio" data-magnetic>
+        <a class="btn btn--dark" href="https://samdigital.com.co/portafolio/" target="_blank" rel="noopener" data-magnetic>
           <span class="btn__txt"><span>Ver portafolio</span><span aria-hidden="true">Ver portafolio</span></span>
           <span class="btn__ico btn__ico--orange"><svg width="18" height="18"><use href="#i-arrow"/></svg></span>
         </a>
       </div>
 
-      <a class="wcard" href="#portafolio" data-cursor="view" data-cursor-label="Ver">
-        <span class="wcard__media"><img src="assets/img/work/proyecto-1.webp" alt="Sitio web institucional mostrado en escritorio, tablet y móvil" width="500" height="500" loading="lazy"></span>
-        <span class="wcard__meta"><small>01 · Página web</small><b>Sitio institucional</b><svg width="22" height="22"><use href="#i-arrow-ur"/></svg></span>
+      <!-- Tarjetas altas (referencia Superside): imagen + barra de título teñida con el color del proyecto -->
+      <a class="pcard" href="https://octopuscontenedor.com/" target="_blank" rel="noopener" data-cursor="view" data-cursor-label="Ver sitio" style="--c:#ea5349;--t:#fff">
+        <span class="pcard__media"><img src="assets/img/work/octopus.webp" style="object-position:14% 50%" alt="Tienda virtual Octopus Contenedor en laptop y celular" width="1200" height="800" loading="lazy"></span>
+        <span class="pcard__cap"><span class="pcard__txt"><small>Diseño web</small><b><em>Octopus</em> Contenedor</b></span><i><svg width="22" height="22"><use href="#i-arrow-ur"/></svg></i></span>
       </a>
-
-      <a class="wcard" href="#portafolio" data-cursor="view" data-cursor-label="Ver">
-        <span class="wcard__media"><img src="assets/img/work/proyecto-2.webp" alt="Brochure de marca corporativa en cuatro vistas" width="500" height="500" loading="lazy"></span>
-        <span class="wcard__meta"><small>02 · Marca corporativa</small><b>Brochure e identidad</b><svg width="22" height="22"><use href="#i-arrow-ur"/></svg></span>
+      <a class="pcard" href="https://clinicapicassocali.com/" target="_blank" rel="noopener" data-cursor="view" data-cursor-label="Ver sitio" style="--c:#ffc09f;--t:#06304c">
+        <span class="pcard__media"><img src="assets/img/work/picasso.webp" style="object-position:22% 50%" alt="Sitio web de la Clínica Picasso en Cali" width="1200" height="800" loading="lazy"></span>
+        <span class="pcard__cap"><span class="pcard__txt"><small>Diseño web</small><b><em>Clínica</em> Picasso</b></span><i><svg width="22" height="22"><use href="#i-arrow-ur"/></svg></i></span>
+      </a>
+      <a class="pcard" href="https://asoclicper.com/" target="_blank" rel="noopener" data-cursor="view" data-cursor-label="Ver sitio" style="--c:#06304c;--t:#fff">
+        <span class="pcard__media"><img src="assets/img/work/asoclicper.webp" style="object-position:82% 50%" alt="Sitio web de Asoclicper en escritorio, tablet y móvil" width="1200" height="800" loading="lazy"></span>
+        <span class="pcard__cap"><span class="pcard__txt"><small>Diseño web</small><b><em>Asoclicper</em></b></span><i><svg width="22" height="22"><use href="#i-arrow-ur"/></svg></i></span>
+      </a>
+      <a class="pcard" href="https://lasmananitasnaturalmente.com/" target="_blank" rel="noopener" data-cursor="view" data-cursor-label="Ver sitio" style="--c:#cdeed7;--t:#06304c">
+        <span class="pcard__media"><img src="assets/img/work/mananitas.webp" alt="Sitio web de lotes campestres Las Mañanitas Naturalmente" width="1200" height="800" loading="lazy"></span>
+        <span class="pcard__cap"><span class="pcard__txt"><small>Diseño web</small><b><em>Mañanitas</em> Naturalmente</b></span><i><svg width="22" height="22"><use href="#i-arrow-ur"/></svg></i></span>
+      </a>
+      <a class="pcard" href="https://samdigital.com.co/wp-content/uploads/2026/04/BRANDBOARD-TRONOX.pdf" target="_blank" rel="noopener" data-cursor="view" data-cursor-label="Ver marca" style="--c:#0b3a63;--t:#fff">
+        <span class="pcard__media"><img src="assets/img/work/brand-tronox.webp" alt="Identidad de marca Tronox aplicada en pantalla, empaque y tablet" width="1200" height="800" loading="lazy"></span>
+        <span class="pcard__cap"><span class="pcard__txt"><small>Branding</small><b><em>Tronox</em></b></span><i><svg width="22" height="22"><use href="#i-arrow-ur"/></svg></i></span>
+      </a>
+      <a class="pcard" href="https://samdigital.com.co/wp-content/uploads/2026/03/BRANDBOARD-DIPA.pdf" target="_blank" rel="noopener" data-cursor="view" data-cursor-label="Ver marca" style="--c:#0a6a8e;--t:#fff">
+        <span class="pcard__media"><img src="assets/img/work/brand-dipa.webp" alt="Identidad de marca Dipa en aplicación móvil" width="1200" height="800" loading="lazy"></span>
+        <span class="pcard__cap"><span class="pcard__txt"><small>Branding</small><b><em>Dipa</em></b></span><i><svg width="22" height="22"><use href="#i-arrow-ur"/></svg></i></span>
       </a>
 
       <div class="work__end">

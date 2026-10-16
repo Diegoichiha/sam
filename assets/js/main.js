@@ -293,12 +293,13 @@
   gsap.set(heroWords, { yPercent: 118 });
   gsap.set('[data-hero-in]', { autoAlpha: 0, y: 34 });
   gsap.set('.float', { autoAlpha: 0, scale: 0.8 });
+  gsap.set('.wall', { autoAlpha: 0, x: 90, scale: 0.94 });
   gsap.set('.badge-spin, .hero__scroll', { autoAlpha: 0 });
   gsap.set(header, { yPercent: -140 });
 
   const intro = () => {
     gsap.timeline({ defaults: { ease: 'expo.out' }, delay: 0.15 })
-      .fromTo('.hero__bg img', { scale: 1.22 }, { scale: 1, duration: 2.4 }, 0)
+      .to('.wall', { autoAlpha: 1, x: 0, scale: 1, duration: 2, ease: 'power4.out' }, 0.1)
       .to(header, { yPercent: 0, duration: 1.3 }, 0.35)
       .to(heroWords, { yPercent: 0, duration: 1.5, stagger: 0.07 }, 0.3)
       .to('[data-hero-in]', { autoAlpha: 1, y: 0, duration: 1.2, stagger: 0.13 }, 0.5)
@@ -309,14 +310,16 @@
 
   // Parallax al hacer scroll
   gsap.timeline({ scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: true } })
-    .to('.hero__bg', { yPercent: 12, scale: 1.08, ease: 'none' }, 0)
+    .to('.hero__bg', { yPercent: 10, ease: 'none' }, 0)
+    .to('.wall__rot', { yPercent: -10, ease: 'none' }, 0)
     .to('[data-hero-copy]', { yPercent: -14, opacity: 0.15, ease: 'none' }, 0);
 
   // Parallax con el mouse
   if (fine) {
     const heroEl = $('.hero');
-    const bgx = gsap.quickTo('.hero__bg img', 'x', { duration: 1.2, ease: 'power3' });
-    const bgy = gsap.quickTo('.hero__bg img', 'y', { duration: 1.2, ease: 'power3' });
+    const wallEl = $('.wall');
+    const bgx = gsap.quickTo(wallEl, 'x', { duration: 1.4, ease: 'power3' });
+    const bgy = gsap.quickTo(wallEl, 'y', { duration: 1.4, ease: 'power3' });
     const floats = $$('.float').map((el) => ({
       d: parseFloat(el.dataset.depth) || 20,
       x: gsap.quickTo(el, 'x', { duration: 1, ease: 'power3' }),
@@ -325,7 +328,7 @@
     heroEl.addEventListener('mousemove', (e) => {
       const nx = e.clientX / innerWidth - 0.5;
       const ny = e.clientY / innerHeight - 0.5;
-      bgx(nx * -26); bgy(ny * -16);
+      bgx(nx * -34); bgy(ny * -22);
       floats.forEach((f) => { f.x(nx * f.d); f.y(ny * f.d); });
     });
   }
@@ -341,6 +344,19 @@
     while (track.scrollWidth < innerWidth * 1.3 && guard++ < 6) { html += base; track.innerHTML = html; }
     track.innerHTML = html + html;
     return gsap.fromTo(track, { xPercent: dir === 1 ? 0 : -50 }, { xPercent: dir === 1 ? -50 : 0, duration: 46, ease: 'none', repeat: -1 });
+  });
+  // Muro de trabajos del hero: columnas en sentidos opuestos, también reactivas a la velocidad del scroll
+  $$('.wall__col').forEach((col, i) => {
+    const track = $('.wall__track', col);
+    const base = track.innerHTML;
+    const target = $('.wall__rot').offsetHeight * 1.1;
+    let html = base;
+    track.innerHTML = html;
+    let guard = 0;
+    while (track.scrollHeight < target && guard++ < 4) { html += base; track.innerHTML = html; }
+    track.innerHTML = html + html;
+    const up = i % 2 === 0;
+    bandTweens.push(gsap.fromTo(track, { yPercent: up ? 0 : -50 }, { yPercent: up ? -50 : 0, duration: 60 + i * 14, ease: 'none', repeat: -1 }));
   });
   let lastY = scrollY, boost = 0;
   gsap.ticker.add(() => {
