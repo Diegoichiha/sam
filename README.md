@@ -54,7 +54,7 @@ Medido en superside.com a 1920 px: contenido de **1608 px** máximo, centrado, c
 | **Secciones a alto completo**: cada bloque mide al menos el alto de la pantalla (`min-height: 100svh`) y centra su contenido, así nunca asoma un pedazo de la siguiente | Superside | global |
 | Dígitos que ruedan | Superside | "15+" del mosaico y cifras |
 | Lista de soluciones con vista previa que sigue al cursor | Superside | "Soluciones" |
-| **Scrollytelling** con pin: dashboard 3D que se endereza y 3 pasos (datos → análisis → estrategia) | Markethink | "¿Cómo lo hacemos?" |
+| **Scrollytelling en una sola escena fija**: la intro "¿Cómo lo hacemos?" se acerca al espectador y se desvanece mientras la primera tarjeta emerge desde el fondo (escala, desenfoque y dashboard inclinado en 3D); luego los 3 pasos (datos → análisis → estrategia) sobre el mismo fondo, con anillos que crecen para dar profundidad | Markethink | "¿Cómo lo hacemos?" |
 | **Scroll horizontal** con pin y tarjetas altas (imagen + barra de título teñida con el color de cada proyecto) | Superside | "Casos de éxito" |
 | Cursor personalizado (punto sólido + aro con halo blanco, estados de enlace y "Ver") y luz de color que sigue al cursor en el hero | Asoclicper | global (solo punteros finos) |
 | Botones magnéticos con retorno elástico y foco de luz que sigue al cursor; tarjetas y filas con luz al pasar el mouse | Asoclicper | botones, tarjetas, soluciones |

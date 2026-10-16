@@ -79,6 +79,7 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:poin
 /* Acento en cursiva con degradé. Se aplica también a cada palabra (.wi) para que funcione con el split de texto */
 em{--g:var(--grad-accent);font-style:italic;font-weight:800;letter-spacing:-.02em}
 .section--light em,.work em{--g:var(--grad-accent-light)}
+.story em{--g:linear-gradient(100deg,#e67a1f 0%,#f59a1f 55%,#e67a1f 100%)}
 em,em .wi{
   background-image:var(--g);-webkit-background-clip:text;background-clip:text;
   color:transparent;-webkit-text-fill-color:transparent;padding-right:.06em;
@@ -98,7 +99,7 @@ em,em .wi{
 /* ───────── Secciones ───────── */
 .section{position:relative;padding-block:var(--sec);isolation:isolate;overflow:hidden}
 /* Cada sección ocupa al menos el alto de la pantalla (nunca asoma un pedazo de la siguiente) y centra su contenido */
-.about,.story-intro,.stats,.cta,.blog{min-height:100svh;display:flex;flex-direction:column;justify-content:center;padding-block:clamp(44px,7svh,110px)}
+.about,.stats,.cta,.blog{min-height:100svh;display:flex;flex-direction:column;justify-content:center;padding-block:clamp(44px,7svh,110px)}
 /* overflow:clip recorta igual que hidden pero NO crea un contenedor de scroll, así que el lado izquierdo puede ser sticky respecto a la ventana */
 .services{min-height:100svh;overflow:clip}
 .section--light{background:var(--grad-warm);color:var(--ink)}
@@ -395,18 +396,22 @@ html.has-cursor,html.has-cursor *{cursor:none!important}
 .svc-preview img{width:72%;height:auto}
 
 /* ───────── Cómo lo hacemos · scrollytelling ───────── */
-/* Anillos naranja decorativos (mismo recurso del tile de experiencia) */
-.story-intro::after{content:"";position:absolute;right:-9vw;bottom:-16vw;width:50vw;aspect-ratio:1;border-radius:50%;z-index:-1;pointer-events:none;
+/* Anillos naranja decorativos (mismo recurso del tile de experiencia); crecen con el scroll para dar profundidad */
+.story__rings{position:absolute;right:-9vw;bottom:-16vw;width:50vw;aspect-ratio:1;border-radius:50%;z-index:0;pointer-events:none;will-change:transform;
   background:repeating-radial-gradient(circle,rgba(254,160,39,0) 0 28px,rgba(254,160,39,.3) 28px 30px);
   -webkit-mask-image:radial-gradient(circle,#000 25%,transparent 68%);mask-image:radial-gradient(circle,#000 25%,transparent 68%)}
+.story__intro{position:absolute;inset:0;z-index:3;display:flex;align-items:center;pointer-events:none}
+.story__intro .container{will-change:transform,opacity,filter}
+.story__intro a,.story__intro button{pointer-events:auto}
 .story-intro__inner .h2{max-width:13em}
 .story-intro__lead{max-width:34em;margin-top:clamp(18px,2vw,28px);font-size:clamp(1.05rem,1.35vw,1.3rem);color:var(--muted)}
 .steps-preview{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(12px,1.4vw,22px);margin-top:clamp(36px,5vw,72px);max-width:62rem}
 .steps-preview li{position:relative;display:flex;flex-direction:column;gap:10px;padding:clamp(18px,1.8vw,28px);border-radius:clamp(16px,1.6vw,24px);background:linear-gradient(160deg,#fff 0%,#fff3e1 100%);border:1px solid rgba(254,160,39,.28);box-shadow:0 24px 50px -30px rgba(230,122,31,.55)}
 .steps-preview b{font:900 clamp(2rem,3.2vw,3.2rem)/1 var(--f-display);letter-spacing:-.04em;color:transparent;-webkit-text-stroke:1.5px var(--orange)}
 .steps-preview span{font:800 clamp(1rem,1.25vw,1.2rem)/1.2 var(--f-display);color:var(--ink)}
-.story{position:relative;overflow-x:clip;background:var(--grad-warm-soft);color:var(--ink)}
-.story__pin{height:100vh;min-height:640px;display:flex;align-items:center;padding-top:40px}
+.story{position:relative;overflow-x:clip;background:var(--grad-warm);color:var(--ink)}
+.story__pin{position:relative;overflow:clip;height:100vh;min-height:640px;display:flex;align-items:center;padding-top:40px}
+.story__grid{position:relative;z-index:1;will-change:transform,opacity,filter}
 .story__grid{display:grid;grid-template-columns:minmax(0,.82fr) minmax(0,1.18fr);gap:clamp(28px,5vw,110px);align-items:center}
 .story__copy{display:grid;align-content:center}
 .story__count{grid-area:1/1;align-self:start;font:700 1rem var(--f-num);color:var(--muted);margin-bottom:22px;display:flex;align-items:baseline;gap:8px}
@@ -657,8 +662,11 @@ html.has-cursor,html.has-cursor *{cursor:none!important}
   .panel__list{display:none}
   .story__progress{grid-area:2/1;margin-top:18px}
   .stats__grid{grid-template-columns:1fr 1fr;gap:36px 0}
-  .steps-preview{grid-template-columns:1fr}
-  .about,.story-intro,.stats,.cta,.blog,.services{min-height:0}
+  .steps-preview{grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+  .steps-preview li{padding:12px}
+  .steps-preview span{font-size:.78rem}
+  .steps-preview b{font-size:1.5rem}
+  .about,.stats,.cta,.blog,.services{min-height:0}
   .stat:nth-child(odd){padding-left:0;border-left:0}
   .cta .container{grid-template-columns:1fr}
   .cta__bubble{margin-top:36px}
@@ -677,7 +685,8 @@ html.has-cursor,html.has-cursor *{cursor:none!important}
 /* ───────── Movimiento reducido ───────── */
 .reduce *,.reduce *::before,.reduce *::after{animation:none!important;transition-duration:.01ms!important}
 .reduce .panel{opacity:1;visibility:visible;grid-area:auto;margin-bottom:48px}
-.reduce .story__pin{height:auto;padding-block:48px}
+.reduce .story__pin{height:auto;padding-block:48px;flex-direction:column;align-items:stretch}
+.reduce .story__intro{position:relative;inset:auto;padding-block:48px;pointer-events:auto}
 .reduce .viz__layer{opacity:1;visibility:visible;position:relative;inset:auto;height:320px}
 .reduce .dash{aspect-ratio:auto}
 .reduce .viz{position:relative;inset:auto}

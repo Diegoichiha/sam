@@ -479,6 +479,7 @@
     const tabs = $$('.dash__tab', story);
     const fills = $$('.story__progress i', story);
     const countEl = $('.story__count b', story);
+    const hud = [$('.story__count', story), $('.story__progress', story)]; // contador y barra: solo cuando hay una tarjeta activa
     let cur = -1;
 
     // Centra nodos y hub con transformaciones de GSAP
@@ -534,6 +535,15 @@
       if (i === cur) return;
       const prev = cur;
       cur = i;
+      if (i < 0) {
+        // Todavía estamos en la intro: ninguna tarjeta activa
+        panels.forEach((p) => { p.classList.remove('is-active'); gsap.to(p, { autoAlpha: 0, duration: 0.2, overwrite: true }); });
+        layers.forEach((l) => gsap.to(l, { autoAlpha: 0, duration: 0.25, overwrite: true }));
+        tabs.forEach((t, k) => t.classList.toggle('is-on', k === 0));
+        if (countEl) countEl.textContent = '01';
+        gsap.to(hud, { autoAlpha: 0, duration: 0.2, overwrite: true });
+        return;
+      }
       panels.forEach((p, k) => {
         if (k === i) {
           p.classList.add('is-active');
@@ -547,31 +557,42 @@
       });
       if (prev >= 0) gsap.to(layers[prev], { autoAlpha: 0, duration: 0.35, overwrite: true });
       gsap.set(layers[i], { autoAlpha: 1 });
+      gsap.to(hud, { autoAlpha: 1, duration: 0.4, overwrite: true });
       enter[i]();
       tabs.forEach((t, k) => t.classList.toggle('is-on', k === i));
       if (countEl) countEl.textContent = '0' + (i + 1);
     };
 
-    // El panel entra inclinado en 3D y se endereza mientras llega a la sección
-    gsap.fromTo(dash,
-      { rotationY: -22, rotationX: 11, scale: 0.86, y: 70, transformPerspective: 1600 },
-      { rotationY: 0, rotationX: 0, scale: 1, y: 0, ease: 'none',
-        scrollTrigger: { trigger: story, start: 'top 100%', end: 'top 18%', scrub: 0.6 } });
+    /* Escena única y fija: (1) la intro se acerca al espectador y se desvanece mientras la primera tarjeta emerge desde
+       el fondo (escala, desenfoque y dashboard inclinado en 3D); (2) luego los tres pasos, con las animaciones de siempre.
+       1 unidad de la línea de tiempo = 1 alto de pantalla de scroll. */
+    const grid = $('.story__grid', story);
+    const intro = $('.story__intro .container', story);
+    const rings = $('.story__rings', story);
+    const INTRO = 0.9, STEPS = 2.5, TOTAL = INTRO + STEPS;
+    const state = { p: 0 };
 
-    ScrollTrigger.create({
-      trigger: story, start: 'top 72%',
-      onEnter: () => { if (cur < 0) setStep(0); },
-    });
+    gsap.set(grid, { autoAlpha: 0, scale: 0.5, filter: 'blur(14px)', transformOrigin: '50% 50%' });
+    gsap.set(panels, { autoAlpha: 0 });
+    gsap.set(hud, { autoAlpha: 0 });
+    gsap.set(layers, { autoAlpha: 0 });
+    gsap.set(dash, { transformPerspective: 1600 });
 
-    ScrollTrigger.create({
-      trigger: pin, start: 'top top', end: () => '+=' + innerHeight * 2.5,
-      pin: true, anticipatePin: 1, invalidateOnRefresh: true,
-      onUpdate: (self) => {
-        const p = self.progress;
-        setStep(Math.min(2, Math.floor(p * 3)));
-        fills.forEach((f, k) => gsap.set(f, { scaleX: clamp(p * 3 - k, 0, 1) }));
+    const tl = gsap.timeline({
+      defaults: { ease: 'none' },
+      scrollTrigger: { trigger: pin, start: 'top top', end: () => '+=' + innerHeight * TOTAL, pin: true, scrub: true, anticipatePin: 1, invalidateOnRefresh: true },
+      onUpdate: () => {
+        const t = tl.time();
+        const s = clamp((t - INTRO) / STEPS, 0, 1);
+        setStep(t >= 0.8 ? Math.min(2, Math.floor(s * 3)) : -1);
+        fills.forEach((f, k) => gsap.set(f, { scaleX: clamp(s * 3 - k, 0, 1) }));
       },
     });
+    tl.to(intro, { scale: 1.45, autoAlpha: 0, filter: 'blur(10px)', duration: 0.65, ease: 'power2.in' }, 0.05)
+      .fromTo(grid, { autoAlpha: 0, scale: 0.5, filter: 'blur(14px)' }, { autoAlpha: 1, scale: 1, filter: 'blur(0px)', duration: 0.8, ease: 'power2.out' }, 0.38)
+      .fromTo(dash, { rotationY: -24, rotationX: 12, y: 60 }, { rotationY: 0, rotationX: 0, y: 0, duration: 0.85, ease: 'power2.out' }, 0.38)
+      .fromTo(rings, { scale: 1, opacity: 1 }, { scale: 1.9, opacity: 0.35, duration: TOTAL }, 0)
+      .to(state, { p: 1, duration: STEPS }, INTRO);
   }
 
   /* ───────── Portafolio · scroll horizontal ───────── */
