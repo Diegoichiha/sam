@@ -203,13 +203,13 @@
      ScrollTrigger calcula mal la posición de lo que se crea antes que un pin que queda más arriba en la página,
      así que estas funciones se llaman al final, cuando ya existen el pin del proceso y el scroll horizontal. */
 
-  // Enlace activo del menú
+  // Enlace activo del mega menú
   const initNav = () => {
-    const navLinks = $$('.nav__link');
-    // Qué sección resalta cada bloque de la página (el proceso cuenta como "Soluciones", las cifras como "Nosotros")
+    const navLinks = $$('.mm__links a');
+    // Qué enlace resalta cada bloque de la página
     const map = [
-      ['inicio', '#inicio'], ['nosotros', '#nosotros'], ['soluciones', '#soluciones'], ['soluciones', '#como'],
-      ['soluciones', '.story'], ['nosotros', '.stats'], ['portafolio', '#portafolio'], ['contacto', '#contacto'],
+      ['inicio', '#inicio'], ['nosotros', '#nosotros'], ['soluciones', '#soluciones'], ['como', '.story'],
+      ['nosotros', '.stats'], ['portafolio', '#portafolio'], ['contacto', '#contacto'], ['blog', '#blog'],
     ];
     // Se lee la posición real en cada scroll (los pines cambian el layout, no conviene fiarse de rangos precalculados)
     const update = () => {

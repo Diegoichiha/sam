@@ -182,16 +182,6 @@ html.has-cursor,html.has-cursor *{cursor:none!important}
 }
 .header.is-solid .header__bar{background:rgba(4,31,51,.82)}
 .header__logo img{width:92px;height:auto}
-.nav ul{display:flex;align-items:center;gap:clamp(18px,2.6vw,44px)}
-.nav__link{
-  position:relative;display:inline-flex;align-items:center;gap:6px;padding:10px 2px;
-  font:700 .95rem/1 var(--f-display);color:#fff;transition:color .3s;
-}
-.nav__link::after{content:"";position:absolute;left:0;right:0;bottom:2px;height:2px;background:var(--orange);transform:scaleX(0);transform-origin:right;transition:transform .5s var(--ease)}
-.nav__link:hover,.nav__link.is-current{color:var(--orange)}
-.nav__link:hover::after,.nav__link.is-current::after{transform:scaleX(1);transform-origin:left}
-.nav{transition:opacity .35s}
-.header.is-menu .nav{opacity:0;pointer-events:none}
 .header.is-menu .header__bar{background:transparent;border-color:transparent;-webkit-backdrop-filter:none;backdrop-filter:none}
 
 /* Botón de menú (hamburguesa) */
@@ -244,6 +234,8 @@ html.has-cursor,html.has-cursor *{cursor:none!important}
 .mm__t{display:block;overflow:hidden;padding-bottom:.1em;transition:transform .6s var(--ease)}
 .mm__t span{display:block;white-space:nowrap;font:900 clamp(1.5rem,2.6vw,2.9rem)/1.1 var(--f-display);letter-spacing:-.03em;transition:color .3s}
 .mm__links a:hover .mm__t{transform:translateX(14px)}
+.mm__links a.is-current .mm__n{opacity:1}
+.mm__links a.is-current .mm__t span{color:var(--orange)}
 .mm__links a:hover .mm__t span{color:var(--orange)}
 
 .mm__sol{display:flex;flex-direction:column;min-width:0}
@@ -696,7 +688,6 @@ html.has-cursor,html.has-cursor *{cursor:none!important}
 
 /* ───────── Responsive ───────── */
 @media (max-width:1180px){
-  .nav{display:none}
   .mm__inner{grid-template-columns:minmax(0,1fr) minmax(0,1.1fr)}
   .mm__sol{grid-column:1/-1;order:3}
   .mm__grid{grid-auto-rows:auto}
