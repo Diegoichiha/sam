@@ -232,19 +232,26 @@
     });
   };
 
-  /* ───────── Cursor personalizado ───────── */
+  /* ───────── Cursor personalizado (punto pegado al puntero + aro con suavizado corto) ───────── */
   if (fine && !reduce) {
     root.classList.add('has-cursor');
     const cur = $('.cursor');
     const ring = $('.cursor__ring');
     const dot = $('.cursor__dot');
     const label = $('.cursor__label');
-    const rx = gsap.quickTo(ring, 'x', { duration: 0.55, ease: 'power3' });
-    const ry = gsap.quickTo(ring, 'y', { duration: 0.55, ease: 'power3' });
-    const dx = gsap.quickTo(dot, 'x', { duration: 0.12, ease: 'power3' });
-    const dy = gsap.quickTo(dot, 'y', { duration: 0.12, ease: 'power3' });
-
-    let mx = -1, my = -1, raf = 0;
+    // Sin GSAP en el cursor: el punto se coloca en el mismo evento del mouse y el aro lo sigue con un suavizado
+    // calculado por tiempo (45 ms, independiente de los fps). Solo transform; el bucle se apaga cuando el aro alcanza al punto.
+    let tx = 0, ty = 0, rx = 0, ry = 0, live = false, running = false, last = 0, mx = -1, my = -1, raf = 0;
+    const place = (el, x, y) => { el.style.transform = 'translate3d(' + x.toFixed(1) + 'px,' + y.toFixed(1) + 'px,0) translate(-50%,-50%)'; };
+    const tick = (now) => {
+      const dt = Math.max(1, Math.min(50, now - last));
+      last = now;
+      const k = 1 - Math.exp(-dt / 45);
+      rx += (tx - rx) * k; ry += (ty - ry) * k;
+      if (Math.abs(tx - rx) < 0.15 && Math.abs(ty - ry) < 0.15) { rx = tx; ry = ty; running = false; }
+      place(ring, rx, ry);
+      if (running) requestAnimationFrame(tick);
+    };
     const setState = (target) => {
       if (!target || !target.closest) return;
       const view = target.closest('[data-cursor="view"]');
@@ -255,12 +262,12 @@
     };
 
     addEventListener('mousemove', (e) => {
-      mx = e.clientX; my = e.clientY;
-      cur.classList.add('is-on');
-      rx(mx); ry(my); dx(mx); dy(my);
+      tx = mx = e.clientX; ty = my = e.clientY;
+      place(dot, tx, ty);
+      if (!live) { live = true; rx = tx; ry = ty; place(ring, rx, ry); cur.classList.add('is-on'); }
+      if (!running) { running = true; last = performance.now(); requestAnimationFrame(tick); }
     }, { passive: true });
-    document.addEventListener('mouseleave', () => cur.classList.remove('is-on'));
-    document.addEventListener('mouseenter', () => cur.classList.add('is-on'));
+    root.addEventListener('mouseleave', () => { live = false; cur.classList.remove('is-on'); });
     addEventListener('mousedown', () => cur.classList.add('is-down'));
     addEventListener('mouseup', () => cur.classList.remove('is-down'));
     document.addEventListener('mouseover', (e) => setState(e.target));
@@ -271,18 +278,65 @@
     }, { passive: true });
   }
 
-  /* ───────── Botones magnéticos ───────── */
+  /* ───────── Botones: magnéticos + foco de luz que sigue al cursor ───────── */
   if (fine && !reduce) {
-    $$('[data-magnetic]').forEach((el) => {
-      const xTo = gsap.quickTo(el, 'x', { duration: 0.6, ease: 'power3' });
-      const yTo = gsap.quickTo(el, 'y', { duration: 0.6, ease: 'power3' });
+    const magnetic = new Set($$('[data-magnetic], .btn, .cta__bubble, .social a, .footer__big, .fab-popup-cta, .burger'));
+    magnetic.forEach((el) => {
       el.addEventListener('mousemove', (e) => {
         const r = el.getBoundingClientRect();
-        xTo((e.clientX - (r.left + r.width / 2)) * 0.32);
-        yTo((e.clientY - (r.top + r.height / 2)) * 0.4);
+        el.style.setProperty('--mx', e.clientX - r.left + 'px');
+        el.style.setProperty('--my', e.clientY - r.top + 'px');
+        gsap.to(el, { x: (e.clientX - r.left - r.width / 2) * 0.35, y: (e.clientY - r.top - r.height / 2) * 0.5, duration: 0.4, ease: 'power3.out', overwrite: 'auto' });
       });
-      el.addEventListener('mouseleave', () => { xTo(0); yTo(0); });
+      el.addEventListener('mouseleave', () => gsap.to(el, { x: 0, y: 0, duration: 0.8, ease: 'elastic.out(1,.4)', overwrite: 'auto' }));
     });
+    // Tarjetas y filas de soluciones: la luz sigue al cursor
+    $$('.ccard, .svc a').forEach((el) => {
+      el.addEventListener('mousemove', (e) => {
+        const r = el.getBoundingClientRect();
+        el.style.setProperty('--mx', e.clientX - r.left + 'px');
+        el.style.setProperty('--my', e.clientY - r.top + 'px');
+      }, { passive: true });
+    });
+  }
+
+  /* ───────── WhatsApp: círculo que se expande y abre una tarjeta de contacto ───────── */
+  const fab = $('#fab');
+  const fabPopup = $('#fabPopup');
+  const fabClose = $('#fabPopupClose');
+  if (fab && fabPopup && fabClose) {
+    const parts = $$('[data-fab-part]', fabPopup);
+    let fabOpen = false;
+    const openFab = () => {
+      fabOpen = true;
+      fab.setAttribute('aria-expanded', 'true');
+      fab.classList.add('is-hidden');
+      fabPopup.classList.add('is-open');
+      if (reduce) { fabPopup.style.opacity = 1; return; }
+      gsap.killTweensOf([fabPopup, ...parts]);
+      gsap.timeline()
+        .fromTo(fabPopup, { opacity: 0, scale: 0.85, y: 16 }, { opacity: 1, scale: 1, y: 0, duration: 0.45, ease: 'back.out(1.6)' })
+        .fromTo(parts, { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 0.35, ease: 'power3.out', stagger: 0.08 }, '-=0.25');
+    };
+    const closeFab = () => {
+      fabOpen = false;
+      fab.setAttribute('aria-expanded', 'false');
+      fab.classList.remove('is-hidden');
+      if (reduce) { fabPopup.style.opacity = 0; fabPopup.classList.remove('is-open'); return; }
+      gsap.killTweensOf([fabPopup, ...parts]);
+      gsap.to(fabPopup, { opacity: 0, scale: 0.9, y: 10, duration: 0.25, ease: 'power2.in', onComplete: () => fabPopup.classList.remove('is-open') });
+    };
+    fab.addEventListener('click', () => (fabOpen ? closeFab() : openFab()));
+    fabClose.addEventListener('click', closeFab);
+    document.addEventListener('click', (e) => {
+      if (!fabOpen || fabPopup.contains(e.target) || fab.contains(e.target)) return;
+      closeFab();
+    });
+    addEventListener('keydown', (e) => { if (fabOpen && e.key === 'Escape') closeFab(); });
+    // Aparece al bajar medio viewport
+    const fabVisibility = () => fab.classList.toggle('is-visible', scrollY > innerHeight * 0.5);
+    addEventListener('scroll', fabVisibility, { passive: true });
+    fabVisibility();
   }
 
   if (reduce) { initRolls(); finishReduced(); return; }
@@ -292,9 +346,8 @@
   const heroWords = split(heroTitle);
   gsap.set(heroWords, { yPercent: 118 });
   gsap.set('[data-hero-in]', { autoAlpha: 0, y: 34 });
-  gsap.set('.float', { autoAlpha: 0, scale: 0.8 });
   gsap.set('.wall', { autoAlpha: 0, x: 90, scale: 0.94 });
-  gsap.set('.badge-spin, .hero__scroll', { autoAlpha: 0 });
+  gsap.set('.hero__scroll', { autoAlpha: 0 });
   gsap.set(header, { yPercent: -140 });
 
   const intro = () => {
@@ -303,8 +356,7 @@
       .to(header, { yPercent: 0, duration: 1.3 }, 0.35)
       .to(heroWords, { yPercent: 0, duration: 1.5, stagger: 0.07 }, 0.3)
       .to('[data-hero-in]', { autoAlpha: 1, y: 0, duration: 1.2, stagger: 0.13 }, 0.5)
-      .to('.float', { autoAlpha: 1, scale: 1, duration: 1.2, stagger: 0.16, ease: 'back.out(1.5)' }, 1.1)
-      .to('.badge-spin, .hero__scroll', { autoAlpha: 1, duration: 1 }, 1.4);
+      .to('.hero__scroll', { autoAlpha: 1, duration: 1 }, 1.4);
   };
   (document.fonts && document.fonts.ready ? document.fonts.ready : Promise.resolve()).then(intro);
 
@@ -320,31 +372,25 @@
     const wallEl = $('.wall');
     const bgx = gsap.quickTo(wallEl, 'x', { duration: 1.4, ease: 'power3' });
     const bgy = gsap.quickTo(wallEl, 'y', { duration: 1.4, ease: 'power3' });
-    const floats = $$('.float').map((el) => ({
-      d: parseFloat(el.dataset.depth) || 20,
-      x: gsap.quickTo(el, 'x', { duration: 1, ease: 'power3' }),
-      y: gsap.quickTo(el, 'y', { duration: 1, ease: 'power3' }),
-    }));
+    // Luz de color que sigue al cursor sobre el hero (como en Asoclicper)
+    const glow = $('.hero__glow');
+    gsap.set(glow, { xPercent: -50, yPercent: -50 });
+    const glowX = gsap.quickTo(glow, 'x', { duration: 0.75, ease: 'power3.out' });
+    const glowY = gsap.quickTo(glow, 'y', { duration: 0.75, ease: 'power3.out' });
+    let glowOn = false;
     heroEl.addEventListener('mousemove', (e) => {
       const nx = e.clientX / innerWidth - 0.5;
       const ny = e.clientY / innerHeight - 0.5;
       bgx(nx * -34); bgy(ny * -22);
-      floats.forEach((f) => { f.x(nx * f.d); f.y(ny * f.d); });
+      const r = heroEl.getBoundingClientRect();
+      glowX(e.clientX - r.left); glowY(e.clientY - r.top);
+      if (!glowOn) { glowOn = true; gsap.to(glow, { opacity: 1, duration: 0.45, overwrite: 'auto' }); }
     });
+    heroEl.addEventListener('mouseleave', () => { glowOn = false; gsap.to(glow, { opacity: 0, duration: 0.7, overwrite: 'auto' }); });
   }
 
-  /* ───────── Bandas (marquee reactivo al scroll) ───────── */
-  const bandTweens = $$('[data-marquee]').map((band) => {
-    const dir = Number(band.dataset.marquee);
-    const track = $('.band__track', band);
-    const base = track.innerHTML;
-    let html = base;
-    track.innerHTML = html;
-    let guard = 0;
-    while (track.scrollWidth < innerWidth * 1.3 && guard++ < 6) { html += base; track.innerHTML = html; }
-    track.innerHTML = html + html;
-    return gsap.fromTo(track, { xPercent: dir === 1 ? 0 : -50 }, { xPercent: dir === 1 ? -50 : 0, duration: 46, ease: 'none', repeat: -1 });
-  });
+  /* ───────── Muro de trabajos del hero (reactivo a la velocidad del scroll) ───────── */
+  const bandTweens = [];
   // Muro de trabajos del hero: columnas en sentidos opuestos, también reactivas a la velocidad del scroll
   $$('.wall__col').forEach((col, i) => {
     const track = $('.wall__track', col);

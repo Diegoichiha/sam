@@ -110,6 +110,7 @@
 <!-- ───────── Hero ───────── -->
 <section class="hero" id="inicio">
   <div class="hero__bg" data-hero-bg aria-hidden="true"></div>
+  <span class="hero__glow" aria-hidden="true"></span>
   <div class="hero__grid" aria-hidden="true"></div>
   <span class="aurora aurora--a" aria-hidden="true"></span>
   <span class="aurora aurora--b" aria-hidden="true"></span>
@@ -153,44 +154,18 @@
         </a>
       </div>
     </div>
-
-    <!-- Tarjetas flotantes (decorativas) -->
-    <div class="hero__floats" aria-hidden="true">
-      <div class="float float--a" data-depth="34"><span class="float__ico float__ico--g"><svg width="16" height="16"><use href="#i-check"/></svg></span><span><b>Nuevo lead calificado</b><small>Cotización de página web</small></span></div>
-      <div class="float float--b" data-depth="-22"><span class="float__ico float__ico--o"><svg width="16" height="16"><use href="#i-target"/></svg></span><span><b>Campaña optimizada</b><small>Google Ads · Meta Ads</small></span></div>
-    </div>
   </div>
 
   <a class="hero__scroll" href="#nosotros" aria-label="Desliza para ver más">
     <span class="hero__mouse"><i></i></span>
     <span>Desliza</span>
   </a>
-
-  <a class="badge-spin" href="#contacto" aria-label="Hablemos de tu proyecto" data-magnetic>
-    <svg viewBox="0 0 200 200" aria-hidden="true">
-      <defs><path id="circ" d="M100,100 m-78,0 a78,78 0 1,1 156,0 a78,78 0 1,1 -156,0"/></defs>
-      <text><textPath href="#circ" startOffset="0">Hablemos de tu proyecto · Hablemos de tu proyecto ·</textPath></text>
-    </svg>
-    <span class="badge-spin__arrow"><svg width="30" height="30"><use href="#i-arrow-ur"/></svg></span>
-  </a>
 </section>
 
-<!-- ───────── Bandas de servicios (marquee) ───────── -->
-<div class="bands" aria-hidden="true">
-  <div class="band band--back" data-marquee="1">
-    <div class="band__track">
-      <span>Generación de leads</span><i><svg width="26" height="26"><use href="#i-spark"/></svg></i><span>Marketing estratégico</span><i><svg width="26" height="26"><use href="#i-spark"/></svg></i><span>Social media</span><i><svg width="26" height="26"><use href="#i-spark"/></svg></i><span>Diseño web</span><i><svg width="26" height="26"><use href="#i-spark"/></svg></i><span>SEO</span><i><svg width="26" height="26"><use href="#i-spark"/></svg></i><span>Publicidad paga</span><i><svg width="26" height="26"><use href="#i-spark"/></svg></i><span>Email marketing</span><i><svg width="26" height="26"><use href="#i-spark"/></svg></i><span>Diseño gráfico</span><i><svg width="26" height="26"><use href="#i-spark"/></svg></i><span>Branding</span><i><svg width="26" height="26"><use href="#i-spark"/></svg></i>
-    </div>
-  </div>
-  <div class="band band--front" data-marquee="-1">
-    <div class="band__track">
-      <span>Más que marketing</span><i><svg width="26" height="26"><use href="#i-spark"/></svg></i><span>Sistemas que generan ventas</span><i><svg width="26" height="26"><use href="#i-spark"/></svg></i><span>Éxito digital</span><i><svg width="26" height="26"><use href="#i-spark"/></svg></i><span>Más que marketing</span><i><svg width="26" height="26"><use href="#i-spark"/></svg></i><span>Sistemas que generan ventas</span><i><svg width="26" height="26"><use href="#i-spark"/></svg></i><span>Éxito digital</span><i><svg width="26" height="26"><use href="#i-spark"/></svg></i>
-    </div>
-  </div>
-</div>
-
 <!-- ───────── Sobre nosotros ───────── -->
-<section class="about section section--light" id="nosotros">
+<section class="about sheet section section--light" id="nosotros">
+  <span class="aurora aurora--o aurora--o1" aria-hidden="true"></span>
+  <span class="aurora aurora--o aurora--o2" aria-hidden="true"></span>
   <div class="container">
     <p class="eyebrow"><span></span>Sobre nosotros</p>
     <p class="about__big" data-scrub>Convertimos tu presencia digital en un <em>sistema constante</em> de clientes.</p>
@@ -403,6 +378,8 @@
 
 <!-- ───────── Portafolio · Scroll horizontal ───────── -->
 <section class="work" id="portafolio" aria-label="Portafolio">
+  <span class="aurora aurora--o aurora--o1" aria-hidden="true"></span>
+  <span class="aurora aurora--o aurora--o3" aria-hidden="true"></span>
   <div class="work__pin">
     <div class="work__track">
 
@@ -489,6 +466,7 @@
 
 <!-- ───────── Blog ───────── -->
 <section class="blog section section--light" id="blog">
+  <span class="aurora aurora--o aurora--o3" aria-hidden="true"></span>
   <div class="container">
     <div class="blog__head">
       <div>
@@ -567,8 +545,23 @@
   </div>
 </footer>
 
-<!-- WhatsApp (pendiente: número oficial) -->
-<a class="wa" href="#contacto" aria-label="Escríbenos por WhatsApp" data-magnetic><svg width="30" height="30"><use href="#i-wa"/></svg></a>
+<!-- WhatsApp: círculo en reposo que se expande al pasar el mouse y abre una tarjeta de contacto -->
+<button type="button" class="fab" id="fab" aria-haspopup="dialog" aria-expanded="false" aria-controls="fabPopup">
+  <span class="fab-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><use href="#i-wa"/></svg></span>
+  <span class="fab-label">Hablar con un especialista</span>
+</button>
+<div class="fab-popup" id="fabPopup" role="dialog" aria-modal="false" aria-label="Contacto">
+  <button type="button" class="fab-popup-close" id="fabPopupClose" aria-label="Cerrar">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>
+  </button>
+  <span class="fab-popup-avatar" data-fab-part><img src="assets/img/brand/favicon.png" alt=""></span>
+  <p class="fab-popup-title" data-fab-part>Equipo SÁM digital</p>
+  <p class="fab-popup-message" data-fab-part>¿Quieres convertir tu presencia digital en un sistema de clientes? Escríbenos y te respondemos directo por WhatsApp.</p>
+  <a href="https://wa.me/573167335485" target="_blank" rel="noopener" class="fab-popup-cta" data-fab-part data-magnetic>
+    <svg viewBox="0 0 24 24" width="18" height="18"><use href="#i-wa"/></svg>
+    Escribir por WhatsApp
+  </a>
+</div>
 
 <script src="assets/vendor/gsap.min.js"></script>
 <script src="assets/vendor/ScrollTrigger.min.js"></script>

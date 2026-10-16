@@ -29,6 +29,12 @@ npx http-server . -p 5190 -c-1
 Tipografías: **Red Hat Display** (títulos, 900), **Quicksand** (texto) y **Poppins** (números), las mismas del sitio actual.
 El acento en cursiva (estilo Superside/Markethink) usa Red Hat Display *italic* en lugar de una serif para no salirse de la marca.
 
+## Degradados
+
+- **Claros:** blanco que se funde a naranja suave (`--grad-warm`), con luces naranja (`.aurora--o`).
+- **Oscuros:** azul marino con luz azul/turquesa y toques naranja (`--grad-dark-1`, `--grad-dark-2`), más profundidad en CTA y footer.
+- **Botones:** naranja degradado (primario), azul marino degradado (oscuro) y degradé turquesa → naranja (cabecera y WhatsApp).
+
 ## Contenedor
 
 Medido en superside.com a 1920 px: contenido de **1608 px** máximo, centrado, con gutter de 32 px (`--maxw: 1672px` = 1608 + 2×32; `--gutter: clamp(16px, 2.5vw, 32px)`). Por debajo de 1672 px ocupa el ancho completo menos el gutter. Ver `.container` en `styles.css`.
@@ -42,20 +48,21 @@ Medido en superside.com a 1920 px: contenido de **1608 px** máximo, centrado, c
 | Titulares revelados palabra por palabra con máscara | Superside | todos los `h1/h2` |
 | Acento en cursiva con degradé | Superside / Markethink | `em` en titulares |
 | Hero sin foto: **muro de trabajos** (portafolio real de SÁM) en dos columnas inclinadas que suben y bajan, reactivas al scroll y al mouse; aurora y grilla | Superside / Markethink | hero |
-| Bandas cruzadas (marquee) que aceleran con la velocidad del scroll | — | tras el hero |
 | Párrafo que se ilumina palabra a palabra con el scroll | Superside | "Sobre nosotros" |
 | Dígitos que ruedan | Superside | "15+" y cifras |
 | Lista de soluciones con vista previa que sigue al cursor | Superside | "Soluciones" |
 | **Scrollytelling** con pin: dashboard 3D que se endereza y 3 pasos (datos → análisis → estrategia) | Markethink | "¿Cómo lo hacemos?" |
 | **Scroll horizontal** con pin y tarjetas altas (imagen + barra de título teñida con el color de cada proyecto) | Superside | "Casos de éxito" |
-| Cursor personalizado (punto + aro, estados de enlace y "Ver"), botones magnéticos | — | global (solo punteros finos) |
+| Cursor personalizado (punto sólido + aro con halo blanco, estados de enlace y "Ver") y luz de color que sigue al cursor en el hero | Asoclicper | global (solo punteros finos) |
+| Botones magnéticos con retorno elástico y foco de luz que sigue al cursor; tarjetas y filas con luz al pasar el mouse | Asoclicper | botones, tarjetas, soluciones |
+| WhatsApp flotante: círculo que se expande al pasar el mouse y abre una tarjeta de contacto (número oficial de SÁM tomado de su sitio actual) | Asoclicper | esquina inferior derecha |
 | Secciones apiladas con borde redondeado | Superside | transición entre secciones |
 
 Accesibilidad: respeta `prefers-reduced-motion` (sin Lenis, sin pines ni animaciones; el contenido queda visible y apilado). El cursor personalizado solo se activa con mouse.
 
 ## Pendientes por validar con el cliente
 
-- **WhatsApp**: el botón flotante existe en el sitio actual; falta el número oficial (hoy enlaza a `#contacto`).
+- **WhatsApp**: se usa el número que ya está configurado en el sitio actual (`573167335485`); confirmar que es el oficial.
 - **Logos de clientes**: la sección "Ellos confiaron en nosotros" del sitio actual no se pudo extraer; hay que pedir los logos.
 - **Casos de éxito**: se usan los 12 trabajos del portafolio actual (`assets/img/work/`, mockups de 1200×800). Faltan resultados/métricas aprobadas por cliente. VOLCALI está solo en el muro del hero (su enlace en el sitio actual apunta por error a ASOCLICPER). "Ver portafolio" enlaza al portafolio del sitio actual hasta que se diseñe esa página.
 - **Cifras**: se usan datos reales del sitio actual (15+ años, 9 soluciones, 4 plataformas de pauta, 30 min de consultoría). Si hay métricas aprobadas (clientes, proyectos, ROI), se pueden sumar.
