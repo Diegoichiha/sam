@@ -18,6 +18,8 @@
 
   if (!window.gsap || !window.ScrollTrigger) return;
   gsap.registerPlugin(ScrollTrigger);
+  // El hero genérico anima elementos opcionales (muro, visual, "Desliza") que no existen en todas las páginas
+  gsap.config({ nullTargetWarn: false });
 
   if (reduce) root.classList.add('reduce');
 
@@ -211,7 +213,7 @@
     const mark = (id) => navLinks.forEach((l) => l.classList.toggle('is-current', !!id && l.dataset.nav === id));
     if (!isHome) { mark(document.body.dataset.nav); return; }
     const map = [
-      ['inicio', '#inicio'], ['nosotros', '#nosotros'], ['soluciones', '#soluciones'], ['como', '.story'],
+      ['inicio', '#inicio'], ['nosotros', '#nosotros'], ['soluciones', '#soluciones'],
       ['nosotros', '.stats'], ['portafolio', '#portafolio'], ['contacto', '#contacto'], ['blog', '#blog'],
     ];
     // Se lee la posición real en cada scroll (los pines cambian el layout, no conviene fiarse de rangos precalculados)

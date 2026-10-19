@@ -97,15 +97,13 @@ def btn(label, href, cls='btn--primary', ico='', ext=False, size='', reveal=Fals
 # ───────────────────────── Piezas compartidas ─────────────────────────
 def header(root, is_home):
     home = '#inicio' if is_home else root
-    como = '#como' if is_home else root + '#como'
     links = [
         ('01', 'Inicio', home, 'inicio'),
         ('02', 'Nosotros', root + 'sobre-nosotros/', 'nosotros'),
         ('03', 'Soluciones', root + 'services/', 'soluciones'),
-        ('04', 'Cómo lo hacemos', como, 'como'),
-        ('05', 'Portafolio', root + 'portafolio/', 'portafolio'),
-        ('06', 'Blog', root + 'blog/', 'blog'),
-        ('07', 'Contacto', root + 'contacto/', 'contacto'),
+        ('04', 'Portafolio', root + 'portafolio/', 'portafolio'),
+        ('05', 'Blog', root + 'blog/', 'blog'),
+        ('06', 'Contacto', root + 'contacto/', 'contacto'),
     ]
     link_html = '\n'.join(
         f'        <li><a href="{h}" data-nav="{k}"><span class="mm__n">{n}</span><span class="mm__t"><span>{t}</span></span></a></li>'
@@ -177,7 +175,6 @@ def social():
 
 
 def footer(root, is_home):
-    como = '#como' if is_home else root + '#como'
     home = '#inicio' if is_home else root
     arrow = '<svg width="14" height="14" aria-hidden="true"><use href="#i-arrow-ur"/></svg>'
     groups = [
@@ -194,9 +191,8 @@ def footer(root, is_home):
           </div>''' for t, sl in groups)
     nav = [
         ('Principal', [('Inicio', home), ('Nosotros', root + 'sobre-nosotros/'), ('Soluciones', root + 'services/'),
-                       ('Cómo lo hacemos', como), ('Portafolio', root + 'portafolio/'), ('Contacto', root + 'contacto/')]),
-        ('Recursos', [('Blog', root + 'blog/'), ('Casos de éxito', root + 'portafolio/'),
-                      ('Consultoría gratis', root + 'contacto/'), ('Agenda tu cita', root + 'contacto/')]),
+                       ('Portafolio', root + 'portafolio/'), ('Contacto', root + 'contacto/')]),
+        ('Recursos', [('Blog', root + 'blog/'), ('Casos de éxito', root + 'portafolio/')]),
     ]
     nav_html = '\n'.join(
         f'''          <div class="footer__col">
