@@ -6,6 +6,8 @@ Sitio estático (HTML + CSS + JS vanilla) con las 22 páginas generadas desde da
 ```
 index.html                       ← Home (generado)
 <slug>/index.html                ← 21 páginas internas, con las mismas URL del sitio actual (generadas)
+404.html, sitemap.xml            ← página de error y mapa del sitio (generados)
+robots.txt, .htaccess            ← para buscadores y servidor (escritos a mano, ver "Producción")
 build.py                         ← generador de todas las páginas
 src/data/*.json                  ← contenido extraído del sitio actual (servicios, nosotros, legales, artículos)
 src/pages/home.html              ← contenido del Home
@@ -15,6 +17,7 @@ assets/css/pages.css             ← estilos de las páginas internas
 assets/js/main.js                ← lo común: cabecera, mega menú, cursor, hero, revelados (+ secciones del Home)
 assets/js/pages.js               ← lógica de las internas (pasos apilados, filtro, índice, formulario)
 assets/vendor/                   ← GSAP 3.12.5, ScrollTrigger 3.12.5, Lenis 1.1.20 (copias locales)
+assets/img/og/                   ← imágenes para compartir en redes (1200×630), generadas con src/tools/make_og.py
 assets/img/                      ← logos, iconos, portafolio (work/), blog, servicios y fotos de stock
 ```
 
@@ -41,6 +44,17 @@ npx http-server . -p 5190 -c-1       # servidor local
 ```
 
 Para cambiar un texto: editar el JSON de `src/data/` (o `src/pages/home.html` para el Home) y volver a ejecutar `python build.py`. Requiere Python 3 con `lxml`. **No editar a mano los `index.html` generados.**
+
+## Producción (https://samdigital.com.co)
+
+El sitio se publica con el Git de Hostinger (hPanel → Advanced → Git, rama `main`): **cada push a `main` actualiza el sitio real**, así que se publica solo lo que ya se probó en local. No hay build en el servidor: se sube lo que está commiteado, por eso los HTML generados van en el repo.
+
+- **Canonical, `og:url` y `og:image`** (y tarjeta de Twitter): los agrega `build.py` a cada página con el dominio de la constante `SITE`. Si el dominio cambia, se cambia ahí y se regenera. Los artículos usan `og:type=article`.
+- **Imágenes para compartir:** `python src/tools/make_og.py` (requiere Pillow) genera `assets/img/og/default.jpg` y una por artículo. Se ejecuta solo si cambian las fotos.
+- **`sitemap.xml`:** se regenera con cada `python build.py`. **`robots.txt`** es estático y apunta a ese mapa.
+- **`404.html`:** la sirve el servidor en cualquier ruta que no existe (`ErrorDocument` del `.htaccess`). Usa `<base href="/">` para que cargue bien en rutas profundas; por eso solo se ve correcta en el dominio raíz.
+- **`.htaccess`:** una sola dirección (`https` y sin `www`), bloquea `build.py`, `README.md`, `src/` y `.git`, y declara la 404. Cada despliegue lo reemplaza: no editarlo en el servidor. Si el deploy falla por un `.htaccess` ya existente, borrar el del servidor y volver a desplegar.
+- **Caché:** los CSS y JS llevan `?v=<huella>` (la calcula `build.py`), así un cambio publicado se ve de inmediato aunque el navegador tenga la versión anterior en caché.
 
 ## Marca (extraída del sitio actual)
 

@@ -1,0 +1,4 @@
+# Keep server config and crawler files with LF line endings
+.htaccess text eol=lf
+robots.txt text eol=lf
+*.xml text eol=lf

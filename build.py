@@ -7,12 +7,14 @@ Home, Nosotros, Soluciones, 9 servicios, Portafolio, Contacto, Blog (+ artículo
 
 Uso:  python build.py
 """
+import hashlib
 import html as H
 import json
 import os
 import re
 
 ROOT = os.path.dirname(os.path.abspath(__file__))
+SITE = 'https://samdigital.com.co'    # dominio de producción: canonical, og:url, og:image y sitemap
 WA = 'https://wa.link/j7n585'          # enlace de WhatsApp que usa el sitio actual en todos sus CTA
 WA_NUMBER = '573167335485'
 EMAIL = 'info@samdigital.com.co'
@@ -46,6 +48,12 @@ def local_img(path):
 
 def J(p):
     return json.loads(read(p))
+
+
+def ver(p):
+    """Huella del archivo para ?v= : el navegador no sirve un CSS/JS viejo tras publicar cambios."""
+    with open(os.path.join(ROOT, p), 'rb') as f:
+        return hashlib.md5(f.read()).hexdigest()[:8]
 
 
 SV = J('src/data/services.json')
@@ -240,26 +248,28 @@ def footer(root, is_home):
 </footer>'''
 
 
-def shell(*, title, desc, main, root='', page='inner', nav='', og_image='', extra_js=''):
+def shell(*, title, desc, main, root='', page='inner', nav='', og_image='', extra_js='', base='', robots=''):
     is_home = page == 'home'
-    css = f'<link rel="stylesheet" href="{root}assets/css/styles.css">'
+    css = f'<link rel="stylesheet" href="{root}assets/css/styles.css?v={ver("assets/css/styles.css")}">'
     if not is_home:
-        css += f'\n  <link rel="stylesheet" href="{root}assets/css/pages.css">'
+        css += f'\n  <link rel="stylesheet" href="{root}assets/css/pages.css?v={ver("assets/css/pages.css")}">'
     scripts = (f'<script src="{root}assets/vendor/gsap.min.js"></script>\n'
                f'<script src="{root}assets/vendor/ScrollTrigger.min.js"></script>\n'
                f'<script src="{root}assets/vendor/lenis.min.js"></script>\n')
     if not is_home:
-        scripts += f'<script src="{root}assets/js/pages.js"></script>\n'
-    scripts += f'<script src="{root}assets/js/main.js"></script>'
+        scripts += f'<script src="{root}assets/js/pages.js?v={ver("assets/js/pages.js")}"></script>\n'
+    scripts += f'<script src="{root}assets/js/main.js?v={ver("assets/js/main.js")}"></script>'
     fab = FAB.replace('src="assets/', f'src="{root}assets/')
     og = f'\n  <meta property="og:image" content="{qa(og_image)}">' if og_image else ''
+    base_tag = f'\n  <base href="{base}">' if base else ''
+    robots_tag = f'\n  <meta name="robots" content="{robots}">' if robots else ''
     return f'''<!doctype html>
 <html lang="es">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1">{base_tag}
   <title>{esc(title)}</title>
-  <meta name="description" content="{qa(desc)}">
+  <meta name="description" content="{qa(desc)}">{robots_tag}
   <meta name="theme-color" content="#06304C">
   <meta property="og:title" content="{qa(title)}">
   <meta property="og:description" content="{qa(desc)}">
@@ -862,6 +872,69 @@ def legal_page(slug):
     return shell(title=f'{lg["title"]} · SÁM digital', desc=f'{lg["title"]} de SÁM digital.', main=main, root=root, nav='')
 
 
+# ───────────────────────── SEO, 404 y sitemap ─────────────────────────
+POST_BY_SLUG = {p['slug']: p for p in POSTS}
+
+
+def seo_tags(key, html):
+    """Inserta canonical, og:url/site_name/locale/image y tarjeta de Twitter (antes del favicon).
+    `key` es la ruta del archivo generado: 'index.html', 'services/index.html', ..."""
+    rel = '' if key == 'index.html' else key[:-len('index.html')]
+    slug = rel.strip('/')
+    post = POST_BY_SLUG.get(slug)
+    url = f'{SITE}/{rel}'
+    img = f'{SITE}/assets/img/og/{slug if post else "default"}.jpg'
+    alt = post['title'] if post else 'SÁM digital · Agencia de marketing digital'
+    tags = [
+        f'<link rel="canonical" href="{url}">',
+        f'<meta property="og:url" content="{url}">',
+        '<meta property="og:site_name" content="SÁM digital">',
+        '<meta property="og:locale" content="es_CO">',
+        f'<meta property="og:image" content="{img}">',
+        '<meta property="og:image:width" content="1200">',
+        '<meta property="og:image:height" content="630">',
+        f'<meta property="og:image:alt" content="{qa(alt)}">',
+        '<meta name="twitter:card" content="summary_large_image">',
+    ]
+    if post:
+        html = html.replace('<meta property="og:type" content="website">', '<meta property="og:type" content="article">', 1)
+        tags += [f'<meta property="article:published_time" content="{post["iso"]}">',
+                 f'<meta property="article:section" content="{qa(post["cat"])}">']
+    marker = '  <link rel="icon"'
+    assert marker in html, key
+    return html.replace(marker, '\n'.join('  ' + t for t in tags) + '\n' + marker, 1)
+
+
+def sitemap_xml(keys):
+    rows = []
+    for key in keys:
+        rel = '' if key == 'index.html' else key[:-len('index.html')]
+        post = POST_BY_SLUG.get(rel.strip('/'))
+        lastmod = f'<lastmod>{post["iso"]}</lastmod>' if post else ''
+        rows.append(f'  <url><loc>{SITE}/{rel}</loc>{lastmod}</url>')
+    return ('<?xml version="1.0" encoding="UTF-8"?>\n'
+            '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' + '\n'.join(rows) + '\n</urlset>\n')
+
+
+def not_found_page():
+    """404.html: el servidor la sirve en cualquier ruta inexistente, por eso usa <base href="/"> (rutas desde la raíz)."""
+    visual = ('<div class="hero__visual hero__visual--404" data-hero-visual><span class="hv__disc" aria-hidden="true"></span>'
+              f'{rings()}<b class="n404" aria-hidden="true">404</b></div>')
+    ctas = (btn('Volver al inicio', './', 'btn--primary btn--lg') +
+            '<a class="btn btn--ghost btn--lg" href="services/" data-magnetic><span class="btn__txt"><span>Ver soluciones</span>'
+            f'<span aria-hidden="true">Ver soluciones</span></span><span class="btn__ico btn__ico--ghost">{ARROW.format(s=18)}</span></a>')
+    h = hero(crumb='<p class="eyebrow" data-hero-in><span></span>Error 404</p>',
+             title_html='Esta página no <em>existe</em>',
+             lead='Es posible que el enlace haya cambiado o que la dirección esté mal escrita. Te llevamos de vuelta al camino.',
+             ctas=ctas, visual=visual, cls='hero--404', scroll_to='#main')
+    main = f'<main id="main" tabindex="-1">\n{h}\n</main>'
+    html = shell(title='Página no encontrada · SÁM digital',
+                 desc='La página que buscas no existe o cambió de dirección.', main=main, root='', page='notfound',
+                 base='/', robots='noindex')
+    # con <base href="/"> el ancla "#main" saldría de la página: el salto al contenido se resuelve con foco
+    return html.replace('<a class="skip" href="#main">', '<a class="skip" href="#main" onclick="event.preventDefault();document.getElementById(\'main\').focus()">', 1)
+
+
 # ───────────────────────── Home ─────────────────────────
 def home_page():
     return shell(title='SÁM digital · Agencia de marketing digital',
@@ -878,9 +951,12 @@ def main():
         pages[f'{p["slug"]}/index.html'] = post_page(p)
     for _, s in LEGAL_LINKS:
         pages[f'{s}/index.html'] = legal_page(s)
+    sitemap = sitemap_xml(pages.keys())
     for path, content in pages.items():
-        write(path, content)
-    print(f'{len(pages)} páginas generadas')
+        write(path, seo_tags(path, content))
+    write('404.html', not_found_page())
+    write('sitemap.xml', sitemap)
+    print(f'{len(pages)} páginas generadas + 404.html + sitemap.xml')
 
 
 if __name__ == '__main__':

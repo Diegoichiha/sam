@@ -299,3 +299,7 @@
 /* ───────── Movimiento reducido ───────── */
 .reduce .step-card{position:relative;top:auto}
 .reduce .hero__visual{position:relative;inset:auto;height:auto;margin-top:24px}
+
+/* ───────── 404 ───────── */
+.hero--404 .hero__scroll{display:none}
+.n404{position:relative;font:900 clamp(7rem,19vw,19rem)/.85 var(--f-display);letter-spacing:-.06em;background:linear-gradient(160deg,#fff 0%,#ffd9a0 42%,#fea027 100%);-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 30px 50px rgba(2,15,25,.5));animation:bob 7s ease-in-out infinite}

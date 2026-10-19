@@ -1,0 +1,20 @@
+# SAM digital - static site (Hostinger / LiteSpeed)
+# This file lives in the git repository and every deploy replaces it: do not edit it by hand on the server.
+
+# 404 page with the site design
+ErrorDocument 404 /404.html
+
+<IfModule mod_rewrite.c>
+RewriteEngine On
+
+# One single address: https and no www
+RewriteCond %{HTTP_HOST} ^www\.(.+)$ [NC]
+RewriteRule ^ https://%1%{REQUEST_URI} [R=301,L]
+RewriteCond %{HTTPS} !=on
+RewriteCond %{HTTP:X-Forwarded-Proto} !https
+RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
+
+# Project files that must not be public
+RewriteRule ^(src|\.git|\.github)(/|$) - [F,L]
+RewriteRule ^(build\.py|README\.md|\.gitignore)$ - [F,L]
+</IfModule>
