@@ -17,4 +17,85 @@ RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
 # Project files that must not be public
 RewriteRule ^(src|\.git|\.github)(/|$) - [F,L]
 RewriteRule ^(build\.py|README\.md|\.gitignore)$ - [F,L]
+
+# ------------------------------------------------------------------
+# Redirects from the previous WordPress site (ids and slugs come from its REST API)
+# ------------------------------------------------------------------
+# WordPress short links: /?p=ID and /?page_id=ID
+RewriteCond %{QUERY_STRING} (^|&)(p|page_id)=(281|52|182)(&|$)
+RewriteRule ^(index\.php)?$ /? [R=301,L]
+RewriteCond %{QUERY_STRING} (^|&)(p|page_id)=(362)(&|$)
+RewriteRule ^(index\.php)?$ /sobre-nosotros/? [R=301,L]
+RewriteCond %{QUERY_STRING} (^|&)(p|page_id)=(394)(&|$)
+RewriteRule ^(index\.php)?$ /blog/? [R=301,L]
+RewriteCond %{QUERY_STRING} (^|&)(p|page_id)=(461|489|481)(&|$)
+RewriteRule ^(index\.php)?$ /contacto/? [R=301,L]
+RewriteCond %{QUERY_STRING} (^|&)(p|page_id)=(498|666|512)(&|$)
+RewriteRule ^(index\.php)?$ /services/? [R=301,L]
+RewriteCond %{QUERY_STRING} (^|&)(p|page_id)=(5004)(&|$)
+RewriteRule ^(index\.php)?$ /generacion-de-leads/? [R=301,L]
+RewriteCond %{QUERY_STRING} (^|&)(p|page_id)=(5036|672)(&|$)
+RewriteRule ^(index\.php)?$ /marketing-estrategico/? [R=301,L]
+RewriteCond %{QUERY_STRING} (^|&)(p|page_id)=(5042|659)(&|$)
+RewriteRule ^(index\.php)?$ /social-media-manager/? [R=301,L]
+RewriteCond %{QUERY_STRING} (^|&)(p|page_id)=(5103)(&|$)
+RewriteRule ^(index\.php)?$ /diseno-de-paginas-web/? [R=301,L]
+RewriteCond %{QUERY_STRING} (^|&)(p|page_id)=(5128|669|649)(&|$)
+RewriteRule ^(index\.php)?$ /optimizacion-seo/? [R=301,L]
+RewriteCond %{QUERY_STRING} (^|&)(p|page_id)=(5152|663)(&|$)
+RewriteRule ^(index\.php)?$ /publicidad-paga/? [R=301,L]
+RewriteCond %{QUERY_STRING} (^|&)(p|page_id)=(5180)(&|$)
+RewriteRule ^(index\.php)?$ /email-marketing/? [R=301,L]
+RewriteCond %{QUERY_STRING} (^|&)(p|page_id)=(5201)(&|$)
+RewriteRule ^(index\.php)?$ /diseno-grafico/? [R=301,L]
+RewriteCond %{QUERY_STRING} (^|&)(p|page_id)=(5230)(&|$)
+RewriteRule ^(index\.php)?$ /branding/? [R=301,L]
+RewriteCond %{QUERY_STRING} (^|&)(p|page_id)=(5247|411|399)(&|$)
+RewriteRule ^(index\.php)?$ /portafolio/? [R=301,L]
+RewriteCond %{QUERY_STRING} (^|&)(p|page_id)=(5633|4261)(&|$)
+RewriteRule ^(index\.php)?$ /politica-de-privacidad/? [R=301,L]
+RewriteCond %{QUERY_STRING} (^|&)(p|page_id)=(5655)(&|$)
+RewriteRule ^(index\.php)?$ /declaracion-de-accesibilidad/? [R=301,L]
+RewriteCond %{QUERY_STRING} (^|&)(p|page_id)=(5663)(&|$)
+RewriteRule ^(index\.php)?$ /aviso-legal/? [R=301,L]
+RewriteCond %{QUERY_STRING} (^|&)(p|page_id)=(5671)(&|$)
+RewriteRule ^(index\.php)?$ /politica-de-cookies/? [R=301,L]
+RewriteCond %{QUERY_STRING} (^|&)(p|page_id)=(4266)(&|$)
+RewriteRule ^(index\.php)?$ /cuanto-cuesta-no-tener-una-estrategia-digital/? [R=301,L]
+RewriteCond %{QUERY_STRING} (^|&)(p|page_id)=(15)(&|$)
+RewriteRule ^(index\.php)?$ /que-es-una-estrategia-de-marketing-digital-y-como-implementarla-paso-a-paso/? [R=301,L]
+RewriteCond %{QUERY_STRING} (^|&)(p|page_id)=(4315)(&|$)
+RewriteRule ^(index\.php)?$ /las-5-tendencias-marketing-digital-2026/? [R=301,L]
+RewriteCond %{QUERY_STRING} (^|&)(p|page_id)=(2|10|11|12|13|546|547|548|549|2467|2473|4264|4312)(&|$)
+RewriteRule ^(index\.php)?$ - [G,L]
+
+# Pages of the old theme that now have an equivalent
+RewriteRule ^(seo-optimization|link-building)/?$ /optimizacion-seo/ [R=301,L]
+RewriteRule ^social-media-management/?$ /social-media-manager/ [R=301,L]
+RewriteRule ^pay-per-clicks/?$ /publicidad-paga/ [R=301,L]
+RewriteRule ^online-marketing/?$ /marketing-estrategico/ [R=301,L]
+RewriteRule ^(time-management|service-details)/?$ /services/ [R=301,L]
+RewriteRule ^(faq-pricings|contact-us-02)/?$ /contacto/ [R=301,L]
+RewriteRule ^case-studies-0[12]/?$ /portafolio/ [R=301,L]
+RewriteRule ^home-v[123]/?$ / [R=301,L]
+RewriteRule ^privacy-policy-2/?$ /politica-de-privacidad/ [R=301,L]
+
+# Shop, account, login and sample pages of the old theme: gone for good (410)
+RewriteRule ^(shop|cart|checkout|my-account)(-2)?(/.*)?$ - [G,L]
+RewriteRule ^(login|register|sample-page(-2(-2)?)?)/?$ - [G,L]
+RewriteRule ^(product|product-category|product-tag)(/.*)?$ - [G,L]
+
+# Blog archives, pagination and feeds
+RewriteRule ^(category|tag|author)(/.*)?$ /blog/ [R=301,L]
+RewriteRule ^blog/page/[0-9]+/?$ /blog/ [R=301,L]
+RewriteRule ^page/[0-9]+/?$ / [R=301,L]
+RewriteRule ^(.+/)?feed/?$ /blog/ [R=301,L]
+
+# Old sitemaps -> the new one
+RewriteRule ^(wp-sitemap[^/]*\.xml|sitemap_index\.xml|[a-z_-]+-sitemap[0-9]*\.xml)$ /sitemap.xml [R=301,L]
+
+# index.php and index.html -> the clean URL
+RewriteRule ^index\.php$ / [R=301,L]
+RewriteCond %{THE_REQUEST} \s/(.*/)?index\.html[\s?]
+RewriteRule ^(.*/)?index\.html$ /$1 [R=301,L]
 </IfModule>

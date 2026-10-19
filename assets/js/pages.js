@@ -106,36 +106,65 @@ window.SAM_PAGE = function (ctx) {
   }
 
   /* ───────── Formulario de contacto ───────── */
+  // Envía a contact.php (correo). Si el envío falla (sin conexión, servidor sin PHP, límite de envíos) ofrece WhatsApp con el mensaje ya redactado.
   const form = $('[data-form]');
   if (form) {
     const err = $('[data-form-err]', form);
     const ok = $('[data-form-ok]', form);
+    const btnTxt = $$('.cform__btn .btn__txt span', form);
+    const loaded = Date.now();
     const field = (name) => form.elements[name];
     const flag = (el, bad) => { const box = el.closest('.fld, .chk'); if (box) box.classList.toggle('is-bad', bad); };
-    form.addEventListener('input', (e) => { const box = e.target.closest('.fld, .chk'); if (box) box.classList.remove('is-bad'); err.hidden = true; });
-    form.addEventListener('submit', (e) => {
-      e.preventDefault();
-      const email = field('email'), tel = field('telefono'), chk = field('acepto');
-      const badEmail = !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email.value.trim());
-      const badTel = tel.value.replace(/\D/g, '').length < 7;
-      const badChk = !chk.checked;
-      flag(email, badEmail); flag(tel, badTel); flag(chk, badChk);
-      if (badEmail || badTel || badChk) {
-        err.textContent = 'Revisa los campos obligatorios: un correo válido, tu teléfono y la aceptación del Aviso Legal y la Política de Privacidad.';
-        err.hidden = false;
-        return;
-      }
-      err.hidden = true;
-      // Sin backend: el mensaje se abre en WhatsApp ya redactado (se reemplaza por el envío real del formulario al migrar)
+    const showErr = (html) => { err.innerHTML = html; err.hidden = false; };
+    const esc = (t) => String(t).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+    const waLink = () => {
       const v = (n) => (field(n).value || '').trim();
       const lines = [
         `Hola, soy ${v('nombre') || 'una persona interesada'}${v('empresa') ? ' de ' + v('empresa') : ''}.`,
         `Correo: ${v('email')}`, `Teléfono: ${v('telefono')}`,
         v('mensaje') ? `Mensaje: ${v('mensaje')}` : '',
       ].filter(Boolean);
-      window.open(`https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(lines.join('\n'))}`, '_blank', 'noopener');
-      ok.hidden = false;
-      if (!reduce) gsap.fromTo(ok, { autoAlpha: 0, y: 16 }, { autoAlpha: 1, y: 0, duration: 0.6, ease: 'expo.out' });
+      return `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(lines.join('\n'))}`;
+    };
+    const setSending = (on) => {
+      form.classList.toggle('is-sending', on);
+      btnTxt.forEach((s) => { s.textContent = on ? 'Enviando…' : 'Enviar'; });
+    };
+    form.addEventListener('input', (e) => { const box = e.target.closest('.fld, .chk'); if (box) box.classList.remove('is-bad'); err.hidden = true; });
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      if (form.classList.contains('is-sending')) return;
+      const email = field('email'), tel = field('telefono'), chk = field('acepto');
+      const badEmail = !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email.value.trim());
+      const badTel = tel.value.replace(/\D/g, '').length < 7;
+      const badChk = !chk.checked;
+      flag(email, badEmail); flag(tel, badTel); flag(chk, badChk);
+      if (badEmail || badTel || badChk) {
+        showErr('Revisa los campos obligatorios: un correo válido, tu teléfono y la aceptación del Aviso Legal y la Política de Privacidad.');
+        return;
+      }
+      err.hidden = true;
+      setSending(true);
+      try {
+        const data = new FormData(form);
+        data.append('t', String(Date.now() - loaded));
+        const res = await fetch(form.dataset.endpoint, { method: 'POST', body: data, credentials: 'same-origin' });
+        let json = null;
+        try { json = await res.json(); } catch (_) { /* respuesta que no es JSON: el servidor no ejecutó contact.php */ }
+        if (json && json.ok) {
+          ok.hidden = false;
+          form.reset();
+          $$('.fld.is-bad, .chk.is-bad', form).forEach((b) => b.classList.remove('is-bad'));
+          if (!reduce) gsap.fromTo(ok, { autoAlpha: 0, y: 16 }, { autoAlpha: 1, y: 0, duration: 0.6, ease: 'expo.out' });
+        } else {
+          const msg = json && json.error ? json.error : 'No pudimos enviar tu mensaje en este momento.';
+          showErr(`${esc(msg)} Puedes <a href="${waLink()}" target="_blank" rel="noopener">enviarlo por WhatsApp</a>.`);
+        }
+      } catch (_) {
+        showErr(`No pudimos enviar tu mensaje: revisa tu conexión. Puedes <a href="${waLink()}" target="_blank" rel="noopener">enviarlo por WhatsApp</a>.`);
+      } finally {
+        setSending(false);
+      }
     });
   }
 };

@@ -8,6 +8,7 @@ index.html                       ← Home (generado)
 <slug>/index.html                ← 21 páginas internas, con las mismas URL del sitio actual (generadas)
 404.html, sitemap.xml            ← página de error y mapa del sitio (generados)
 robots.txt, .htaccess            ← para buscadores y servidor (escritos a mano, ver "Producción")
+contact.php                      ← envío por correo del formulario de /contacto/ (PHP, solo corre en Hostinger)
 build.py                         ← generador de todas las páginas
 src/data/*.json                  ← contenido extraído del sitio actual (servicios, nosotros, legales, artículos)
 src/pages/home.html              ← contenido del Home
@@ -58,6 +59,8 @@ El sitio se publica con el Git de Hostinger (hPanel → Advanced → Git, rama `
 - **`sitemap.xml`:** se regenera con cada `python build.py`. **`robots.txt`** es estático y apunta a ese mapa.
 - **`404.html`:** la sirve el servidor en cualquier ruta que no existe (`ErrorDocument` del `.htaccess`). Usa `<base href="/">` para que cargue bien en rutas profundas; por eso solo se ve correcta en el dominio raíz.
 - **`.htaccess`:** una sola dirección (`https` y sin `www`), bloquea `build.py`, `README.md`, `src/` y `.git`, y declara la 404. Cada despliegue lo reemplaza: no editarlo en el servidor. Si el deploy falla por un `.htaccess` ya existente, borrar el del servidor y volver a desplegar.
+- **Formulario de contacto (`contact.php`):** recibe el POST de `assets/js/pages.js`, valida y envía el correo con `mail()` al buzón configurado en la constante `TO_B64` (codificado en base64 para que el repositorio público no lo muestre; para cambiarlo: `python -c "import base64;print(base64.b64encode(b'correo@dominio.com').decode())"`). Antispam: campo trampa oculto (`sitio_web`), tiempo mínimo desde que se abrió la página, mismo origen y 5 envíos por hora y por IP. Remitente: `info@samdigital.com.co`; el visitante queda en `Reply-To`, así que basta con responder el correo. Solo funciona en Hostinger (PHP): en GitHub Pages o en local el formulario cae al respaldo de WhatsApp. Si algún día los correos llegan a spam, se cambia `mail()` por SMTP con las credenciales guardadas solo en el servidor, nunca en el repositorio.
+- **Redirecciones del WordPress anterior (`.htaccess`):** `?p=ID` / `?page_id=ID` hacia la página equivalente, páginas del tema viejo (`seo-optimization`, `case-studies-01`, `home-v1`…) hacia su servicio o sección, `category/`, `tag/`, `author/`, paginación y `feed/` hacia `/blog/`, sitemaps viejos hacia `sitemap.xml`, y `index.php` / `index.html` hacia la URL limpia. Tienda, cuenta, login y páginas de ejemplo del tema responden **410 (eliminadas)**. El mapa de IDs salió de la API REST del sitio anterior. Para agregar una URL antigua que falte, añadir su regla en la sección correspondiente y verificar con `curl -sI`.
 - **Caché:** los CSS y JS llevan `?v=<huella>` (la calcula `build.py`), así un cambio publicado se ve de inmediato aunque el navegador tenga la versión anterior en caché.
 
 ## Marca (extraída del sitio actual)
@@ -119,7 +122,7 @@ Accesibilidad: respeta `prefers-reduced-motion` (sin Lenis, sin pines ni animaci
 - **Casos de éxito**: se usan los 12 trabajos del portafolio actual (`assets/img/work/`, mockups de 1200×800). Faltan resultados/métricas aprobadas por cliente. VOLCALI está solo en el muro del hero (su enlace en el sitio actual apunta por error a ASOCLICPER). "Ver portafolio" enlaza a `/portafolio/`.
 - **Cifras**: se usan datos reales del sitio actual (15+ años, 9 soluciones, 4 plataformas de pauta, 30 min de consultoría). Si hay métricas aprobadas (clientes, proyectos, ROI), se pueden sumar.
 - **Textos de "¿Cómo lo hacemos?"**: el sitio actual tiene lorem ipsum en esta sección; los textos de los 3 pasos son propuesta nuestra.
-- **Formulario de contacto**: no tiene backend. Al enviarlo valida los campos y abre WhatsApp con el mensaje ya redactado; al migrar se reemplaza por el envío real (correo / CRM).
+- **Formulario de contacto**: envía los mensajes por correo con `contact.php` (ver "Producción"). Si el envío falla, la página ofrece WhatsApp con el mensaje ya redactado.
 - **Textos repetidos en el sitio actual** (se mantuvieron tal cual): el título "Beneficios de la generación de leads" aparece también en Social media manager, Publicidad paga, Diseño gráfico y Email marketing. Conviene corregirlos con el cliente.
 - **Enlace de VOLCALI** en el portafolio: en el sitio actual apunta a asoclicper.com (se mantuvo); la tarjeta "Marketing Estrátegico" se corrigió a "Estratégico".
 - **Portafolio**: las pestañas "Diseño gráfico" y "Edición de video" están vacías en el sitio actual; muestran "Pronto publicaremos nuevos proyectos en esta categoría.".

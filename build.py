@@ -687,7 +687,8 @@ def contact_page():
       </ul>
       <div class="social social--dark" data-reveal>{social()}</div>
     </div>
-    <form class="cform" data-form novalidate data-reveal>
+    <form class="cform" data-form data-endpoint="{root}contact.php" novalidate data-reveal>
+      <div class="cform__trap" aria-hidden="true"><label>No llenar este campo<input type="text" name="sitio_web" tabindex="-1" autocomplete="off"></label></div>
       <div class="cform__row">
         <label class="fld"><input type="text" name="nombre" placeholder=" " autocomplete="name"><span>Nombre Completo</span></label>
         <label class="fld"><input type="email" name="email" placeholder=" " autocomplete="email" required><span>Correo Electrónico</span></label>
@@ -702,7 +703,7 @@ def contact_page():
       <button class="btn btn--primary btn--xl cform__btn" type="submit" data-magnetic><span class="btn__txt"><span>Enviar</span><span aria-hidden="true">Enviar</span></span><span class="btn__ico">{ARROW.format(s=20)}</span></button>
       <div class="cform__ok" data-form-ok hidden>
         <b>¡Gracias por escribirnos!</b>
-        <p>Abrimos WhatsApp con tu mensaje listo para enviar. Si no se abrió, <a href="{WA}" target="_blank" rel="noopener">contáctanos por whatsapp</a>.</p>
+        <p>Recibimos tu mensaje y un especialista de SÁM digital te responderá muy pronto. Si es urgente, <a href="{WA}" target="_blank" rel="noopener">contáctanos por whatsapp</a>.</p>
       </div>
     </form>
   </div>

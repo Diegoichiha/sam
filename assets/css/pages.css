@@ -219,6 +219,9 @@
 .chk a{color:var(--blue);text-decoration:underline;text-underline-offset:3px}
 .cform__btn{align-self:flex-start}
 .cform__err{color:#c2272d;font-weight:700;font-size:.9rem}
+.cform__err a{text-decoration:underline;text-underline-offset:3px}
+.cform__trap{position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden}
+.cform.is-sending .cform__btn{opacity:.7;pointer-events:none}
 .cform__ok{padding:18px 22px;border-radius:18px;background:#e8fbf1;border:1px solid #8be0b3;color:#0b5132}
 .cform__ok b{font:900 1.1rem var(--f-display)}
 .cform__ok a{text-decoration:underline}
