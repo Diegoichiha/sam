@@ -85,6 +85,10 @@ RewriteRule ^(shop|cart|checkout|my-account)(-2)?(/.*)?$ - [G,L]
 RewriteRule ^(login|register|sample-page(-2(-2)?)?)/?$ - [G,L]
 RewriteRule ^(product|product-category|product-tag)(/.*)?$ - [G,L]
 
+# WordPress internals (plugins, themes, uploads, admin, REST API, wp-*.php, xmlrpc): gone for good (410)
+RewriteRule ^wp-(content|includes|admin|json)(/.*)?$ - [G,L]
+RewriteRule ^(wp-[a-z-]+|xmlrpc)\.php$ - [G,L]
+
 # Blog archives, pagination and feeds
 RewriteRule ^(category|tag|author)(/.*)?$ /blog/ [R=301,L]
 RewriteRule ^blog/page/[0-9]+/?$ /blog/ [R=301,L]
