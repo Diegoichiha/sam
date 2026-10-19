@@ -15,6 +15,7 @@ import re
 
 ROOT = os.path.dirname(os.path.abspath(__file__))
 SITE = 'https://samdigital.com.co'    # dominio de producción: canonical, og:url, og:image y sitemap
+GTAG_ID = 'GT-K4CXQSWC'               # Google tag (GA4 + Google Ads) que tenía el WordPress con Site Kit
 WA = 'https://wa.link/j7n585'          # enlace de WhatsApp que usa el sitio actual en todos sus CTA
 WA_NUMBER = '573167335485'
 EMAIL = 'info@samdigital.com.co'
@@ -257,12 +258,27 @@ def shell(*, title, desc, main, root='', page='inner', nav='', og_image='', extr
     scripts = (f'<script src="{root}assets/vendor/gsap.min.js"></script>\n'
                f'<script src="{root}assets/vendor/ScrollTrigger.min.js"></script>\n'
                f'<script src="{root}assets/vendor/lenis.min.js"></script>\n')
+    scripts += f'<script src="{root}assets/js/analytics.js?v={ver("assets/js/analytics.js")}"></script>\n'
     if not is_home:
         scripts += f'<script src="{root}assets/js/pages.js?v={ver("assets/js/pages.js")}"></script>\n'
     scripts += f'<script src="{root}assets/js/main.js?v={ver("assets/js/main.js")}"></script>'
     fab = FAB.replace('src="assets/', f'src="{root}assets/')
     og = f'\n  <meta property="og:image" content="{qa(og_image)}">' if og_image else ''
     base_tag = f'\n  <base href="{base}">' if base else ''
+    # El Google tag solo se carga en el dominio de producción: GitHub Pages y local no ensucian Analytics ni Ads
+    gtag = f'''<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){{dataLayer.push(arguments);}}
+    if (/(^|\\.)samdigital\\.com\\.co$/.test(location.hostname)) {{
+      gtag('js', new Date());
+      gtag('set', 'linker', {{domains: ['samdigital.com.co']}});
+      gtag('config', '{GTAG_ID}');
+      var g = document.createElement('script');
+      g.async = true;
+      g.src = 'https://www.googletagmanager.com/gtag/js?id={GTAG_ID}';
+      document.head.appendChild(g);
+    }}
+  </script>'''
     robots_tag = f'\n  <meta name="robots" content="{robots}">' if robots else ''
     return f'''<!doctype html>
 <html lang="es">
@@ -276,6 +292,7 @@ def shell(*, title, desc, main, root='', page='inner', nav='', og_image='', extr
   <meta property="og:description" content="{qa(desc)}">
   <meta property="og:type" content="website">{og}
   <link rel="icon" href="{root}assets/img/brand/favicon.png">
+  {gtag}
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Red+Hat+Display:ital,wght@0,400;0,500;0,700;0,800;0,900;1,700;1,800;1,900&family=Quicksand:wght@400;500;600;700&family=Poppins:wght@600;700&display=swap" rel="stylesheet">

@@ -152,6 +152,7 @@ window.SAM_PAGE = function (ctx) {
         let json = null;
         try { json = await res.json(); } catch (_) { /* respuesta que no es JSON: el servidor no ejecutó contact.php */ }
         if (json && json.ok) {
+          if (window.samTrack) window.samTrack('generate_lead', { form_id: 'contacto', form_name: 'Formulario de contacto' }, { event: 'form_submit', form_id: 'contacto' });
           ok.hidden = false;
           form.reset();
           $$('.fld.is-bad, .chk.is-bad', form).forEach((b) => b.classList.remove('is-bad'));
