@@ -51,6 +51,9 @@ El sitio se publica con el Git de Hostinger (hPanel → Advanced → Git, rama `
 
 - **Canonical, `og:url` y `og:image`** (y tarjeta de Twitter): los agrega `build.py` a cada página con el dominio de la constante `SITE`. Si el dominio cambia, se cambia ahí y se regenera. Los artículos usan `og:type=article`.
 - **Imágenes para compartir:** `python src/tools/make_og.py` (requiere Pillow) genera `assets/img/og/default.jpg` y una por artículo. Se ejecuta solo si cambian las fotos.
+- **Títulos y descripciones:** viven en `src/data/seo.json` (una entrada por página; clave = ruta). `build.py` los aplica a `<title>`, `description`, `og:title` y `og:description`, y **falla el build** si una página no tiene entrada, si el título pasa de 60 caracteres o si la descripción no mide entre 110 y 160.
+- **Datos estructurados (JSON-LD):** los genera `build.py` (`schema_graph`): Organization + WebSite en el Home; en las internas, migas de pan (`BreadcrumbList`) y el tipo de página (`AboutPage`, `ContactPage`, `CollectionPage`…); `Service` en cada servicio, `BlogPosting` en cada artículo, `Blog` en el listado e `ItemList` en Soluciones y Portafolio. Para sumar dirección o ciudad (negocio local) se edita `org_full()`.
+- **`alt` del portafolio:** descriptivos (`Diseño web de <cliente>. <descripción>`), se arman en `pf_alt()`.
 - **`sitemap.xml`:** se regenera con cada `python build.py`. **`robots.txt`** es estático y apunta a ese mapa.
 - **`404.html`:** la sirve el servidor en cualquier ruta que no existe (`ErrorDocument` del `.htaccess`). Usa `<base href="/">` para que cargue bien en rutas profundas; por eso solo se ve correcta en el dominio raíz.
 - **`.htaccess`:** una sola dirección (`https` y sin `www`), bloquea `build.py`, `README.md`, `src/` y `.git`, y declara la 404. Cada despliegue lo reemplaza: no editarlo en el servidor. Si el deploy falla por un `.htaccess` ya existente, borrar el del servidor y volver a desplegar.

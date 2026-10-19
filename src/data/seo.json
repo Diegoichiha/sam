@@ -1,0 +1,90 @@
+{
+  "": {
+    "title": "SÁM digital | Agencia de marketing digital en Colombia",
+    "description": "Más que marketing, creamos sistemas que generan ventas: generación de leads, SEO, publicidad paga, diseño web y branding con más de 15 años de experiencia."
+  },
+  "services/": {
+    "title": "Servicios de marketing digital | SÁM digital",
+    "description": "Nueve soluciones que trabajan juntas: leads, estrategia, redes sociales, diseño web, SEO, publicidad paga, email marketing, diseño gráfico y branding."
+  },
+  "sobre-nosotros/": {
+    "title": "Sobre SÁM digital: más de 15 años en marketing digital",
+    "description": "Somos un aliado estratégico integral en soluciones digitales: más de 15 años de experiencia y un equipo profesional, especializado en cada área."
+  },
+  "portafolio/": {
+    "title": "Portafolio de diseño web y branding | SÁM digital",
+    "description": "Casos de éxito de SÁM digital: diseño web y branding para Octopus Contenedor, Tapetes y Pisos del Pacífico, Asoclicper, Clínica Picasso y más."
+  },
+  "contacto/": {
+    "title": "Contacto y consultoría gratis | SÁM digital",
+    "description": "Habla con un especialista de SÁM digital: agenda tu consultoría gratis de 30 minutos y cuéntanos tu idea por WhatsApp o por correo electrónico."
+  },
+  "blog/": {
+    "title": "Blog de marketing digital | SÁM digital",
+    "description": "Tendencias, estrategia y consejos de marketing digital para que tu empresa atraiga clientes y crezca. Artículos del equipo de SÁM digital."
+  },
+  "generacion-de-leads/": {
+    "title": "Generación de leads para tu negocio | SÁM digital",
+    "description": "Campañas en redes sociales y Google Ads para conseguir clientes potenciales reales, no likes: recibes los contactos en tiempo real y los conviertes en ventas."
+  },
+  "marketing-estrategico/": {
+    "title": "Marketing estratégico para crecer | SÁM digital",
+    "description": "Diagnóstico, estrategia y acompañamiento para que tu negocio deje de estancarse: definimos el rumbo, los objetivos y los canales, y medimos cada acción."
+  },
+  "social-media-manager/": {
+    "title": "Social media manager y gestión de redes | SÁM digital",
+    "description": "Estrategia, calendario de contenido y gestión completa de tus redes sociales: publicamos, respondemos y te enviamos reportes con propuestas de mejora."
+  },
+  "diseno-de-paginas-web/": {
+    "title": "Diseño de páginas web y tiendas virtuales | SÁM digital",
+    "description": "Sitios web corporativos, tiendas virtuales y landing pages de alta conversión: rápidos, seguros y adaptados a todos los dispositivos."
+  },
+  "optimizacion-seo/": {
+    "title": "Optimización SEO y posicionamiento en Google | SÁM digital",
+    "description": "SEO On Page y Off Page para que tu negocio aparezca en Google: auditoría, palabras clave, optimización y reportes mensuales de tu progreso."
+  },
+  "publicidad-paga/": {
+    "title": "Publicidad paga en Google, Meta y TikTok | SÁM digital",
+    "description": "Diseñamos y optimizamos campañas en Meta Ads, TikTok Ads y Google Ads (Búsqueda, Display y YouTube) enfocadas en resultados, con reportes periódicos."
+  },
+  "email-marketing/": {
+    "title": "Email marketing y SMS para fidelizar clientes | SÁM digital",
+    "description": "Campañas de email y SMS con estrategia, diseño y redacción: promociones, carritos abandonados y fidelización, automatizadas en Mailchimp, Brevo o Klaviyo."
+  },
+  "diseno-grafico/": {
+    "title": "Diseño gráfico para redes, web e impresos | SÁM digital",
+    "description": "Piezas gráficas para redes sociales, páginas web, flyers, portafolios e impresos de gran formato que fortalecen la identidad visual de tu marca."
+  },
+  "branding/": {
+    "title": "Diseño de branding e identidad de marca | SÁM digital",
+    "description": "Creamos tu logo, paleta de colores, tipografías y manual de identidad visual para una marca sólida, coherente y fácil de recordar."
+  },
+  "las-5-tendencias-marketing-digital-2026/": {
+    "title": "5 tendencias de marketing digital para 2026 | SÁM digital",
+    "description": "Tecnología, datos y comportamiento del consumidor cambiarán cómo las marcas venden en 2026. Conoce las 5 tendencias de marketing digital que debes seguir."
+  },
+  "que-es-una-estrategia-de-marketing-digital-y-como-implementarla-paso-a-paso/": {
+    "title": "Qué es una estrategia de marketing digital | SÁM digital",
+    "description": "Aprende qué es una estrategia de marketing digital y cómo implementarla paso a paso para convertir tu presencia online en ventas y crecimiento real."
+  },
+  "cuanto-cuesta-no-tener-una-estrategia-digital/": {
+    "title": "Cuánto cuesta no tener una estrategia digital | SÁM digital",
+    "description": "No tener una estrategia de marketing digital es una pérdida constante de oportunidades. Descubre cuánto le cuesta a tu empresa y cómo cambiarlo."
+  },
+  "aviso-legal/": {
+    "title": "Aviso legal | SÁM digital",
+    "description": "Aviso legal de SÁM digital: titularidad del sitio web, condiciones de uso, propiedad intelectual, responsabilidad, enlaces externos y modificaciones."
+  },
+  "politica-de-privacidad/": {
+    "title": "Política de privacidad | SÁM digital",
+    "description": "Política de privacidad de SÁM digital: qué datos recopilamos, para qué los usamos, cómo los protegemos y cuáles son los derechos del titular."
+  },
+  "politica-de-cookies/": {
+    "title": "Política de cookies | SÁM digital",
+    "description": "Política de cookies de SÁM digital: qué son, qué tipos usamos, para qué sirven y cómo puedes gestionarlas o dar tu consentimiento."
+  },
+  "declaracion-de-accesibilidad/": {
+    "title": "Declaración de accesibilidad | SÁM digital",
+    "description": "Declaración de accesibilidad de SÁM digital: nuestro compromiso, las medidas implementadas, la mejora continua y cómo contactarnos."
+  }
+}

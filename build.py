@@ -60,6 +60,7 @@ SV = J('src/data/services.json')
 ABOUT = J('src/data/about.json')
 LEGAL = J('src/data/legal.json')
 POSTS = J('src/data/posts.json')
+SEO = J('src/data/seo.json')          # título y descripción de cada página (clave = ruta: '', 'services/', ...)
 HOME = read('src/pages/home.html')
 CHROME = read('src/partials/chrome.html')
 FAB = read('src/partials/fab.html')
@@ -616,10 +617,20 @@ PORT_BRAND = [
 ]
 
 
+NICE = {'OCTOPUS CONTENEDOR': 'Octopus Contenedor', 'TAPETES Y PISOS DEL PACÍFICO': 'Tapetes y Pisos del Pacífico', 'ASOCLICPER': 'Asoclicper',
+        'VOLCALI': 'Volcali', 'EC&R': 'EC&R', 'INNOVA SYSTEMS': 'Innova Systems', 'CLÍNICA PICASSO': 'Clínica Picasso',
+        'MAÑANITAS NATURALMENTE': 'Mañanitas Naturalmente', 'DOCUNET WEB': 'Docunet Web', 'DIPA': 'Dipa', 'CALA IMPACT': 'Cala Impact', 'TRONOX': 'Tronox'}
+
+
+def pf_alt(cat, name, desc):
+    kind = 'Diseño web' if cat == 'web' else 'Identidad de marca'
+    return f'{kind} de {NICE.get(name, name)}' + (f'. {desc}' if desc else '')
+
+
 def pf_card(cat, name, desc, img, href, label):
     d = f'<span class="pf__d">{esc(desc)}</span>' if desc else ''
     return f'''        <a class="pf" data-cat="{cat}" href="{href}" target="_blank" rel="noopener" data-cursor="view" data-cursor-label="{qa(label)}">
-          <span class="pf__img"><img src="../assets/img/work/{img}.webp" alt="{qa(name)}" width="1200" height="800" loading="lazy"></span>
+          <span class="pf__img"><img src="../assets/img/work/{img}.webp" alt="{qa(pf_alt(cat, name, desc))}" width="1200" height="800" loading="lazy"></span>
           <span class="pf__meta"><b class="pf__t">{esc(name)}</b>{d}</span>
           <span class="pf__cta">{esc(label)}<i>{ARROW_UR.format(s=16)}</i></span>
         </a>'''
@@ -874,12 +885,123 @@ def legal_page(slug):
 
 # ───────────────────────── SEO, 404 y sitemap ─────────────────────────
 POST_BY_SLUG = {p['slug']: p for p in POSTS}
+ORG_ID = SITE + '/#organization'
+WEB_ID = SITE + '/#website'
+LOGO = SITE + '/assets/img/brand/favicon.png'
+SOCIAL = ['https://www.facebook.com/profile.php?id=61582248838081', 'https://www.instagram.com/samdigital_mkt/',
+          'https://www.linkedin.com/company/s%C3%A1m-digital/']
+PAGE_TYPE = {'services/': 'CollectionPage', 'portafolio/': 'CollectionPage', 'blog/': 'CollectionPage',
+             'sobre-nosotros/': 'AboutPage', 'contacto/': 'ContactPage'}
+CRUMB_NAME = {'services/': 'Soluciones', 'sobre-nosotros/': 'Nosotros', 'portafolio/': 'Portafolio', 'contacto/': 'Contacto', 'blog/': 'Blog'}
+
+
+def apply_meta(rel, html):
+    # Título y descripción de src/data/seo.json (límites para Google: título ≤ 60, descripción 110–160)
+    m = SEO[rel]                      # si falta una página, el build falla
+    t, d = m['title'], m['description']
+    assert len(t) <= 60 and 110 <= len(d) <= 160, (rel, len(t), len(d))
+    for pat, new in ((r'<title>.*?</title>', f'<title>{esc(t)}</title>'),
+                     (r'<meta name="description" content=".*?">', f'<meta name="description" content="{qa(d)}">'),
+                     (r'<meta property="og:title" content=".*?">', f'<meta property="og:title" content="{qa(t)}">'),
+                     (r'<meta property="og:description" content=".*?">', f'<meta property="og:description" content="{qa(d)}">')):
+        html, n = re.subn(pat, lambda _: new, html, count=1, flags=re.S)
+        assert n == 1, (rel, pat)
+    return html
+
+
+def org_min():
+    return {'@type': 'Organization', '@id': ORG_ID, 'name': 'SÁM digital', 'url': SITE + '/',
+            'logo': {'@type': 'ImageObject', 'url': LOGO}}
+
+
+def org_full():
+    o = org_min()
+    o['logo'].update(width=512, height=512)
+    o.update({
+        'alternateName': 'SAM Digital',
+        'image': SITE + '/assets/img/og/default.jpg',
+        'description': 'Agencia creativa de marketing digital: generación de leads, SEO, publicidad paga, diseño web, branding y más.',
+        'slogan': 'Más que marketing, creamos sistemas que generan ventas.',
+        'email': EMAIL,
+        'contactPoint': [{'@type': 'ContactPoint', 'contactType': 'customer service', 'telephone': '+' + WA_NUMBER,
+                          'email': EMAIL, 'availableLanguage': 'Spanish'}],
+        'sameAs': SOCIAL,
+    })
+    return o
+
+
+def crumb_items(rel):
+    slug, url = rel.strip('/'), SITE + '/' + rel
+    home = ('Inicio', SITE + '/')
+    if slug in SV['pages']:
+        return [home, ('Soluciones', SITE + '/services/'), (SV['pages'][slug]['h1'], url)]
+    if slug in POST_BY_SLUG:
+        return [home, ('Blog', SITE + '/blog/'), (POST_BY_SLUG[slug]['title'], url)]
+    if rel in CRUMB_NAME:
+        return [home, (CRUMB_NAME[rel], url)]
+    return [home, (LEGAL[slug]['title'], url)]
+
+
+def schema_graph(rel):
+    # JSON-LD de la página: Organization + WebSite en el Home; migas de pan, tipo de página y entidad propia en las internas
+    meta, url, slug = SEO[rel], SITE + '/' + rel, rel.strip('/')
+    website = {'@type': 'WebSite', '@id': WEB_ID, 'url': SITE + '/', 'name': 'SÁM digital', 'inLanguage': 'es'}
+    page = {'@type': PAGE_TYPE.get(rel, 'WebPage'), '@id': url + '#webpage', 'url': url, 'name': meta['title'],
+            'description': meta['description'], 'inLanguage': 'es'}
+    if not rel:
+        website['publisher'] = {'@id': ORG_ID}
+        page['isPartOf'] = {'@id': WEB_ID}
+        page['about'] = {'@id': ORG_ID}
+        return [org_full(), website, page]
+    page['isPartOf'] = website
+    page['breadcrumb'] = {'@id': url + '#breadcrumb'}
+    crumbs_ld = {'@type': 'BreadcrumbList', '@id': url + '#breadcrumb',
+                 'itemListElement': [{'@type': 'ListItem', 'position': i + 1, 'name': n, 'item': u}
+                                     for i, (n, u) in enumerate(crumb_items(rel))]}
+    graph = [page, crumbs_ld]
+    if slug in SV['pages']:
+        sv = SV['pages'][slug]
+        page['mainEntity'] = {'@id': url + '#service'}
+        graph.append({'@type': 'Service', '@id': url + '#service', 'name': sv['h1'], 'serviceType': SHORT[slug][0],
+                      'description': meta['description'], 'url': url, 'provider': org_min()})
+    elif slug in POST_BY_SLUG:
+        post = POST_BY_SLUG[slug]
+        page['mainEntity'] = {'@id': url + '#article'}
+        graph.append({'@type': 'BlogPosting', '@id': url + '#article', 'headline': post['title'], 'description': meta['description'],
+                      'image': [f'{SITE}/assets/img/og/{slug}.jpg'], 'datePublished': post['iso'], 'dateModified': post['iso'],
+                      'author': {'@type': 'Organization', 'name': 'SÁM digital', 'url': SITE + '/'}, 'publisher': org_min(),
+                      'mainEntityOfPage': {'@id': url + '#webpage'}, 'articleSection': post['cat'], 'inLanguage': 'es', 'url': url})
+    elif rel == 'services/':
+        page['mainEntity'] = {'@type': 'ItemList', 'itemListElement': [
+            {'@type': 'ListItem', 'position': i + 1, 'name': SHORT[x][0], 'url': f'{SITE}/{x}/'} for i, x in enumerate(ORDER)]}
+    elif rel == 'portafolio/':
+        items = [(n, d, i, u) for n, d, i, u in PORT_WEB] + [(n, '', i, '') for n, i, _ in PORT_BRAND]
+        els = []
+        for k, (n, d, i, u) in enumerate(items):
+            w = {'@type': 'CreativeWork', 'name': NICE.get(n, n), 'image': f'{SITE}/assets/img/work/{i}.webp', 'creator': {'@id': ORG_ID}}
+            if d: w['description'] = d
+            if u: w['url'] = u
+            els.append({'@type': 'ListItem', 'position': k + 1, 'item': w})
+        page['mainEntity'] = {'@type': 'ItemList', 'itemListElement': els}
+    elif rel == 'blog/':
+        posts = sorted(POSTS, key=lambda q: q['iso'], reverse=True)
+        page['mainEntity'] = {'@type': 'Blog', '@id': url + '#blog', 'name': 'Blog de SÁM digital', 'url': url, 'inLanguage': 'es',
+                              'publisher': org_min(),
+                              'blogPost': [{'@type': 'BlogPosting', 'headline': q['title'], 'url': f'{SITE}/{q["slug"]}/',
+                                            'datePublished': q['iso'], 'image': f'{SITE}/assets/img/og/{q["slug"]}.jpg'} for q in posts]}
+    return graph
+
+
+def ld_script(rel):
+    data = json.dumps({'@context': 'https://schema.org', '@graph': schema_graph(rel)}, ensure_ascii=False, separators=(',', ':'))
+    return '  <script type="application/ld+json">' + data.replace('</', '<\\/') + '</script>\n'
 
 
 def seo_tags(key, html):
     """Inserta canonical, og:url/site_name/locale/image y tarjeta de Twitter (antes del favicon).
     `key` es la ruta del archivo generado: 'index.html', 'services/index.html', ..."""
     rel = '' if key == 'index.html' else key[:-len('index.html')]
+    html = apply_meta(rel, html)
     slug = rel.strip('/')
     post = POST_BY_SLUG.get(slug)
     url = f'{SITE}/{rel}'
@@ -902,7 +1024,9 @@ def seo_tags(key, html):
                  f'<meta property="article:section" content="{qa(post["cat"])}">']
     marker = '  <link rel="icon"'
     assert marker in html, key
-    return html.replace(marker, '\n'.join('  ' + t for t in tags) + '\n' + marker, 1)
+    html = html.replace(marker, '\n'.join('  ' + t for t in tags) + '\n' + marker, 1)
+    assert '</head>' in html, key
+    return html.replace('</head>', ld_script(rel) + '</head>', 1)
 
 
 def sitemap_xml(keys):
