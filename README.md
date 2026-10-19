@@ -18,6 +18,7 @@ assets/js/main.js                ← lo común: cabecera, mega menú, cursor, he
 assets/js/pages.js               ← lógica de las internas (pasos apilados, filtro, índice, formulario)
 assets/vendor/                   ← GSAP 3.12.5, ScrollTrigger 3.12.5, Lenis 1.1.20 (copias locales)
 assets/img/og/                   ← imágenes para compartir en redes (1200×630), generadas con src/tools/make_og.py
+assets/pdf/                      ← brandboards y manuales de marca que abre el portafolio (Dipa, Cala Impact, Octopus, Tronox); son los originales del equipo, sin recomprimir
 assets/img/                      ← logos, iconos, portafolio (work/), blog, servicios y fotos de stock
 ```
 

@@ -610,10 +610,10 @@ PORT_WEB = [
     ('DOCUNET WEB', 'Software de Gestión de Documentos y Procesos', 'docunet', 'https://docunetweb.com.co/'),
 ]
 PORT_BRAND = [
-    ('DIPA', 'brand-dipa', 'https://samdigital.com.co/wp-content/uploads/2026/03/BRANDBOARD-DIPA.pdf'),
-    ('CALA IMPACT', 'brand-cala', 'https://samdigital.com.co/wp-content/uploads/2026/03/APLICACIONES-LOGO-CALA-IMPACT.pdf'),
-    ('OCTOPUS CONTENEDOR', 'octopus', 'https://samdigital.com.co/wp-content/uploads/2026/04/MANUAL-DE-MARCA-OCTOPUS.pdf'),
-    ('TRONOX', 'brand-tronox', 'https://samdigital.com.co/wp-content/uploads/2026/04/BRANDBOARD-TRONOX.pdf'),
+    ('DIPA', 'brand-dipa', '../assets/pdf/brandboard-dipa.pdf'),
+    ('CALA IMPACT', 'brand-cala', '../assets/pdf/manual-de-marca-cala-impact.pdf'),
+    ('OCTOPUS CONTENEDOR', 'octopus', '../assets/pdf/manual-de-marca-octopus.pdf'),
+    ('TRONOX', 'brand-tronox', '../assets/pdf/brandboard-tronox.pdf'),
 ]
 
 
