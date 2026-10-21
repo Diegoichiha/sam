@@ -463,7 +463,10 @@
     while (track.scrollHeight < target && guard++ < 4) { html += base; track.innerHTML = html; }
     track.innerHTML = html + html;
     const up = i % 2 === 0;
-    bandTweens.push(gsap.fromTo(track, { yPercent: up ? 0 : -50 }, { yPercent: up ? -50 : 0, duration: 60 + i * 14, ease: 'none', repeat: -1 }));
+    const band = gsap.fromTo(track, { yPercent: up ? 0 : -50 }, { yPercent: up ? -50 : 0, duration: 60 + i * 14, ease: 'none', repeat: -1 });
+    // El muro arranca con el primer proyecto de cada columna (Multibienes y Volcali) completo y a la vista, no pegado al borde superior
+    band.progress(up ? 0.86 : 0.14);
+    bandTweens.push(band);
   });
   // Cuando la sección siguiente tapa el hero por completo se pausa su animación (ahorra GPU)
   const coverEl = heroEl0 && heroEl0.nextElementSibling;
