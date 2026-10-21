@@ -121,11 +121,11 @@ Accesibilidad: respeta `prefers-reduced-motion` (sin Lenis, sin pines ni animaci
 
 - **WhatsApp**: se usa el número que ya está configurado en el sitio actual (`573167335485`); confirmar que es el oficial.
 - **Logos de clientes**: la sección "Ellos confiaron en nosotros" del sitio actual no se pudo extraer; hay que pedir los logos.
-- **Casos de éxito**: se usan los 12 trabajos del portafolio actual (`assets/img/work/`, mockups de 1200×800). Faltan resultados/métricas aprobadas por cliente. VOLCALI está solo en el muro del hero (su enlace en el sitio actual apunta por error a ASOCLICPER). "Ver portafolio" enlaza a `/portafolio/`.
+- **Casos de éxito (Home)**: la sección muestra, en este orden, Multibienes Ltda (diseño web + integración de CRM), Volcali, Tapetes y Pisos del Pacífico y el branding de Tronox y Dipa, por ser los proyectos de mayor impacto; el resto está en `/portafolio/`, donde Multibienes también va primero. Las imágenes son mockups de 1200×800 en `assets/img/work/`. Faltan resultados/métricas aprobadas por cliente.
 - **Cifras**: se usan datos reales del sitio actual (15+ años, 9 soluciones, 4 plataformas de pauta, 30 min de consultoría). Si hay métricas aprobadas (clientes, proyectos, ROI), se pueden sumar.
 - **Textos de "¿Cómo lo hacemos?"**: el sitio actual tiene lorem ipsum en esta sección; los textos de los 3 pasos son propuesta nuestra.
 - **Formulario de contacto**: envía los mensajes por correo con `contact.php` (ver "Producción"). Si el envío falla, la página ofrece WhatsApp con el mensaje ya redactado.
 - **Textos repetidos en el sitio actual** (se mantuvieron tal cual): el título "Beneficios de la generación de leads" aparece también en Social media manager, Publicidad paga, Diseño gráfico y Email marketing. Conviene corregirlos con el cliente.
-- **Enlace de VOLCALI** en el portafolio: en el sitio actual apunta a asoclicper.com (se mantuvo); la tarjeta "Marketing Estrátegico" se corrigió a "Estratégico".
+- **Enlace de VOLCALI**: en el sitio anterior apuntaba por error a asoclicper.com; se corrigió a https://volcali.com/ (verificado: es el sitio de Volvo Cali). La tarjeta "Marketing Estrátegico" se corrigió a "Estratégico".
 - **Portafolio**: las pestañas "Diseño gráfico" y "Edición de video" están vacías en el sitio actual; muestran "Pronto publicaremos nuevos proyectos en esta categoría.".
 - **Fotos de los artículos y de Nosotros**: las de stock son provisionales.
