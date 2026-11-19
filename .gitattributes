@@ -2,3 +2,5 @@
 .htaccess text eol=lf
 robots.txt text eol=lf
 *.xml text eol=lf
+# Google Search Console verification file: keep its bytes untouched
+google*.html -text
