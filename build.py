@@ -12,6 +12,7 @@ import html as H
 import json
 import os
 import re
+import time
 
 ROOT = os.path.dirname(os.path.abspath(__file__))
 SITE = 'https://samdigital.com.co'    # dominio de producción: canonical, og:url, og:image y sitemap
@@ -29,8 +30,15 @@ def read(p):
 def write(p, s):
     full = os.path.join(ROOT, p)
     os.makedirs(os.path.dirname(full), exist_ok=True)
-    with open(full, 'w', encoding='utf-8', newline='\n') as f:
-        f.write(s)
+    for intento in range(6):
+        try:
+            with open(full, 'w', encoding='utf-8', newline='\n') as f:
+                f.write(s)
+            return
+        except OSError:                      # archivo bloqueado un instante: se reintenta
+            if intento == 5:
+                raise
+            time.sleep(0.4)
 
 
 def esc(t):
@@ -714,6 +722,13 @@ def wall_rot():
                    '\n        </div>\n      </div>\n' for col in WALL_COLS)
     return '    <div class="wall__rot">\n' + cols + '    </div>'
 
+
+# Proyectos ocultos por ahora: siguen en PORT_WEB, HOME_NEW y WALL_COLS (y su imagen en assets/img/work/); para mostrarlos de nuevo basta vaciar este conjunto
+OCULTOS = {'VECTORIAL STUDIOS'}
+_ocultos_img = {i for n, d, i, u in PORT_WEB if n in OCULTOS}
+PORT_WEB = [p for p in PORT_WEB if p[0] not in OCULTOS]
+HOME_NEW = [h for h in HOME_NEW if h[0] not in OCULTOS]
+WALL_COLS = [[t for t in col if t[0] not in _ocultos_img] for col in WALL_COLS]
 
 assert '<!--WALL_ROT-->' in HOME and '<!--PCARDS_NEW-->' in HOME
 HOME = HOME.replace('<!--WALL_ROT-->', wall_rot(), 1).replace('<!--PCARDS_NEW-->', home_new_cards(), 1)
