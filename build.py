@@ -665,6 +665,60 @@ def pf_alt(cat, name, desc):
     return f'{kind} de {NICE.get(name, name)}' + (f'. {desc}' if desc and ' · ' not in desc else '')
 
 
+# ───────── Home: tarjetas de "Casos de éxito" y muro del hero generados desde PORT_WEB ─────────
+# (nombre en PORT_WEB, color de la barra, color del texto, encuadre de la imagen, alt, título con la primera palabra destacada)
+HOME_NEW = [
+    ('VECTORIAL STUDIOS', '#5a45d6', '#fff', '50% 50%', 'Sitio web de Vectorial Studios en pantalla y paneles flotantes', '<em>Vectorial</em> Studios'),
+    ('DIEGO ARANZAZU', '#16190f', '#fff', '50% 50%', 'Sitio web del fotógrafo Diego Aranzazu en monitor, tablet y celular', '<em>Diego</em> Aranzazu'),
+    ('INVEST PACIFIC', '#0a0a6e', '#fff', '80% 50%', 'Prototipo en Figma del sitio de Invest Pacific', '<em>Invest</em> Pacific'),
+    ('FUNDACIÓN VALLE DEL LILI', '#1c3a33', '#fff', '40% 50%', 'Prototipo en Figma del portal de la Fundación Valle del Lili', '<em>Fundación</em> Valle del Lili'),
+    ('MASNADAL', '#f3b09b', '#3b2b25', '50% 50%', 'Sitio web de Masnadal en celular y escritorio', '<em>Masnadal</em>'),
+    ('SERVIPEUGEOT', '#0f4a8a', '#fff', '85% 50%', 'Sitio web de Servipeugeot, servicio de mantenimiento automotriz, en laptop y celular', '<em>Servipeugeot</em>'),
+    ('LA LLAR DE FOCCACHELLA', '#2f2420', '#fff', '50% 50%', 'Sitio web de La Llar de Foccachella en laptop y pantallas', '<em>La Llar</em> de Foccachella'),
+    ('DEL ALTO VALLE COFFEE', '#3f4539', '#fff', '50% 50%', 'Tienda virtual de Del Alto Valle Coffee en laptop y tablet', '<em>Del Alto Valle</em> Coffee'),
+    ('ALMORE COFFEE', '#ffd1bf', '#4a2a1f', '25% 50%', 'Tienda virtual de Almore Coffee en laptop', '<em>Almore</em> Coffee'),
+    ('TUYO', '#111111', '#fff', '70% 50%', 'Tienda virtual de Tuyo en pantallas y laptop', '<em>Tuyo</em>'),
+]
+
+
+def home_new_cards():
+    web = {n: (d, i, u) for n, d, i, u in PORT_WEB}
+    out = []
+    for name, c, tc, pos, alt, title in HOME_NEW:
+        d, img, url = web[name]
+        label = 'Ver prototipo' if name in PROTOTIPOS else 'Ver sitio'
+        out.append(f'      <a class="pcard" href="{qa(url)}" target="_blank" rel="noopener" data-cursor="view" data-cursor-label="{label}" style="--c:{c};--t:{tc}">\n'
+                   f'        <span class="pcard__media"><img src="assets/img/work/{img}.webp" style="object-position:{pos}" alt="{qa(alt)}" width="1200" height="800" loading="lazy"></span>\n'
+                   f'        <span class="pcard__cap"><span class="pcard__txt"><small>{esc(d)}</small><b>{title}</b></span><i><svg width="22" height="22"><use href="#i-arrow-ur"/></svg></i></span>\n'
+                   f'      </a>')
+    return '\n'.join(out)
+
+
+# Muro del hero (dos columnas que suben y bajan): primero los proyectos nuevos; cada columna arranca con el primero a la vista
+WALL_COLS = [
+    [('multibienes', 'Multibienes Ltda', 'Diseño web + CRM'), ('invest-pacific', 'Invest Pacific', 'Prototipo Figma'), ('masnadal', 'Masnadal', 'Sitio web'),
+     ('del-alto-valle-coffee', 'Del Alto Valle Coffee', 'Tienda virtual'), ('almore-coffee', 'Almore Coffee', 'Tienda virtual'),
+     ('tapetes', 'Tapetes y Pisos del Pacífico', 'Diseño web'), ('brand-cala', 'Cala Impact', 'Branding')],
+    [('vectorial', 'Vectorial Studios', 'Diseño web'), ('diego-aranzazu', 'Diego Aranzazu', 'Diseño web'),
+     ('fundacion-valle-del-lili', 'Fundación Valle del Lili', 'Prototipo Figma'), ('servipeugeot', 'Servipeugeot', 'Sitio web'),
+     ('la-llar-de-foccachella', 'La Llar de Foccachella', 'Sitio web'), ('tuyo', 'Tuyo', 'Tienda virtual'),
+     ('volcali', 'Volcali', 'Diseño web'), ('brand-tronox', 'Tronox', 'Branding')],
+]
+
+
+def wall_rot():
+    def tile(img, name, cat):
+        return (f'          <figure class="hcard"><img src="assets/img/work/{img}.webp" alt="" width="1200" height="800">'
+                f'<figcaption><b>{esc(name)}</b><small>{esc(cat)}</small></figcaption></figure>')
+    cols = ''.join('      <div class="wall__col">\n        <div class="wall__track">\n' + '\n'.join(tile(*x) for x in col) +
+                   '\n        </div>\n      </div>\n' for col in WALL_COLS)
+    return '    <div class="wall__rot">\n' + cols + '    </div>'
+
+
+assert '<!--WALL_ROT-->' in HOME and '<!--PCARDS_NEW-->' in HOME
+HOME = HOME.replace('<!--WALL_ROT-->', wall_rot(), 1).replace('<!--PCARDS_NEW-->', home_new_cards(), 1)
+
+
 def pf_card(cat, name, desc, img, href, label):
     d = f'<span class="pf__d">{esc(desc)}</span>' if desc else ''
     return f'''        <a class="pf" data-cat="{cat}" href="{href}" target="_blank" rel="noopener" data-cursor="view" data-cursor-label="{qa(label)}">

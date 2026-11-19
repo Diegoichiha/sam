@@ -464,8 +464,21 @@
     track.innerHTML = html + html;
     const up = i % 2 === 0;
     const band = gsap.fromTo(track, { yPercent: up ? 0 : -50 }, { yPercent: up ? -50 : 0, duration: 60 + i * 14, ease: 'none', repeat: -1 });
-    // El muro arranca con el primer proyecto de cada columna (Multibienes y Volcali) completo y a la vista, no pegado al borde superior
-    band.progress(up ? 0.86 : 0.14);
+    // El muro arranca con el primer proyecto de cada columna (Multibienes y Vectorial) lo más a la vista posible, no pegado al borde:
+    // se prueban posiciones del ciclo y se elige la que deja más visible al primero de la segunda mitad del recorrido (según el tamaño de pantalla)
+    const probe = $$('.hcard', track)[$$('.hcard', track).length / 2];
+    let startAt = up ? 0.86 : 0.14;
+    if (probe) {
+      let best = -1;
+      for (let k = 0; k <= 12; k++) {
+        const p = up ? 0.78 + k * 0.018 : 0.02 + k * 0.018;
+        band.progress(p);
+        const r = probe.getBoundingClientRect();
+        const seen = Math.max(0, Math.min(r.right, innerWidth) - Math.max(r.left, 0)) * Math.max(0, Math.min(r.bottom, innerHeight) - Math.max(r.top, 0));
+        if (seen > best + 1) { best = seen; startAt = p; }
+      }
+    }
+    band.progress(startAt);
     bandTweens.push(band);
   });
   // Cuando la sección siguiente tapa el hero por completo se pausa su animación (ahorra GPU)
@@ -671,7 +684,8 @@
     const dist = () => Math.max(0, track.scrollWidth - innerWidth);
     gsap.to(track, {
       x: () => -dist(), ease: 'none',
-      scrollTrigger: { trigger: work, start: 'top top', end: () => '+=' + dist(), pin: wpin, scrub: 0.8, anticipatePin: 1, invalidateOnRefresh: true },
+      // el recorrido fijado se limita a ~6200 px de scroll: con muchas tarjetas el carrusel avanza más rápido en vez de alargarse
+      scrollTrigger: { trigger: work, start: 'top top', end: () => '+=' + Math.round(Math.min(dist(), Math.max(innerWidth, 6200))), pin: wpin, scrub: 0.8, anticipatePin: 1, invalidateOnRefresh: true },
     });
   }
 
