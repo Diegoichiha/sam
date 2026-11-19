@@ -617,6 +617,17 @@ def about_page():
 # ───────────────────────── Portafolio ─────────────────────────
 PORT_WEB = [
     ('MULTIBIENES LTDA', 'Inmobiliaria. Diseño web + integración de CRM', 'multibienes', 'https://multibienesltda.com/'),
+    # Proyectos de diegotdesigner.com/proyectos (excepto la propia página de SÁM): nombre, categoría · año, imagen, enlace
+    ('VECTORIAL STUDIOS', 'Diseño web · 2026', 'vectorial', 'https://www.vectorial.co/'),
+    ('DIEGO ARANZAZU', 'Diseño web · 2026', 'diego-aranzazu', 'https://aranzazuphotos.com/'),
+    ('INVEST PACIFIC', 'Prototipo Figma · 2026', 'invest-pacific', 'https://www.figma.com/proto/sOx7dur0wTKNmjbSGj4dV0/Invest-pacific?node-id=1774-7216&viewport=1929%2C1130%2C0.5&t=XPaAkTiLe54LVL4k-8&scaling=min-zoom&content-scaling=fixed&starting-point-node-id=1%3A2&show-proto-sidebar=1&page-id=0%3A1&hide-ui=1'),
+    ('FUNDACIÓN VALLE DEL LILI', 'Prototipo Figma · 2025', 'fundacion-valle-del-lili', 'https://www.figma.com/proto/NyMrCUp5XNS313tJBj2rNl/FVL-portal?node-id=793-4711&viewport=-1527%2C283%2C1&t=C5K0bnlIVfkAiIBC-8&scaling=min-zoom&content-scaling=fixed&starting-point-node-id=2%3A91&show-proto-sidebar=1&page-id=2%3A90&hide-ui=1'),
+    ('MASNADAL', 'Sitio web · 2025', 'masnadal', 'https://elmasnadal.com/es/'),
+    ('SERVIPEUGEOT', 'Sitio web · 2024', 'servipeugeot', 'http://servipeugeot.com/'),
+    ('LA LLAR DE FOCCACHELLA', 'Sitio web · 2024', 'la-llar-de-foccachella', 'https://lallardefoccalella.com/es/'),
+    ('DEL ALTO VALLE COFFEE', 'Tienda virtual · 2023', 'del-alto-valle-coffee', 'https://delvallecoffee.com/'),
+    ('ALMORE COFFEE', 'Tienda virtual · 2025', 'almore-coffee', 'https://almorecoffee.com/'),
+    ('TUYO', 'Tienda virtual · 2026', 'tuyo', 'https://www.tuyoshop.com/'),
     ('OCTOPUS CONTENEDOR', 'Tienda virtual de artículos para dropshipping', 'octopus', 'https://octopuscontenedor.com/'),
     ('TAPETES Y PISOS DEL PACÍFICO', 'Especialistas en productos para decoración de interiores', 'tapetes', 'https://tapetesypisos.com.co/'),
     ('ASOCLICPER', 'Asociación Colombiana de Clínicas de Cirugía Plástica Estética y Reconstructiva', 'asoclicper', 'https://asoclicper.com/'),
@@ -635,14 +646,23 @@ PORT_BRAND = [
 ]
 
 
-NICE = {'MULTIBIENES LTDA': 'Multibienes Ltda', 'OCTOPUS CONTENEDOR': 'Octopus Contenedor', 'TAPETES Y PISOS DEL PACÍFICO': 'Tapetes y Pisos del Pacífico', 'ASOCLICPER': 'Asoclicper',
+NICE = {'VECTORIAL STUDIOS': 'Vectorial Studios', 'DIEGO ARANZAZU': 'Diego Aranzazu', 'INVEST PACIFIC': 'Invest Pacific',
+        'FUNDACIÓN VALLE DEL LILI': 'Fundación Valle del Lili', 'MASNADAL': 'Masnadal', 'SERVIPEUGEOT': 'Servipeugeot',
+        'LA LLAR DE FOCCACHELLA': 'La Llar de Foccachella', 'DEL ALTO VALLE COFFEE': 'Del Alto Valle Coffee',
+        'ALMORE COFFEE': 'Almore Coffee', 'TUYO': 'Tuyo', 'MULTIBIENES LTDA': 'Multibienes Ltda', 'OCTOPUS CONTENEDOR': 'Octopus Contenedor', 'TAPETES Y PISOS DEL PACÍFICO': 'Tapetes y Pisos del Pacífico', 'ASOCLICPER': 'Asoclicper',
         'VOLCALI': 'Volcali', 'EC&R': 'EC&R', 'INNOVA SYSTEMS': 'Innova Systems', 'CLÍNICA PICASSO': 'Clínica Picasso',
         'MAÑANITAS NATURALMENTE': 'Mañanitas Naturalmente', 'DOCUNET WEB': 'Docunet Web', 'DIPA': 'Dipa', 'CALA IMPACT': 'Cala Impact', 'TRONOX': 'Tronox'}
 
 
+PROTOTIPOS = {'INVEST PACIFIC', 'FUNDACIÓN VALLE DEL LILI'}                      # prototipos de Figma, no sitios publicados
+TIENDAS = {'DEL ALTO VALLE COFFEE', 'ALMORE COFFEE', 'TUYO'}
+
+
 def pf_alt(cat, name, desc):
-    kind = 'Diseño web' if cat == 'web' else 'Identidad de marca'
-    return f'{kind} de {NICE.get(name, name)}' + (f'. {desc}' if desc else '')
+    kind = ('Prototipo en Figma' if name in PROTOTIPOS else 'Tienda virtual' if name in TIENDAS
+            else 'Diseño web' if cat == 'web' else 'Identidad de marca')
+    # las descripciones "categoría · año" repetirían el tipo: solo se añaden las que cuentan algo del cliente
+    return f'{kind} de {NICE.get(name, name)}' + (f'. {desc}' if desc and ' · ' not in desc else '')
 
 
 def pf_card(cat, name, desc, img, href, label):
@@ -662,7 +682,7 @@ def portfolio_page():
              ctas=btn('Hablemos de tu proyecto', root + 'contacto/', 'btn--primary btn--lg'), visual=wall, cls='hero--portfolio')
     tabs = [('web', 'Diseño web'), ('branding', 'Branding'), ('grafico', 'Diseño gráfico'), ('video', 'Edición de video')]
     tab_html = ''.join(f'<button class="ptab{" is-on" if i == 0 else ""}" type="button" role="tab" aria-selected="{"true" if i == 0 else "false"}" data-tab="{k}">{esc(t)}</button>' for i, (k, t) in enumerate(tabs))
-    cards = '\n'.join(pf_card('web', n, d, i, u, 'Ver sitio web') for n, d, i, u in PORT_WEB)
+    cards = '\n'.join(pf_card('web', n, d, i, u, 'Ver prototipo' if n in PROTOTIPOS else 'Ver sitio web') for n, d, i, u in PORT_WEB)
     cards += '\n' + '\n'.join(pf_card('branding', n, '', i, u, 'Ver más') for n, i, u in PORT_BRAND)
     grid = f'''<section class="section section--light psec sheet s-port" id="contenido">
   <span class="aurora aurora--o aurora--o1" aria-hidden="true"></span>

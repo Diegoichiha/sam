@@ -113,7 +113,7 @@ Accesibilidad: respeta `prefers-reduced-motion` (sin Lenis, sin pines ni animaci
 
 ## Imágenes
 
-- **Portafolio** (hero y casos de éxito): trabajos reales de samdigital.com.co.
+- **Portafolio** (hero, Home y `/portafolio/`): trabajos reales de samdigital.com.co. Desde 2026-11 `/portafolio/` también muestra los proyectos de [diegotdesigner.com/proyectos](https://diegotdesigner.com/proyectos/) (Vectorial Studios, Diego Aranzazu, Invest Pacific, Fundación Valle del Lili, Masnadal, Servipeugeot, La Llar de Foccachella, Del Alto Valle Coffee, Almore Coffee, Tuyo), con Multibienes primero y sin la página de SÁM; la lista y el orden están en `PORT_WEB` de `build.py` y las imágenes (1200×800) en `assets/img/work/`. Los dos prototipos de Figma llevan el enlace "Ver prototipo".
 - **Mosaico de "Sobre nosotros"** y **foto del footer**: fotos de stock de [Unsplash](https://unsplash.com) (licencia libre), **provisionales**; reemplazar por fotografía propia del equipo de SÁM cuando exista.
 - Blog e íconos de servicios: del sitio actual.
 
